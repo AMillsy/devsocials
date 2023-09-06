@@ -4,8 +4,6 @@ const AWS = require("aws-sdk");
 
 class AWSS3Uploader {
   config = {
-    accessKeyId: "",
-    secretAcessKey: "",
     destinationBucketName: "",
     region: "",
   };
@@ -14,8 +12,8 @@ class AWSS3Uploader {
     AWS.config = new AWS.Config({
       apiVersion: "2006-03-01",
       region: "eu-west-2",
-      accessKeyId: "AKIA4CECC2SUBU2IU2X5", // config.accessKeyId,
-      secretAccessKey: "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",
+      accessKeyId: process.env.AWS_ACCESS_KEY, // config.accessKeyId,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     });
     this.s3 = new AWS.S3({});
     this.config = config;

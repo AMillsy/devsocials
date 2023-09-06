@@ -4,8 +4,6 @@ const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const AWSS3Uploader = require("../config/awsS3config");
 require("dotenv").config();
 const s3Uploader = new AWSS3Uploader({
-  accessKeyId: process.env.AWS_ACESS_KEY,
-  secretAcessKey: process.env.AWS_SECRET_ACCESS_KEY,
   destinationBucketName: "devsocials",
 });
 const resolvers = {
