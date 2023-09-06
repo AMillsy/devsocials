@@ -1,7 +1,11 @@
 const { AuthenticationError } = require("apollo-server-express");
-
+const { User, Post } = require("../models");
 const resolvers = {
-  Query: {},
+  Query: {
+    posts: async () => {
+      return Post.find({});
+    },
+  },
 
   Mutation: {},
 };

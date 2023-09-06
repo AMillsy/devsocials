@@ -1,23 +1,26 @@
 const { Schema, model } = require("mongoose");
 const commentSchema = require("./comment");
-const postSchema = new Schema({
-  title: {
-    type: String,
-    reqiured: true,
+const postSchema = new Schema(
+  {
+    title: {
+      type: String,
+      reqiured: true,
+    },
+    description: {
+      type: String,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    comments: [commentSchema],
   },
-  description: {
-    type: String,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
-  likes: {
-    type: Number,
-    default: 0,
-  },
-  comments: [commentSchema],
-});
+  { toJSON: { virtuals: true } }
+);
 
 /**
  * post
@@ -27,5 +30,8 @@ const postSchema = new Schema({
  * comments: commentSchema -- People will be able to comment on each post
  */
 
+postSchema.virtual("commentCount", function () {
+  return this.comments.length;
+});
 const Post = model("Post", postSchema);
 module.exports = Post;
