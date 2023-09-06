@@ -7,7 +7,7 @@ const resolvers = {
     },
   },
 
-  Mutation: {},
+  /*Mutation: {},*/
 };
 
 module.exports = resolvers;
