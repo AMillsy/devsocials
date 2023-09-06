@@ -2,8 +2,8 @@ const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const { resolvers, typeDefs } = require("./schemas");
 const path = require("path");
-
-const db = require("./config/connection");
+const graphqlUploadExpress = require("graphql-upload/graphqlUploadExpress.js");
+const db = require("./config/connection.js");
 
 const PORT = process.env.PORT || 3001;
 
@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
 
 const startApolloServer = async () => {
   await server.start();
+  app.use(graphqlUploadExpress());
   server.applyMiddleware({ app });
 
   db.once("open", () => {

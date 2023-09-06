@@ -1,5 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Post } = require("../models");
+const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const AWSS3Uploader = require("../config/awsS3config");
 require("dotenv").config();
 const s3Uploader = new AWSS3Uploader({
@@ -8,6 +9,8 @@ const s3Uploader = new AWSS3Uploader({
   destinationBucketName: "devsocials",
 });
 const resolvers = {
+  Upload: GraphQLUpload,
+
   Query: {
     posts: async () => {
       return Post.find({});
@@ -45,9 +48,7 @@ const resolvers = {
       //   image: image,
       // });
     },
-    singleUpload: async (parent, args) => {
-      console.log(args);
-    },
+    singleUpload: s3Uploader.singleFileUploadResovler.bind(s3Uploader),
   },
 };
 
