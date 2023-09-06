@@ -5,6 +5,9 @@ const resolvers = {
     posts: async () => {
       return Post.find({});
     },
+    userProfile: async (parent, { _id }) => {
+      return User.findById(_id).populate("posts");
+    },
   },
 
   Mutation: {
