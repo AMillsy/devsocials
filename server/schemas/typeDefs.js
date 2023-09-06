@@ -4,6 +4,13 @@ const { GraphQLInt } = require("graphql");
 const typeDefs = gql`
   scalar Date
 
+  type UploadFileResponse {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+    url: String!
+  }
+
   type Comment {
     user: User
     message: String
@@ -29,12 +36,24 @@ const typeDefs = gql`
     posts: [Post]
   }
 
+  type PostData {
+    user: User
+    Post: Post
+  }
   type Query {
     posts: [Post]
     users: [User]
+    userProfile(_id: ID!): User
   }
   type Mutation {
     createUser(username: String!, email: String!, password: String!): User
+    createPost(
+      title: String!
+      description: String
+      image: Upload!
+      userId: ID!
+    ): PostData
+    singleUpload(file: Upload!): UploadFileResponse
   }
 `;
 
