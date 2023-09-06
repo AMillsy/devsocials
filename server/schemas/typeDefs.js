@@ -1,9 +1,8 @@
 const { gql } = require("apollo-server-express");
-const { GraphQLInt } = require("graphql");
 
 const typeDefs = gql`
   scalar Date
-
+  scalar Upload
   type UploadFileResponse {
     filename: String!
     mimetype: String!

@@ -45,13 +45,12 @@ const resolvers = {
       //   image: image,
       // });
     },
-    singleUpload: s3Uploader.singleFileUploadResovler.bind(s3Uploader),
-    singleFileUpload: async (parent, { file }) => {
-      const { stream, filename, mimetype, encoding } = await file;
-
-      return { filename, mimetype, encoding, url: "" };
+    singleUpload: async (parent, args) => {
+      console.log(args);
     },
   },
 };
 
 module.exports = resolvers;
+
+//s3Uploader.singleFileUploadResovler.bind(s3Uploader)
