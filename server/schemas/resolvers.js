@@ -7,7 +7,20 @@ const resolvers = {
     },
   },
 
-  /*Mutation: {},*/
+  Mutation: {
+    createUser: async (parent, args) => {
+      try {
+        const user = await User.create(args);
+
+        if (user) {
+          return user;
+        }
+        return AuthenticationError("Error creating user");
+      } catch (error) {
+        throw AuthenticationError("Error creating user");
+      }
+    },
+  },
 };
 
 module.exports = resolvers;
