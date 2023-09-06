@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-
+const commentSchema = require("./comment");
 const postSchema = new Schema({
   title: {
     type: String,
@@ -16,6 +16,7 @@ const postSchema = new Schema({
     type: Number,
     default: 0,
   },
+  comments: [commentSchema],
 });
 
 /**
@@ -23,7 +24,7 @@ const postSchema = new Schema({
  * Title : String -- Title of the post the user is making
  * Description : String -- Description of the post the user is making
  * image : String -- Will be a url that links to the image saved in AWS
- *
+ * comments: commentSchema -- People will be able to comment on each post
  */
 
 const Post = model("Post", postSchema);
