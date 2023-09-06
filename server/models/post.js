@@ -18,6 +18,10 @@ const postSchema = new Schema(
       default: 0,
     },
     comments: [commentSchema],
+    date: {
+      type: Date,
+      default: Date.now(),
+    },
   },
   { toJSON: { virtuals: true } }
 );

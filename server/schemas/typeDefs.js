@@ -1,10 +1,14 @@
 const { gql } = require("apollo-server-express");
+const { GraphQLInt } = require("graphql");
 
 const typeDefs = gql`
+  scalar Date
+
   type Comment {
     user: User
     message: String
     likes: Int
+    date: Date
   }
 
   type Post {
@@ -14,6 +18,7 @@ const typeDefs = gql`
     image: String!
     likes: Int
     comments: [Comment]
+    date: Date
   }
 
   type User {
