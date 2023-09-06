@@ -1,19 +1,20 @@
 {
-  "name": "devsocials",
+  "name": "dev-socials",
   "version": "1.0.0",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "devDependencies": {
-    "concurrently": "^8.2.1"
-  },
+  "description": "A social media website for developers by developers",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AMillsy/devsocials.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "social"
+  ],
+  "author": "Adam Mills, Haseeb, Faduma Abdi, Shabnam",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AMillsy/devsocials/issues"
