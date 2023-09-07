@@ -3,7 +3,6 @@ const stream = require("stream");
 const AWS = require("aws-sdk");
 
 const { AuthenticationError } = require("apollo-server-express");
-const { error } = require("console");
 
 class AWSS3Uploader {
   config = {
@@ -46,9 +45,11 @@ class AWSS3Uploader {
   }
 
   checkFileType(filename) {
+    const regex = /(jpg|JPG|gif|jpeg|JPEG|PNG|png|jfif)$/;
     const fileType = filename.split(".").pop();
     console.log(fileType);
-    if (fileType !== ("png" || "jpeg" || "jpg" || "gif")) return false;
+    console.log(regex.test(fileType));
+    if (!regex.test(fileType)) return false;
 
     return true;
   }
