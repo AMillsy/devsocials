@@ -1,11 +1,10 @@
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  ApolloLink,
-  createHttpLink,
+ 
 } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import { setContext } from "@apollo/client/link/context";
