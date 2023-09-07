@@ -3,7 +3,6 @@ const stream = require("stream");
 const AWS = require("aws-sdk");
 
 const { AuthenticationError } = require("apollo-server-express");
-const { error } = require("console");
 
 class AWSS3Uploader {
   config = {
