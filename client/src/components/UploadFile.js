@@ -15,24 +15,27 @@ const SINGLE_UPLOAD = gql`
 const UploadFile = () => {
   const [mutate, { loading, error }] = useMutation(SINGLE_UPLOAD);
 
-  const onChange = ({ target }) => {
+  const onChange = async ({ target }) => {
     console.log(target.files);
     const {
       validity,
       files: [file],
     } = target;
 
-    validity.valid && mutate({ variables: { file } });
+    if (validity.valid) {
+      try {
+        const { data } = await mutate({ variables: { file } });
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   if (loading) return <div>Loading....</div>;
   if (error) return <div>{JSON.stringify(error, null, 2)}</div>;
 
-  return (
-    <React.Fragment>
-      <input type="file" required onChange={onChange} />
-    </React.Fragment>
-  );
+  return <input type="file" required onChange={onChange} />;
 };
 
 export default UploadFile;

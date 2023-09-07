@@ -46,7 +46,17 @@ const resolvers = {
       //   image: image,
       // });
     },
-    singleUpload: s3Uploader.singleFileUploadResovler.bind(s3Uploader),
+    singleUpload: async (parent, args) => {
+      const upload = s3Uploader.singleFileUploadResovler.bind(s3Uploader);
+
+      try {
+        const newUpload = upload(parent, args);
+        return newUpload;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    },
   },
 };
 

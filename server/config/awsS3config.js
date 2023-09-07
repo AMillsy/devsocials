@@ -2,6 +2,9 @@ require("dotenv").config();
 const stream = require("stream");
 const AWS = require("aws-sdk");
 
+const { AuthenticationError } = require("apollo-server-express");
+const { error } = require("console");
+
 class AWSS3Uploader {
   config = {
     destinationBucketName: "",
@@ -20,12 +23,12 @@ class AWSS3Uploader {
   }
 
   //Creates a custom name for the file to use in S3
-  createDestinationFilePath(filename, mimetype, encoding) {
-    return `${filename}-${Date.now()}`;
+  createFileName(filename, mimetype, encoding) {
+    return `${filename}_${Date.now()}`;
   }
 
   //Creates a stream that will point at the s3 bucket for uploading
-  createUploadStream(key) {
+  createUploadStream(key, mimetype) {
     const pass = new stream.PassThrough();
 
     return {
@@ -35,27 +38,39 @@ class AWSS3Uploader {
           Bucket: this.config.destinationBucketName,
           Key: key,
           Body: pass,
+          ContentDisposition: "inline",
+          ContentType: mimetype,
         })
         .promise(),
     };
+  }
+
+  checkFileType(filename) {
+    const fileType = filename.split(".").pop();
+    console.log(fileType);
+    if (fileType !== ("png" || "jpeg" || "jpg" || "gif")) return false;
+
+    return true;
   }
 
   //Will upload a single file passed into it
   async singleFileUploadResovler(parent, { file }) {
     const { createReadStream, filename, mimetype, encoding } = await file;
 
+    const fileType = this.checkFileType(filename);
+    if (!fileType) {
+      throw new AuthenticationError(
+        "Use correct file type. JPG, PNG, JPEG, GIF"
+      );
+    }
+
     const stream = createReadStream();
 
-    const filePath = this.createDestinationFilePath(
-      filename,
-      mimetype,
-      encoding
-    );
+    const filePath = this.createFileName(filename, mimetype, encoding);
 
     //Creates a uploadStream that will point at AWS Bucket
 
-    console.log(filePath);
-    const uploadStream = this.createUploadStream(filePath);
+    const uploadStream = this.createUploadStream(filePath, mimetype);
 
     //Pipes all the data in our uploadStream
     stream.pipe(uploadStream.writeStream);
