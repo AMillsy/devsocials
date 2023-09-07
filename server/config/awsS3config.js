@@ -45,7 +45,7 @@ class AWSS3Uploader {
   }
 
   checkFileType(filename) {
-    const regex = /(jpg|JPG|gif|jpeg|JPEG|PNG|png)$/;
+    const regex = /(jpg|JPG|gif|jpeg|JPEG|PNG|png|jfif)$/;
     const fileType = filename.split(".").pop();
     console.log(fileType);
     console.log(regex.test(fileType));
