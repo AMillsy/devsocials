@@ -11,7 +11,7 @@ const resolvers = {
 
   Query: {
     posts: async () => {
-      return Post.find({});
+      return Post.find({}).populate("comments.user");
     },
     users: async () => {
       return User.find({});

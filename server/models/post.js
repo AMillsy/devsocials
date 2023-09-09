@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const commentSchema = require("./comment");
+
 const postSchema = new Schema(
   {
     title: {
@@ -17,13 +18,18 @@ const postSchema = new Schema(
       type: Number,
       default: 0,
     },
+    // commentCount: {
+    //   type: Number,
+    //   default: 0,
+    //   get: getCount,
+    // },
     comments: [commentSchema],
     date: {
       type: Date,
       default: Date.now(),
     },
   },
-  { toJSON: { virtuals: true } }
+  { toJSON: { getters: true } }
 );
 
 /**
@@ -33,8 +39,7 @@ const postSchema = new Schema(
  * image : String -- Will be a url that links to the image saved in AWS
  * comments: commentSchema -- People will be able to comment on each post
  */
-
-postSchema.virtual("commentCount", function () {
+postSchema.virtual("commentCount").get(function () {
   return this.comments.length;
 });
 const Post = model("Post", postSchema);
