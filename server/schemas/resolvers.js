@@ -35,22 +35,25 @@ const resolvers = {
         if (user) {
           return user;
         }
-        return AuthenticationError("Error creating user");
+        throw new AuthenticationError("Error creating user");
       } catch (error) {
-        throw AuthenticationError("Error creating user");
+        throw new AuthenticationError("Error creating user");
       }
     },
-    createPost: async (parent, { title, description, image, userId }) => {
-      console.log(image);
-      // const findUser = await User.findById(userId);
+    createPost: async (parent, { title, description, image }, context) => {
+      if (!context.user)
+        throw new AuthenticationError("Must be logged in to create a post ");
 
-      // if (!findUser) return AuthenticationError("No user found to create post");
+      const findUser = await User.findOne({ _id: context.user._id });
 
-      // const post = await Post.create({
-      //   title: title,
-      //   description: description,
-      //   image: image,
-      // });
+      if (!findUser)
+        throw new AuthenticationError("No user found to create post");
+
+      const post = await Post.create({
+        title: title,
+        description: description,
+        image: image,
+      });
     },
     singleUpload: async (parent, args) => {
       const upload = s3Uploader.singleFileUploadResovler.bind(s3Uploader);
