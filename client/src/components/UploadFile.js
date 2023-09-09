@@ -1,28 +1,6 @@
 import React from "react";
-import { useMutation, gql } from "@apollo/client";
-
-const SINGLE_UPLOAD = gql`
-  mutation Mutation($file: Upload!) {
-    singleUpload(file: $file) {
-      encoding
-      filename
-      mimetype
-      url
-    }
-  }
-`;
-
-const MULTI_UPLOAD = gql`
-  mutation MultiUpload($files: [Upload!]) {
-    multiUpload(files: $files) {
-      filename
-      mimetype
-      encoding
-      url
-    }
-  }
-`;
-
+import { useMutation } from "@apollo/client";
+import { SINGLE_UPLOAD, MULTI_UPLOAD } from "../utils/mutations";
 const UploadFile = () => {
   const [mutate, { loading, error }] = useMutation(SINGLE_UPLOAD);
   const [multiUploadMutate, { loading: multiLoad, error: multiError }] =
