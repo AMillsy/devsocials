@@ -61,6 +61,7 @@ const typeDefs = gql`
       userId: ID!
     ): PostData
     singleUpload(file: Upload!): UploadFileResponse
+    multiUpload(files: [Upload!]): [UploadFileResponse]
   }
 `;
 

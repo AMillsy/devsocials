@@ -12,10 +12,22 @@ const SINGLE_UPLOAD = gql`
   }
 `;
 
+const MULTI_UPLOAD = gql`
+  mutation MultiUpload($files: [Upload!]) {
+    multiUpload(files: $files) {
+      filename
+      mimetype
+      encoding
+      url
+    }
+  }
+`;
+
 const UploadFile = () => {
   const [mutate, { loading, error }] = useMutation(SINGLE_UPLOAD);
-
-  const onChange = async ({ target }) => {
+  const [multiUploadMutate, { loading: multiLoad, error: multiError }] =
+    useMutation(MULTI_UPLOAD);
+  const sinlgeUpload = async ({ target }) => {
     console.log(target.files);
     const {
       validity,
@@ -32,10 +44,28 @@ const UploadFile = () => {
     }
   };
 
+  const multiUpload = async ({ target }) => {
+    console.log(target);
+    const { validity, files } = target;
+
+    if (validity.valid) {
+      try {
+        const { data } = await multiUploadMutate({
+          variables: { files },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  const onChange = async ({ target }) => {
+    await multiUpload({ target });
+  };
+
   if (loading) return <div>Loading....</div>;
   if (error) return <div>Error has occured</div>;
 
-  return <input type="file" required onChange={onChange} />;
+  return <input type="file" multiple required onChange={onChange} />;
 };
 
 export default UploadFile;

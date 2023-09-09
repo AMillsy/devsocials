@@ -66,6 +66,18 @@ const resolvers = {
         throw error;
       }
     },
+    multiUpload: async (parent, args) => {
+      console.log(args);
+      const upload = s3Uploader.multiUploadResolver.bind(s3Uploader);
+
+      try {
+        const newUploads = await upload(parent, args);
+        return newUploads;
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
+    },
   },
 };
 
