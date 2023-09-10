@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavTabs from "./NavTabs";
 import Footer from "./Footer/Index";
-import Header from "./Header/index";
+import Layout from "./Pages/Layout";
 import MyProfile from "./Pages/MyProfile";
 import LogIn from "./Pages/LogIn";
 
@@ -26,14 +26,9 @@ export default function RunDevContainer() {
 
   return (
     <div>
-      <div Header>
-        <NavTabs
-          currentPage={currentPage}
-          handlePageChange={handlePageChange}
-        />
-        {renderPage()}
-        <Footer />
-      </div>
+     <Layout currentPage={currentPage} handlePageChange={handlePageChange}>
+      {renderPage()}
+    </Layout>
     </div>
   );
 }
