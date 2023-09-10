@@ -3,7 +3,7 @@ import "./NavTabs.css";
 
 function NavTabs({ currentPage, handlePageChange }) {
   return (
-    <div>
+    <div className="myheader">
       {" "}
       <ul className="nav nav-tabs myul">
         <li className="nav-item">

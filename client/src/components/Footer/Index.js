@@ -4,9 +4,9 @@ import "./Footer.css";
 
 function Footer() {
     return (
-        <Footer>
+        <footer className="footer">
              <span className="copyright">&copy; Copyright 2023 RunDev Society</span>
-        </Footer>
+        </footer>
     );
 }
 
