@@ -14,7 +14,7 @@ function NavTabs({ currentPage, handlePageChange }) {
               currentPage === "Scripts" ? "nav-link active" : "nav-link"
             }
           >
-            <h4>Scripts</h4>
+            <h3>Scripts</h3>
           </a>
         </li>
 
@@ -26,7 +26,7 @@ function NavTabs({ currentPage, handlePageChange }) {
               currentPage === "LogIn" ? "nav-link active" : "nav-link"
             }
           >
-            <h4>LogIn</h4>
+            <h3>LogIn</h3>
           </a>
         </li>
 
@@ -38,7 +38,7 @@ function NavTabs({ currentPage, handlePageChange }) {
               currentPage === "MyProfile" ? "nav-link active" : "nav-link"
             }
           >
-            <h4>MyProfile</h4>
+            <h3>MyProfile</h3>
           </a>
         </li>
 

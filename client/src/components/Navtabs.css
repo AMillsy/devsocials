@@ -1,14 +1,31 @@
 .myheader {
-    min-height: 75px;
+    min-height: 35px;
     background: #E5E5E5;
     background:linear-gradient(to bottom, #dbe6c4 5%, #9ba892 100%);
 	background-color:#bdd28f;
     background: repeating-linear-gradient(
-        45deg,
+        40deg,
         rgba(0, 0, 0, 0.815),
         rgba(0, 0, 0, 0.815) 10px,
         rgba(0, 0, 0, 0.815) 10px,
         rgba(0, 0, 0, 0.715) 20px
       ),
       url(http://s3-us-west-2.amazonaws.com/s.cdpn.io/3/old_map_@2X.png);
+      align-items: center;
+      padding: 10px;
+      
+}
+
+.myul {
+   margin: 0;
+   padding: 0;
+    list-style:none;
+    display: flex;
+    gap: 20px;
+}
+.nav-item {
+    transition:transform 0.2s ease-in-out ;
+}
+.nav-item:hover {
+    transform: scale(1.05);
 }
