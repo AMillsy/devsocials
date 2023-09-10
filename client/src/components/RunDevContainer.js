@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NavTabs from './NavTabs';
-import Footer from './Footer';
+import Footer from './Footer/Index';
 // import Header from './Header';
 import MyProfile from './Pages/MyProfile';
 import LogIn from './Pages/LogIn';
