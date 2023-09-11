@@ -27,7 +27,7 @@ export const QUERY_POST = gql`
   }
 `;
 
-e;
+
 
 /**Need to send through a ID, just send a string of the profile you have clicked on */
 /**
