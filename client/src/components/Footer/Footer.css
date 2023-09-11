@@ -1,0 +1,11 @@
+.copyright {
+  color: white;
+  vertical-align: middle;
+  display: inline-block;
+}
+.footer {
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
