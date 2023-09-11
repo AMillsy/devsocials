@@ -7,8 +7,8 @@ function Layout({ currentPage, handlePageChange, children }) {
     <div>
       <div className="myheader">
         <div className="logo">
-          <img src="person-icon.png" alt="Person" />
-          <span>RunDev</span>
+        <span>RunDev</span>
+          <img src="person-icon.png" alt="icon" />
         </div>
         <NavTabs currentPage={currentPage} handlePageChange={handlePageChange} />
       </div>
