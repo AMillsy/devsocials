@@ -2,8 +2,7 @@ import "./App.css";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
 import { setContext } from "@apollo/client/link/context";
-
-import UploadFile from "./components/UploadFile";
+import RunDevContainer from "./components/RunDevContainer";
 
 const uploadLink = createUploadLink({ uri: "/graphql" });
 const authLink = setContext((_, { headers }) => {
@@ -25,7 +24,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <UploadFile />
+      <RunDevContainer />
     </ApolloProvider>
   );
 }
