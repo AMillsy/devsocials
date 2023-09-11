@@ -1,20 +1,21 @@
 import React from "react";
 import NavTabs from "../NavTabs";
 import Footer from "../Footer/Index";
+import { Outlet } from "react-router-dom";
 
-function Layout({ currentPage, handlePageChange, children }) {
+function Layout({ children }) {
   return (
-    <div>
-      <div className="myheader">
+    <>
+      <header className="myheader">
         <div className="logo">
-        <span>RunDev</span>
+          <span>RunDev</span>
           <img src="person-icon.png" alt="icon" />
         </div>
-        <NavTabs currentPage={currentPage} handlePageChange={handlePageChange} />
-      </div>
-      {children}
+        <NavTabs />
+      </header>
+      <Outlet />
       <Footer />
-    </div>
+    </>
   );
 }
 
