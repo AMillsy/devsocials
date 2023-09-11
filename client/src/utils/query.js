@@ -48,3 +48,14 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const GET_COMMENTS_QUERY = gql`
+  query GetComments($postId: ID!) {
+    comments(postId: $postId) {
+      _id
+      message
+      likes
+      date
+    }
+  }
+`;

@@ -1,9 +1,25 @@
 import React,{ useState, useEffect } from "react";
 import Modal from "react-modal";
-import {} from "@apollo/client";
-import {} from "../utils/query"
+import { useQuery } from "@apollo/client";
+import {GET_COMMENTS_QUERY,} from "../utils/query"
+import { CREATE_COMMENT } from "../utils/mutations";
 
-const CommentPopup = ({ isOpen, onRequestClose }) => {
+const CommentPopup = ({ isOpen, onRequestClose,postId }) => {
+  const {loading, error, data, refetch } = useQuery(GET_COMMENTS_QUERY, {
+    variables: {postId},
+    SKIP: !isOpen,
+  });
+
+  useEffect(() => {
+    if (isOpen) {
+      refetch();
+    }
+  }, [isOpen, refetch]);
+
+  if (loading) return "loading..";
+  if (error) return 'Error with loading';
+
+  const Comments = data.Comments;
   return (
     <Modal
       isOpen={isOpen}
@@ -11,7 +27,11 @@ const CommentPopup = ({ isOpen, onRequestClose }) => {
       contentLabel="Comment Popup"
     >
       <h2>Comments</h2>
-      {/*  comment rendering */}
+<ul>
+  {Comments.map((Comment) => (
+    <li key={Comment._id}>{Comment.message}</li>
+  ))}
+</ul>
       <button onClick={onRequestClose}>Close</button>
     </Modal>
   );
