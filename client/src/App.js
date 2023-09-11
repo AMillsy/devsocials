@@ -27,6 +27,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <RunDevContainer />
+      <Homepage />
     </ApolloProvider>
   );
 }
