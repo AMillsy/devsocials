@@ -2,6 +2,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Post } = require("../models");
 const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const AWSS3Uploader = require("../config/awsS3config");
+const { signToken } = require("../utils/auth");
 require("dotenv").config();
 const s3Uploader = new AWSS3Uploader({
   destinationBucketName: "devsocials",
@@ -39,6 +40,23 @@ const resolvers = {
       } catch (error) {
         throw new AuthenticationError("Error creating user");
       }
+    },
+    loginUser: async (parent, { username, password }) => {
+      console.log(username, password);
+      const user = await User.findOne({ username });
+      if (!user) {
+        throw new AuthenticationError("Incorrect Credentials");
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect Credentials");
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
     },
     createPost: async (parent, { title, description, image }, context) => {
       if (!context.user)

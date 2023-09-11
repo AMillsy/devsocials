@@ -8,7 +8,13 @@ const seed = async () => {
     await Post.deleteMany({});
     await User.deleteMany({});
 
-    const createUsers = await User.insertMany(userData);
+    const createUsers = [];
+
+    for (const user of userData) {
+      await User.create(user);
+
+      createUsers.push(user);
+    }
 
     for (const { title, description, image, likes, comments } of postData) {
       const userInt = Math.floor(Math.random() * (createUsers.length - 0) + 0);

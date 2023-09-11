@@ -21,3 +21,5 @@ export const MULTI_UPLOAD = gql`
     }
   }
 `;
+
+export const LOGIN_USER = gql``;
