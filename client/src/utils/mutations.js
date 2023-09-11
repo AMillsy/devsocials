@@ -21,3 +21,15 @@ export const MULTI_UPLOAD = gql`
     }
   }
 `;
+
+export const LOGIN_USER = gql`
+  mutation LoginUser($username: String!, $password: String!) {
+    loginUser(username: $username, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
