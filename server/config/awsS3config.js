@@ -56,7 +56,7 @@ class AWSS3Uploader {
 
   //Will upload a single file passed into it
   async singleFileUploadResovler(parent, { file }) {
-    const { createReadStream, filename, mimetype, encoding } = await file;
+    const { createReadStream, filename, mimetype, encoding, csv } = await file;
 
     const fileType = this.checkFileType(filename);
     if (!fileType) {

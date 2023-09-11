@@ -40,8 +40,8 @@ const UploadFile = () => {
     await multiUpload({ target });
   };
 
-  if (loading) return <div>Loading....</div>;
-  if (error) return <div>Error has occured</div>;
+  if (multiLoad) return <div>Loading....</div>;
+  if (multiError) return <div>{multiError.message}</div>;
 
   return <input type="file" multiple required onChange={onChange} />;
 };
