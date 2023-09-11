@@ -1,5 +1,6 @@
 import "./MainFeed.css";
-
+import heart from "../../images/heart.png";
+import comment from "../../images/comment.png";
 const MainFeed = ({ imgSrc }) => {
   return (
     <div className="middle">
@@ -7,12 +8,16 @@ const MainFeed = ({ imgSrc }) => {
         <h2>Title</h2>
         <div className="cardContainer">
           <div className="cardImageContainer">
-            <img src={imgSrc}></img>
+            <img className="mainImage" src={imgSrc}></img>
           </div>
           <div className="cardInfo">
             <ul>
-              <li>Likes:</li>
-              <li>Comments:</li>
+              <li>
+                <img className="extraImage" src={heart}></img>
+              </li>
+              <li>
+                <img className="extraImage" src={comment}></img>
+              </li>
             </ul>
           </div>
         </div>
