@@ -11,12 +11,12 @@ const seed = async () => {
     const createUsers = await User.insertMany(userData);
 
     for (const { title, description, image, likes, comments } of postData) {
-      const userInt = Math.random() * (createUsers.length - 0) + 0;
-      const userMessageInt = Math.random() * (createUsers.length - 0) + 0;
-      console.log(userInt, userMessageInt);
-      const userPost = createUsers[1];
-      const userMessage = createUsers[2];
-      console.log(userMessage, userPost);
+      const userInt = Math.floor(Math.random() * (createUsers.length - 0) + 0);
+      const userMessageInt = Math.floor(
+        Math.random() * (createUsers.length - 0) + 0
+      );
+      const userPost = createUsers[userInt];
+      const userMessage = createUsers[userMessageInt];
 
       const createPost = await Post.create({
         title: title,

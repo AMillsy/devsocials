@@ -56,7 +56,7 @@ class AWSS3Uploader {
 
   //Will upload a single file passed into it
   async singleFileUploadResovler(parent, { file }) {
-    const { createReadStream, filename, mimetype, encoding } = await file;
+    const { createReadStream, filename, mimetype, encoding, csv } = await file;
 
     const fileType = this.checkFileType(filename);
     if (!fileType) {
@@ -83,6 +83,20 @@ class AWSS3Uploader {
     const link = result.Location;
 
     return { filename, mimetype, encoding, url: link };
+  }
+
+  async multiUploadResolver(parent, { files }) {
+    const uploads = [];
+    for (const file of files) {
+      try {
+        uploads.push(this.singleFileUploadResovler(parent, { file }));
+      } catch (error) {
+        console.log(error);
+        continue;
+      }
+    }
+
+    return uploads;
   }
 }
 

@@ -1,0 +1,69 @@
+.middle {
+  grid-column-start: 2;
+}
+.card {
+  display: flex;
+  background-color: #121212;
+  height: 800px;
+  width: 100%;
+  flex-direction: column;
+  grid-row-start: 2;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  margin-bottom: 20px;
+  position: relative;
+  padding: 10px;
+}
+
+.card h2 {
+  color: white;
+  border-bottom: 2px white solid;
+  width: 100%;
+  text-align: center;
+  font-size: 250%;
+}
+
+.cardContainer {
+  height: 80%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  justify-content: center;
+}
+.cardImageContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column-start: 2;
+  height: inherit;
+  width: 100%;
+
+  object-fit: contain;
+}
+.mainImage {
+  height: 100%;
+  width: inherit;
+  object-fit: contain;
+}
+
+.cardInfo {
+  display: flex;
+  grid-column-start: 3;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
+  height: inherit;
+}
+
+.cardDesc {
+  color: white;
+  text-align: center;
+}
+
+.extraImage {
+  width: 75px;
+  margin-bottom: 40px;
+}

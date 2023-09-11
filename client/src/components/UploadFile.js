@@ -1,21 +1,11 @@
 import React from "react";
-import { useMutation, gql } from "@apollo/client";
-
-const SINGLE_UPLOAD = gql`
-  mutation Mutation($file: Upload!) {
-    singleUpload(file: $file) {
-      encoding
-      filename
-      mimetype
-      url
-    }
-  }
-`;
-
+import { useMutation } from "@apollo/client";
+import { SINGLE_UPLOAD, MULTI_UPLOAD } from "../utils/mutations";
 const UploadFile = () => {
   const [mutate, { loading, error }] = useMutation(SINGLE_UPLOAD);
-
-  const onChange = async ({ target }) => {
+  const [multiUploadMutate, { loading: multiLoad, error: multiError }] =
+    useMutation(MULTI_UPLOAD);
+  const sinlgeUpload = async ({ target }) => {
     console.log(target.files);
     const {
       validity,
@@ -32,10 +22,28 @@ const UploadFile = () => {
     }
   };
 
-  if (loading) return <div>Loading....</div>;
-  if (error) return <div>Error has occured</div>;
+  const multiUpload = async ({ target }) => {
+    console.log(target);
+    const { validity, files } = target;
 
-  return <input type="file" required onChange={onChange} />;
+    if (validity.valid) {
+      try {
+        const { data } = await multiUploadMutate({
+          variables: { files },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  const onChange = async ({ target }) => {
+    await multiUpload({ target });
+  };
+
+  if (multiLoad) return <div>Loading....</div>;
+  if (multiError) return <div>{multiError.message}</div>;
+
+  return <input type="file" multiple required onChange={onChange} />;
 };
 
 export default UploadFile;

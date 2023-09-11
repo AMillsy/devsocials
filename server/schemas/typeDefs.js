@@ -10,7 +10,13 @@ const typeDefs = gql`
     url: String!
   }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
   type Comment {
+    _id: ID
     user: User
     message: String
     likes: Int
@@ -25,6 +31,7 @@ const typeDefs = gql`
     likes: Int
     comments: [Comment]
     date: Date
+    commentCount: Int
   }
 
   type User {
@@ -43,6 +50,7 @@ const typeDefs = gql`
     posts: [Post]
     users: [User]
     userProfile(_id: ID!): User
+    me: User
   }
   type Mutation {
     createUser(username: String!, email: String!, password: String!): User
@@ -53,6 +61,7 @@ const typeDefs = gql`
       userId: ID!
     ): PostData
     singleUpload(file: Upload!): UploadFileResponse
+    multiUpload(files: [Upload!]): [UploadFileResponse]
   }
 `;
 
