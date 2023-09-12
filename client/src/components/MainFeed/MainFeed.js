@@ -33,7 +33,7 @@ const MainFeed = ({ imgSrc, postId, title, likes, description }) => {
                 <img
                   className="extraImage"
                   src={commentImg}
-                  alt=""
+                  alt="CommentPopup"
                   onClick={openCommentPopup}
                 ></img>
               </li>

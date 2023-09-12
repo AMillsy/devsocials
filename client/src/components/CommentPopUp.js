@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { GET_COMMENTS_QUERY } from "../utils/query";
 import { CREATE_COMMENT } from "../utils/mutations";
 
 const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
-  console.log(postId);
   const { loading, error, data, refetch } = useQuery(GET_COMMENTS_QUERY, {
     variables: { _id: postId },
-    SKIP: !isOpen,
+    skip: !isOpen,
   });
+
+  const [commentText, setCommentText] = useState("");
+  const [createComment] = useMutation(CREATE_COMMENT);
 
   useEffect(() => {
     if (isOpen) {
@@ -17,11 +19,26 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
     }
   }, [isOpen, refetch]);
 
-  console.log(error);
-  if (loading) return "loading..";
+  if (loading) return "Loading...";
   if (error) return "Error with loading";
 
-  const Comments = data.Comments;
+  const comments = data && data.comments ? data.comments : [];
+
+  const handleCommentSubmit = async () => {
+    try {
+      await createComment({
+        variables: {
+          postId: postId,
+          message: commentText,
+        },
+      });
+      setCommentText("");
+      refetch();
+    } catch (err) {
+      console.error("Error adding comment", err);
+    }
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -30,10 +47,18 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
     >
       <h2>Comments</h2>
       <ul>
-        {Comments.map((Comment) => (
+        {comments.map((comments) => (
           <li key={Comment._id}>{Comment.message}</li>
         ))}
       </ul>
+      <div>
+        <textarea
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
+          placeholder="Write a comment..."
+        />
+        <button onClick={handleCommentSubmit}>Add Comment</button>
+      </div>
       <button onClick={onRequestClose}>Close</button>
     </Modal>
   );
