@@ -1,31 +1,61 @@
-.myheader {
-    min-height: 35px;
-    background: #E5E5E5;
-    background:linear-gradient(to bottom, #dbe6c4 5%, #9ba892 100%);
-	background-color:#bdd28f;
-    background: repeating-linear-gradient(
-        40deg,
-        rgba(0, 0, 0, 0.815),
-        rgba(0, 0, 0, 0.815) 10px,
-        rgba(0, 0, 0, 0.815) 10px,
-        rgba(0, 0, 0, 0.715) 20px
-      ),
-      url(http://s3-us-west-2.amazonaws.com/s.cdpn.io/3/old_map_@2X.png);
-      align-items: center;
-      padding: 10px;
-      
+* {
+    color: white;
 }
 
-.myul {
-   margin: 0;
-   padding: 0;
-    list-style:none;
+
+.myheader {
+    min-height: 35px;
+    background: black;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
     display: flex;
     gap: 20px;
+    margin-right: 20vw;
+
 }
+
+
 .nav-item {
-    transition:transform 0.2s ease-in-out ;
+    transition: transform 0.2s ease-in-out;
 }
+
+
+@keyframes blink-with-shadow {
+    0% {
+        opacity: 1;
+        box-shadow: none;
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(128, 128, 128, 0.7); 
+    }
+    100% {
+        opacity: 1;
+        box-shadow: none;
+    }
+}
+
+
 .nav-item:hover {
     transform: scale(1.05);
+    color: gray;
+    animation: blink-with-shadow 1s infinite; 
 }
+
+
+
+
+
+
