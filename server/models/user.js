@@ -24,6 +24,8 @@ const userSchema = new Schema(
       minlength: 8,
     },
     posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+    followed: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    following: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   { toJSON: { virtuals: true } }
 );
