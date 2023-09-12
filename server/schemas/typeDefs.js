@@ -29,8 +29,8 @@ const typeDefs = gql`
     description: String
     image: String!
     likes: Int
-    comments: [Comment]
     date: Date
+    comments: [Comment]
     commentCount: Int
   }
 
@@ -49,6 +49,7 @@ const typeDefs = gql`
   type Query {
     posts: [Post]
     users: [User]
+    getComments(_id: ID!): Comment
     userProfile(_id: ID!): User
     me: User
   }
