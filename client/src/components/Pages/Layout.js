@@ -10,7 +10,7 @@ function Layout({ children }) {
     <>
       <header className="myheader">
         <div className="logo">
-          <img src={Logo} alt="logo" class="logo"></img>
+          <img src={Logo} alt="logo" className="logo"></img>
         </div>
         <NavTabs />
       </header>

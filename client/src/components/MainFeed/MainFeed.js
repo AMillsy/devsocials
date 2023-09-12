@@ -4,7 +4,7 @@ import heart from "../../images/heart.png";
 import commentImg from "../../images/comment.png";
 import CommentPopup from "../CommentPopUp";
 
-const MainFeed = ({ imgSrc }) => {
+const MainFeed = ({ imgSrc, postId, title, likes, description }) => {
   const [isCommentPopupOpen, setIsCommentPopupOpen] = useState(false);
 
   const openCommentPopup = () => {
@@ -15,46 +15,46 @@ const MainFeed = ({ imgSrc }) => {
     setIsCommentPopupOpen(false);
   };
 
+  const isCommentOpen = () => {
+    if (isCommentPopupOpen) {
+      return (
+        <CommentPopup
+          isOpen={isCommentPopupOpen}
+          onRequestClose={closeCommentPopup}
+          postId={postId}
+        />
+      );
+    }
+    return;
+  };
+
   return (
     <div className="middle">
       <div className="card">
-        <h2>Main Feed</h2>
+        <h2>{title}</h2>
         <div className="cardContainer">
           <div className="cardImageContainer">
-            <img className="mainImage" 
-            src={imgSrc}
-             alt="">
-
-             </img>
+            <img className="mainImage" src={imgSrc} alt=""></img>
           </div>
           <div className="cardInfo">
             <ul>
               <li>
-                <img className="extraImage" 
-                src={heart} 
-                alt="">
-
-                </img>
+                <img className="extraImage" src={heart} alt=""></img>
+                <p>{likes}</p>
               </li>
               <li>
-                <img className="extraImage" 
-                src={commentImg} 
-                alt="CommentPopup"
-                onClick={openCommentPopup}
-                >
-                </img>
+                <button alt="CommentPopup" onClick={openCommentPopup}>
+                  <img className="extraImage" src={commentImg} />
+                </button>
               </li>
             </ul>
           </div>
         </div>
         <div className="cardDesc">
-          <p>
-            Start your day with a hearty helping of code! Let's explore the
-            delicious world of programming together. #CodeBreakfast #DevHumor
-          </p>
+          <p>{description}</p>
         </div>
       </div>
-      <CommentPopup isOpen={isCommentPopupOpen} onRequestClose={closeCommentPopup} />
+      {isCommentOpen()}
     </div>
   );
 };
