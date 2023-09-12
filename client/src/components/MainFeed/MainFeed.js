@@ -15,6 +15,19 @@ const MainFeed = ({ imgSrc, postId, title, likes, description }) => {
     setIsCommentPopupOpen(false);
   };
 
+  const isCommentOpen = () => {
+    if (isCommentPopupOpen) {
+      return (
+        <CommentPopup
+          isOpen={isCommentPopupOpen}
+          onRequestClose={closeCommentPopup}
+          postId={postId}
+        />
+      );
+    }
+    return;
+  };
+
   return (
     <div className="middle">
       <div className="card">
@@ -30,12 +43,9 @@ const MainFeed = ({ imgSrc, postId, title, likes, description }) => {
                 <p>{likes}</p>
               </li>
               <li>
-                <img
-                  className="extraImage"
-                  src={commentImg}
-                  alt="CommentPopup"
-                  onClick={openCommentPopup}
-                ></img>
+                <button alt="CommentPopup" onClick={openCommentPopup}>
+                  <img className="extraImage" src={commentImg} />
+                </button>
               </li>
             </ul>
           </div>
@@ -44,11 +54,7 @@ const MainFeed = ({ imgSrc, postId, title, likes, description }) => {
           <p>{description}</p>
         </div>
       </div>
-      <CommentPopup
-        isOpen={isCommentPopupOpen}
-        onRequestClose={closeCommentPopup}
-        postId={postId}
-      />
+      {isCommentOpen()}
     </div>
   );
 };

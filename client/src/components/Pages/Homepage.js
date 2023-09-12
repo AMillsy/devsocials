@@ -2,6 +2,7 @@ import MainFeed from "../MainFeed";
 import "./Homepage.css";
 import { useQuery } from "@apollo/client";
 import { QUERY_POST } from "../../utils/query";
+import { GET_COMMENTS_QUERY } from "../../utils/query";
 const Homepage = () => {
   const { loading, data, error } = useQuery(QUERY_POST);
 
@@ -19,6 +20,7 @@ const Homepage = () => {
         }) {
           return (
             <MainFeed
+              key={_id}
               imgSrc={image}
               postId={_id}
               title={title}
