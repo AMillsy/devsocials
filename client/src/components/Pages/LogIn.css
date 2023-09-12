@@ -1,11 +1,21 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Open+Sans:400,300,600);
+  @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 
+body{
+  background-image: linear-gradient(60deg, rgba(0, 0, 0, 0.215), rgb(40, 40, 40), rgba(69, 69, 69, 0.174));
+
+}
 .log-form {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 5rem;
+  color: #ffffff;
+  padding: 20px;
+  background-image: linear-gradient(120deg, rgba(0, 0, 0, 0.215), rgb(38, 38, 38), rgba(0, 0, 0, 0.174));
+  width: 400px;
+  border-radius: 30px;
+  margin: auto;
+  font-family: 'Courier New', Courier, monospace;
+  
 }
 
 form {
@@ -15,8 +25,38 @@ form {
 
 form input {
   margin-bottom: 10px;
+  border-radius: 5px;
+  height: 25px;
+  padding-left: 5px;
 }
 
 .signup {
-  margin-top: 10px;
+  margin-top: 20px;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: underline;
+  
 }
+
+h2 { 
+  padding: 20px;
+  color: #fff;
+  font-size: 20px ;
+
+}
+
+.btn {
+  background-color: #717171;
+  padding: 3px;
+  border-radius: 10px;
+  width: 100px;
+  margin: auto;
+}
+
+
+.btn:hover {
+  box-shadow: 2px 2px 2px #161616;
+  background-color: #161616;
+  color: #fff;
+}
+
