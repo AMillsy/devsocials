@@ -27,8 +27,6 @@ export const QUERY_POST = gql`
   }
 `;
 
-
-
 /**Need to send through a ID, just send a string of the profile you have clicked on */
 /**
   const { loading, error, data } = useQuery(QUERY_USER, {
@@ -60,7 +58,8 @@ export const LOGIN_USER = gql`
         username
       }
     }
-    `;
+  }
+`;
 
 export const GET_COMMENTS_QUERY = gql`
   query GetComments($postId: ID!) {

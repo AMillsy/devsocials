@@ -17,8 +17,11 @@ const resolvers = {
     users: async () => {
       return User.find({});
     },
+    getComments: async (parent, { _id }) => {
+      return Post.findById(_id).populate("comments.user");
+    },
     userProfile: async (parent, { _id }) => {
-      return User.findById(_id).populate("posts");
+      return User.findOne({ _id }).populate("posts");
     },
     me: async (parent, args, context) => {
       if (context.user) {
