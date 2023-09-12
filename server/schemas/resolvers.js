@@ -24,7 +24,15 @@ const resolvers = {
       return User.find({});
     },
     getComments: async (parent, { _id }) => {
-      return Post.findById(_id).populate("comments.user");
+      const post = await Post.findById(_id).populate({
+        path: "comments",
+        populate: {
+          path: "user",
+          model: "User",
+        },
+      });
+
+      return post.comments;
     },
     userProfile: async (parent, { _id }) => {
       return User.findOne({ _id }).populate("posts");
@@ -108,7 +116,7 @@ const resolvers = {
     createComment: async (parent, { postID, message, userID }, context) => {
       // if (!context.user)
       //   throw new AuthenticationError("Must be logged in to make a comment");
-      const newComment = await commentSchema.create({ message, user: userID });
+      const newComment = await Comment.create({ message, user: userID });
       const updatePost = await Post.findOneAndUpdate(
         { _id: postID },
         { $push: { comments: newComment } },

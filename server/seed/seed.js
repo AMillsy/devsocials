@@ -28,7 +28,7 @@ const seed = async () => {
       const userMessage = createUsers[userMessageInt];
 
       const newComment = await Comment.create({
-        message: commentData[0].message,
+        message: commentData[i].message,
         user: userMessage._id,
       });
 
