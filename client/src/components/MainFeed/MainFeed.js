@@ -18,7 +18,7 @@ const MainFeed = ({ imgSrc }) => {
   return (
     <div className="middle">
       <div className="card">
-        <h2>Title</h2>
+        <h2>Main Feed</h2>
         <div className="cardContainer">
           <div className="cardImageContainer">
             <img className="mainImage" 
