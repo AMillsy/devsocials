@@ -23,6 +23,7 @@
     "url": "https://github.com/AMillsy/devsocials/issues"
   },
   "homepage": "https://github.com/AMillsy/devsocials#readme",
-  "dependencies": {}
-  
+  "dependencies": {
+    "react-router-dom": "^6.15.0"
+  }
 }
