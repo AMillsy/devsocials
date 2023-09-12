@@ -2,14 +2,17 @@ import React from "react";
 import NavTabs from "../NavTabs";
 import Footer from "../Footer/Index";
 import { Outlet } from "react-router-dom";
+import Logo from "../../images/logo.png";
+import './Layout.css'
+
 
 function Layout({ children }) {
   return (
     <>
       <header className="myheader">
         <div className="logo">
-          <span>RunDev</span>
-          <img src="person-icon.png" alt="icon" />
+          
+          <img src= {Logo} alt="logo" width="400x" height="250px" class="logo" ></img>
         </div>
         <NavTabs />
       </header>
