@@ -8,20 +8,11 @@ export const QUERY_POST = gql`
   query Posts {
     posts {
       _id
+      image
+      likes
       title
       description
-      image
       date
-      likes
-      comments {
-        _id
-        date
-        likes
-        message
-        user {
-          username
-        }
-      }
       commentCount
     }
   }
@@ -62,12 +53,14 @@ export const LOGIN_USER = gql`
 `;
 
 export const GET_COMMENTS_QUERY = gql`
-  query GetComments($postId: ID!) {
-    comments(postId: $postId) {
-      _id
+  query GetComments($id: ID!) {
+    getComments(_id: $id) {
       message
       likes
       date
+      user {
+        username
+      }
     }
   }
 `;

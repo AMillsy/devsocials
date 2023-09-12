@@ -1,19 +1,32 @@
 import MainFeed from "../MainFeed";
 import "./Homepage.css";
+import { useQuery } from "@apollo/client";
+import { QUERY_POST } from "../../utils/query";
 const Homepage = () => {
+  const { loading, data, error } = useQuery(QUERY_POST);
+
   return (
     <>
       <article className="main">
-        <MainFeed
-          imgSrc={
-            "https://devsocials.s3.eu-west-2.amazonaws.com/testimage2.png_1694115963401"
-          }
-        />
-        <MainFeed
-          imgSrc={
-            "https://devsocials.s3.eu-west-2.amazonaws.com/testimage3.jpg_1694115968472"
-          }
-        />
+        {data.posts.map(function ({
+          _id,
+          image,
+          title,
+          likes,
+          description,
+          commentCount,
+        }) {
+          return (
+            <MainFeed
+              imgSrc={image}
+              postId={_id}
+              title={title}
+              likes={likes}
+              description={description}
+              commentCount={commentCount}
+            />
+          );
+        })}
       </article>
     </>
   );
