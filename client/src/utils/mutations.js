@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const SINGLE_UPLOAD = gql`
-  mutation Mutation($file: Upload!) {
+  mutation SingleUpload($file: Upload!) {
     singleUpload(file: $file) {
       encoding
       filename
@@ -14,15 +14,15 @@ export const SINGLE_UPLOAD = gql`
 export const MULTI_UPLOAD = gql`
   mutation MultiUpload($files: [Upload!]) {
     multiUpload(files: $files) {
+      encoding
       filename
       mimetype
-      encoding
       url
     }
   }
 `;
 export const LOGIN_USER = gql`
-  mutation LoginUser($username: String!, $password: String!) {
+  mutation Mutation($username: String!, $password: String!) {
     loginUser(username: $username, password: $password) {
       token
       user {
@@ -33,13 +33,13 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const CREATE_COMMENT = gql`
-  mutation CreateComment($postId: ID!, $message: String!) {
-    createComment(postId: $postId, message: $message) {
+export const CREATE_USER = gql`
+  mutation CreateUser($username: String!, $email: String!, $password: String!) {
+    createUser(username: $username, email: $email, password: $password) {
       _id
-      message
-      likes
-      date
+      email
+      password
+      username
     }
   }
 `;
