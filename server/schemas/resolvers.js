@@ -24,6 +24,7 @@ const resolvers = {
       return User.find({});
     },
     getComments: async (parent, { _id }) => {
+      console.log(_id);
       const post = await Post.findById(_id).populate({
         path: "comments",
         populate: {

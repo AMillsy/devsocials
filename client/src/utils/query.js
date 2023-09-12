@@ -55,9 +55,9 @@ export const LOGIN_USER = gql`
 export const GET_COMMENTS_QUERY = gql`
   query GetComments($id: ID!) {
     getComments(_id: $id) {
-      message
-      likes
       date
+      likes
+      message
       user {
         username
       }

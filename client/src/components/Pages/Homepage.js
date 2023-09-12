@@ -5,6 +5,7 @@ import { QUERY_POST } from "../../utils/query";
 const Homepage = () => {
   const { loading, data, error } = useQuery(QUERY_POST);
 
+  if (loading) return <p>Loading data</p>;
   return (
     <>
       <article className="main">

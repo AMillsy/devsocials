@@ -5,6 +5,7 @@ import { GET_COMMENTS_QUERY } from "../utils/query";
 import { CREATE_COMMENT } from "../utils/mutations";
 
 const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
+  console.log(postId);
   const { loading, error, data, refetch } = useQuery(GET_COMMENTS_QUERY, {
     variables: { _id: postId },
     SKIP: !isOpen,
