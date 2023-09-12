@@ -6,7 +6,7 @@ import { setContext } from "@apollo/client/link/context";
 import Homepage from "./components/Pages/Homepage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Pages/Layout";
-import Login from "./components/Pages/LogIn";
+import Login from "./components/Pages/Login";
 import MyProfile from "./components/Pages/MyProfile";
 const uploadLink = createUploadLink({ uri: "/graphql" });
 const authLink = setContext((_, { headers }) => {
