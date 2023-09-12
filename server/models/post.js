@@ -23,7 +23,8 @@ const postSchema = new Schema(
     //   default: 0,
     //   get: getCount,
     // },
-    comments: [commentSchema],
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+
     date: {
       type: Date,
       default: Date.now(),

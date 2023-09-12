@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Post } = require("../models");
+const { User, Post, Comment } = require("../models");
 const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const AWSS3Uploader = require("../config/awsS3config");
 const { signToken } = require("../utils/auth");
@@ -12,13 +12,27 @@ const resolvers = {
 
   Query: {
     posts: async () => {
-      return Post.find({}).populate("comments.user");
+      return Post.find({}).populate({
+        path: "comments",
+        populate: {
+          path: "user",
+          model: "User",
+        },
+      });
     },
     users: async () => {
       return User.find({});
     },
     getComments: async (parent, { _id }) => {
-      return Post.findById(_id).populate("comments.user");
+      const post = await Post.findById(_id).populate({
+        path: "comments",
+        populate: {
+          path: "user",
+          model: "User",
+        },
+      });
+
+      return post.comments;
     },
     userProfile: async (parent, { _id }) => {
       return User.findOne({ _id }).populate("posts");
@@ -98,6 +112,18 @@ const resolvers = {
         console.log(error);
         throw error;
       }
+    },
+    createComment: async (parent, { postID, message, userID }, context) => {
+      // if (!context.user)
+      //   throw new AuthenticationError("Must be logged in to make a comment");
+      const newComment = await Comment.create({ message, user: userID });
+      const updatePost = await Post.findOneAndUpdate(
+        { _id: postID },
+        { $push: { comments: newComment } },
+        { new: true }
+      );
+
+      return newComment;
     },
   },
 };
