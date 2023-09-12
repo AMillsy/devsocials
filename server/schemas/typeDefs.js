@@ -16,7 +16,6 @@ const typeDefs = gql`
   }
 
   type Comment {
-    _id: ID
     user: User
     message: String
     likes: Int
@@ -49,7 +48,7 @@ const typeDefs = gql`
   type Query {
     posts: [Post]
     users: [User]
-    getComments(_id: ID!): Comment
+    getComments(_id: ID!): [Comment]
     userProfile(_id: ID!): User
     me: User
   }
@@ -62,6 +61,7 @@ const typeDefs = gql`
       image: Upload!
       userId: ID!
     ): PostData
+    createComment(postID: ID!, message: String, userID: ID): Comment
     singleUpload(file: Upload!): UploadFileResponse
     multiUpload(files: [Upload!]): [UploadFileResponse]
   }
