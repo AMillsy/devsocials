@@ -1,13 +1,16 @@
 .myheader {
     background: #E5E5E5;
-    background: linear-gradient(to bottom, #dbe6c4 5%, #9ba892 100%);
-    background-color: #bdd28f;
+    height: 150px;
+    background-color: black;
     display: flex;
-    justify-content: space-between;
+    justify-content:space-between;
     align-items: center;
     padding: 0%;
+    flex-direction: row;
   }
 .logo {
     display: flex;
-    align-items: center;
+    padding: 30px;
+    
+    
 }

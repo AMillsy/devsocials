@@ -1,7 +1,6 @@
 .header {
-    background: #E5E5E5;
-    background: linear-gradient(to bottom, #dbe6c4 5%, #9ba892 100%);
-    background-color: #bdd28f;
+    background: black;
+    background-color: black;
     display: flex;
     justify-content: space-between;
     align-items: center;
