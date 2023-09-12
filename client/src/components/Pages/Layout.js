@@ -12,7 +12,7 @@ function Layout({ children }) {
       <header className="myheader">
         <div className="logo">
           
-          <img src= {Logo} alt="logo" width="500x" height="250px" class="logo" ></img>
+          <img src= {Logo} alt="logo" width="400x" height="250px" class="logo" ></img>
         </div>
         <NavTabs />
       </header>
