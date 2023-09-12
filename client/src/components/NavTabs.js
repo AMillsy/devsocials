@@ -13,7 +13,7 @@ function NavTabs({ currentPage, handlePageChange }) {
           <Link to={"/profile"}>Profile</Link>
         </li>
         <li>
-          <Link to={"login"}>Login</Link>
+          <Link to={"/login"}>Login</Link>
         </li>
       </ul>
     </nav>
