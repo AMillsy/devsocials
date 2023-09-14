@@ -9,6 +9,8 @@ import Layout from "./components/Pages/Layout";
 import Login from "./components/Pages/Login";
 import MyProfile from "./components/Pages/MyProfile";
 import { UsernameProvider } from "./utils/userContext";
+import Settings from "./components/Pages/Settings";
+import NewScript from "./components/Pages/NewScript";
 const uploadLink = createUploadLink({ uri: "/graphql" });
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("id_token");
@@ -31,18 +33,13 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <UsernameProvider>
-                <Layout />
-              </UsernameProvider>
-            }
-          >
+          <Route path="/" element={<Layout />}>
             <Route index element={<Homepage />} />
             <Route path="profile/:userId" element={<MyProfile />} />
             <Route path="login" element={<Login />} />
             <Route path="me" element={<MyProfile />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="new" element={<NewScript />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import ProfileFeed from "../ProfileFeed";
 import userImage from "../../images/userImage.jpg";
+import { Link } from "react-router-dom";
 
 export default function MyProfile() {
   const { userId } = useParams();
@@ -17,7 +18,11 @@ export default function MyProfile() {
   const editBtn = () => {
     if (userId) return;
 
-    return <button className="primary">Settings</button>;
+    return (
+      <Link to={"/settings"}>
+        <button className="primary">Settings</button>
+      </Link>
+    );
   };
 
   const userData = data?.me || data?.userProfile;
@@ -39,7 +44,9 @@ export default function MyProfile() {
           <br />
         </p>
         <div className="buttons">
-          <button className="primary">New Script</button>
+          <Link to={"/new"}>
+            <button className="primary">New Script</button>
+          </Link>
           <button className="primary ghost">Follow</button>{" "}
           {/**Will say followed, if you follow them */}
           {editBtn()}
