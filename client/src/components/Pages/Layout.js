@@ -6,6 +6,9 @@ import Logo from "../../images/logo.png";
 import "./Layout.css";
 
 function Layout({ children }) {
+  const size = window.matchMedia("max-width: 500px");
+  console.log(size);
+
   return (
     <>
       <header className="myheader">

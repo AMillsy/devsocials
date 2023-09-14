@@ -56,7 +56,7 @@ function NavTabs() {
   }
   return (
     <nav>
-      <ul>
+      <ul className="nav-list">
         <li>
           <Link className="nav-item" to={"/"}>
             Scripts

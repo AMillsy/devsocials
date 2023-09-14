@@ -14,6 +14,12 @@ export default function MyProfile() {
     variables: { id: userId },
   });
 
+  const editBtn = () => {
+    if (userId) return;
+
+    return <button className="primary">Settings</button>;
+  };
+
   const userData = data?.me || data?.userProfile;
 
   if (error) return <h2>{error.message}</h2>;
@@ -36,6 +42,7 @@ export default function MyProfile() {
           <button className="primary">New Script</button>
           <button className="primary ghost">Follow</button>{" "}
           {/**Will say followed, if you follow them */}
+          {editBtn()}
         </div>
         {/**Will be able to edit your profile and add these */}
         <div className="skills">

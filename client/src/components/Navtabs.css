@@ -1,25 +1,25 @@
-.myheader {
+nav {
   min-height: 35px;
   background: black;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
   padding: 10px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: larger;
   font-weight: bolder;
 }
 
-ul {
-  margin: 0;
+.nav-list {
+  width: 70%;
   padding: 0;
   list-style: none;
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
   gap: 20px;
   margin-right: 20vw;
   color: white;
 }
 ul li a {
+  font-size: 115%;
   color: white;
 }
 
@@ -56,4 +56,11 @@ ul li a {
   transform: scale(1.05);
   color: gray;
   animation: blink-with-shadow 1s infinite;
+}
+
+@media only screen and (max-width: 600px) {
+  .nav-list {
+    width: 100%;
+    justify-content: center;
+  }
 }
