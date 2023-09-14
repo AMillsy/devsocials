@@ -12,7 +12,7 @@
   grid-column-start: 2;
   display: flex;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -38,6 +38,7 @@ body {
 }
 
 .card-container {
+  margin: 10px;
   background-color: #000000;
   border-radius: 5px;
   box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
@@ -68,6 +69,7 @@ button.primary {
   font-family: Montserrat, sans-serif;
   font-weight: 500;
   padding: 10px 25px;
+  margin: 5px;
 }
 
 button.primary.ghost {
@@ -83,6 +85,8 @@ button.primary.ghost {
   display: flex;
   flex-wrap: wrap;
   text-wrap: wrap;
+  overflow: auto;
+  height: 400px;
 }
 
 .skills ul {
@@ -101,4 +105,19 @@ button.primary.ghost {
   font-size: 12px;
   margin: 0 7px 7px 0;
   padding: 7px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .card-container {
+    width: 250px;
+  }
 }
