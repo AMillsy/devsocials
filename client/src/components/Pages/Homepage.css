@@ -2,3 +2,13 @@
   display: grid;
   grid-template-columns: 20% 60% 20%;
 }
+
+.feed {
+  grid-column-start: 2;
+}
+
+.devs {
+  grid-column-start: 1;
+  color: white;
+  margin: 10px;
+}

@@ -38,7 +38,13 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    image: String
+    location: String
+    job: String
+    skills: [String]
     posts: [Post]
+    followed: [ID]
+    following: [ID]
   }
 
   type PostData {
@@ -55,10 +61,11 @@ const typeDefs = gql`
   type Mutation {
     createUser(username: String!, email: String!, password: String!): Auth
     loginUser(username: String!, password: String!): Auth
+    updateUser(username: String, file: Upload, location: String): User
     createPost(
       title: String!
       description: String
-      image: Upload!
+      image: [Upload]!
       userId: ID!
     ): PostData
     createComment(postID: ID!, message: String, userID: ID): Comment

@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_COMMENTS_QUERY } from "../utils/query";
 import { CREATE_COMMENT } from "../utils/mutations";
+import { Link } from "react-router-dom";
 
 const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
   const { data, loading, error } = useQuery(GET_COMMENTS_QUERY, {
@@ -11,7 +12,7 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
 
   const [commentText, setCommentText] = useState("");
   const [createComment] = useMutation(CREATE_COMMENT);
-
+  console.log(data);
   // useEffect(() => {
   //   if (isOpen) {
   //     refetch();
@@ -50,6 +51,12 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
       <ul>
         {comments.map((comment) => (
           <li style={{ color: "black" }} key={comment._id}>
+            <Link
+              style={{ color: "black" }}
+              to={`/profile/${comment.user._id}`}
+            >
+              {comment.user.username}
+            </Link>
             {comment.message}
           </li>
         ))}
