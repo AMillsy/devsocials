@@ -1,61 +1,49 @@
-* {
-    color: white;
-}
-
-
 .myheader {
-    min-height: 35px;
-    background: black;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    padding: 10px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: larger;
-    font-weight: bolder;
+  min-height: 35px;
+  background: black;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: larger;
+  font-weight: bolder;
 }
-
 
 ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin-right: 20vw;
-
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin-right: 20vw;
+  color: white;
 }
-
+ul li a {
+  color: white;
+}
 
 .nav-item {
-    transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
-
 
 @keyframes blink-with-shadow {
-    0% {
-        opacity: 1;
-        box-shadow: none;
-    }
-    50% {
-        opacity: 1;
-        box-shadow: 0 0 20px rgba(128, 128, 128, 0.7); 
-    }
-    100% {
-        opacity: 1;
-        box-shadow: none;
-    }
+  0% {
+    opacity: 1;
+    box-shadow: none;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(128, 128, 128, 0.7);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: none;
+  }
 }
-
 
 .nav-item:hover {
-    transform: scale(1.05);
-    color: gray;
-    animation: blink-with-shadow 1s infinite; 
+  transform: scale(1.05);
+  color: gray;
+  animation: blink-with-shadow 1s infinite;
 }
-
-
-
-
-
-

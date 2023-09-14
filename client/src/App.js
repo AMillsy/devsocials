@@ -32,8 +32,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Homepage />} />
-            <Route path="profile" element={<MyProfile />} />
+            <Route path="profile/:userId" element={<MyProfile />} />
             <Route path="login" element={<Login />} />
+            <Route path="me" element={<MyProfile />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -18,6 +18,37 @@ export const QUERY_POST = gql`
   }
 `;
 
+export const GET_COMMENTS_QUERY = gql`
+  query GetComments($id: ID!) {
+    getComments(_id: $id) {
+      date
+      likes
+      message
+      user {
+        username
+      }
+    }
+  }
+`;
+
+export const QUERY_ME = gql`
+  query Me {
+    me {
+      _id
+      username
+      posts {
+        _id
+        title
+        image
+        description
+        date
+        likes
+        commentCount
+      }
+    }
+  }
+`;
+
 /**Need to send through a ID, just send a string of the profile you have clicked on */
 /**
   const { loading, error, data } = useQuery(QUERY_USER, {
@@ -31,35 +62,11 @@ export const QUERY_USER = gql`
       posts {
         _id
         title
-        description
         image
-        likes
+        description
         date
-      }
-    }
-  }
-`;
-
-export const LOGIN_USER = gql`
-  mutation LoginUser($username: String!, $password: String!) {
-    loginUser(username: $username, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
-    }
-  }
-`;
-
-export const GET_COMMENTS_QUERY = gql`
-  query GetComments($id: ID!) {
-    getComments(_id: $id) {
-      date
-      likes
-      message
-      user {
-        username
+        likes
+        commentCount
       }
     }
   }

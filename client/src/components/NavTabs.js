@@ -3,7 +3,7 @@ import "./Navtabs.css";
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 
-function NavTabs({ currentPage, handlePageChange }) {
+function NavTabs() {
   function isLoggedIn() {
     const loggedIn = Auth.loggedIn();
 

@@ -2,8 +2,22 @@ import React from "react";
 import "./MyProfile.css";
 import NavTabs from "../NavTabs";
 import MainFeed from "../MainFeed/MainFeed";
+import { QUERY_ME } from "../../utils/query";
+import { QUERY_USER } from "../../utils/query";
+import { useQuery } from "@apollo/client";
+import { useParams } from "react-router-dom";
 
 export default function MyProfile() {
+  const { userId } = useParams();
+
+  const { loading, data, error } = useQuery(userId ? QUERY_USER : QUERY_ME, {
+    variables: { id: userId },
+  });
+
+  const userData = data?.me || data?.userProfile;
+
+  console.log(userData);
+
   return (
     <article className="profile">
       <div className="card-container">
