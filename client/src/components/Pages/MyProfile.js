@@ -14,15 +14,22 @@ export default function MyProfile() {
   const { loading, data, error } = useQuery(userId ? QUERY_USER : QUERY_ME, {
     variables: { id: userId },
   });
+  //Shouldnt show the follow button if its your profile
+  const isUser = () => {
+    if (!userId) {
+      return (
+        <>
+          <Link to={"/new"}>
+            <button className="primary">New Script</button>
+          </Link>
+          <Link to={"/settings"}>
+            <button className="primary">Settings</button>
+          </Link>
+        </>
+      );
+    }
 
-  const editBtn = () => {
-    if (userId) return;
-
-    return (
-      <Link to={"/settings"}>
-        <button className="primary">Settings</button>
-      </Link>
-    );
+    return <button className="primary ghost">Follow</button>;
   };
 
   const userData = data?.me || data?.userProfile;
@@ -44,12 +51,8 @@ export default function MyProfile() {
           <br />
         </p>
         <div className="buttons">
-          <Link to={"/new"}>
-            <button className="primary">New Script</button>
-          </Link>
-          <button className="primary ghost">Follow</button>{" "}
+          {isUser()}
           {/**Will say followed, if you follow them */}
-          {editBtn()}
         </div>
         {/**Will be able to edit your profile and add these */}
         <div className="skills">
