@@ -3,6 +3,7 @@
   border-radius: 1rem;
   width: 100%;
   height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.671) 0px 2px 8px 0px;
 }
 
 .profile-post-con {
