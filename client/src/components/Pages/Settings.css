@@ -1,0 +1,46 @@
+.settings-title {
+  font-size: 200%;
+  width: 95%;
+  border-bottom: 2px solid white;
+}
+
+.settings-title-con {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.settings-form {
+  margin: 10px;
+  width: 60%;
+}
+.settings-form label {
+  color: white;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.settings-form input {
+  width: 50%;
+}
+
+.settings-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.settings-submit {
+  background-color: #717171;
+  padding: 3px;
+  border-radius: 10px;
+  width: 100px;
+  margin: 20px 0;
+}
+
+.settings-submit:hover {
+  box-shadow: 2px 2px 2px #161616;
+  background-color: #161616;
+  color: #fff;
+  cursor: pointer;
+}

@@ -2,21 +2,3 @@
   display: grid;
   grid-template-columns: 20% 60% 20%;
 }
-
-.main {
-  display: grid;
-  grid-template-columns: 20% 60% 20%;
-}
-
-.feed {
-  grid-column-start: 2;
-}
-
-.devs {
-  grid-column-start: 1;
-  color: white;
-  margin: 10px;
-  font-size:larger;
-  font-weight: bolder;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
