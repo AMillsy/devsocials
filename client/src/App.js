@@ -8,7 +8,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Pages/Layout";
 import Login from "./components/Pages/Login";
 import MyProfile from "./components/Pages/MyProfile";
-import { UsernameProvider } from "./utils/userContext";
 import Settings from "./components/Pages/Settings";
 import NewScript from "./components/Pages/NewScript";
 const uploadLink = createUploadLink({ uri: "/graphql" });

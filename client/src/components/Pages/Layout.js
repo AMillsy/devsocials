@@ -5,10 +5,7 @@ import { Outlet } from "react-router-dom";
 import Logo from "../../images/logo.png";
 import "./Layout.css";
 
-function Layout({ children }) {
-  const size = window.matchMedia("max-width: 500px");
-  console.log(size);
-
+function Layout() {
   return (
     <>
       <header className="myheader">

@@ -10,7 +10,7 @@ const Login = () => {
     message: "",
     class: "error-login",
   });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [login] = useMutation(LOGIN_USER);
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -30,7 +30,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const { data, error } = await login({
+      const { data } = await login({
         variables: { ...formState },
       });
       Auth.login(data.loginUser.token);

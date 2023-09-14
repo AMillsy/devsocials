@@ -1,5 +1,4 @@
 import decode from "jwt-decode";
-import { redirect } from "react-router-dom";
 
 class AuthService {
   getProfile() {
@@ -39,4 +38,6 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+const Auth = new AuthService();
+
+export default Auth;
