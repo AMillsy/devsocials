@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Settings.css";
-
+import SkillList from "../skillList";
+import { QUERY_ME_SKILLS } from "../../utils/query";
+import { useQuery } from "@apollo/client";
 const Settings = () => {
   const [formState, setFormState] = useState({
     username: "",
     file: "",
     location: "",
+    job: "",
   });
+  const [skills, setSkills] = useState([]);
+  const { data, loading } = useQuery(QUERY_ME_SKILLS);
 
+  useEffect(function () {
+    setSkills(data?.me?.skills);
+  }, []);
+
+  const showSkills = () => {
+    return <SkillList skills={formState.skills} />;
+  };
   const onFormChange = (e) => {
     const { value, name } = e.target;
 
@@ -52,6 +64,7 @@ const Settings = () => {
             <input type="text" placeholder="skill"></input>
             <button className="settings-submit skills-btn">+</button>
           </div>
+          <SkillList />
           <button className="settings-submit">Submit</button>
         </form>
       </div>

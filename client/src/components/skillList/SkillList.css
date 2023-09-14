@@ -1,0 +1,24 @@
+.skill-text {
+  color: white;
+}
+
+.skill-btn {
+  background-color: #717171;
+  border-radius: 10px;
+  width: 30px;
+  margin: 10px;
+}
+
+.skill-item {
+  display: flex;
+  margin: 10px;
+
+  align-items: center;
+}
+
+.skill-btn:hover {
+  box-shadow: 2px 2px 2px #161616;
+  background-color: #161616;
+  color: #fff;
+  cursor: pointer;
+}

@@ -57,6 +57,13 @@ export const QUERY_ME_USERNAME = gql`
     }
   }
 `;
+export const QUERY_ME_SKILLS = gql`
+  query Me {
+    me {
+      skills
+    }
+  }
+`;
 
 /**Need to send through a ID, just send a string of the profile you have clicked on */
 /**
