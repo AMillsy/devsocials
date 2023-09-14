@@ -8,6 +8,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Pages/Layout";
 import Login from "./components/Pages/Login";
 import MyProfile from "./components/Pages/MyProfile";
+import Settings from "./components/Pages/Settings";
+import NewScript from "./components/Pages/NewScript";
 const uploadLink = createUploadLink({ uri: "/graphql" });
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("id_token");
@@ -35,6 +37,8 @@ function App() {
             <Route path="profile/:userId" element={<MyProfile />} />
             <Route path="login" element={<Login />} />
             <Route path="me" element={<MyProfile />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="new" element={<NewScript />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

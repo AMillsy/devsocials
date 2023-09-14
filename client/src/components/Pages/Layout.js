@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import Logo from "../../images/logo.png";
 import "./Layout.css";
 
-function Layout({ children }) {
+function Layout() {
   return (
     <>
       <header className="myheader">

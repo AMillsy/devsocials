@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+.profile {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+.profile-feed {
+  grid-column-start: 2;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 body {
   background-color: #1e1e1e;
   font-family: Montserrat, sans-serif;
@@ -26,6 +38,7 @@ body {
 }
 
 .card-container {
+  margin: 10px;
   background-color: #000000;
   border-radius: 5px;
   box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
@@ -35,12 +48,17 @@ body {
   width: 350px;
   max-width: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  align-items: center;
 }
 
-.card-container .round {
-  border: 1px solid #d4d4d4;
+.card-container .picture-profile {
+  border: 2px solid #d4d4d4;
   border-radius: 50%;
-  padding: 7px;
+  width: 100px;
+  height: 100px;
 }
 
 button.primary {
@@ -51,6 +69,7 @@ button.primary {
   font-family: Montserrat, sans-serif;
   font-weight: 500;
   padding: 10px 25px;
+  margin: 5px;
 }
 
 button.primary.ghost {
@@ -58,6 +77,9 @@ button.primary.ghost {
   color: #ffffff;
 }
 
+button.primary:hover {
+  cursor: pointer;
+}
 .skills {
   background-color: #242424;
   text-align: left;
@@ -66,6 +88,8 @@ button.primary.ghost {
   display: flex;
   flex-wrap: wrap;
   text-wrap: wrap;
+  overflow: auto;
+  height: 400px;
 }
 
 .skills ul {
@@ -84,4 +108,19 @@ button.primary.ghost {
   font-size: 12px;
   margin: 0 7px 7px 0;
   padding: 7px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .card-container {
+    width: 250px;
+  }
 }

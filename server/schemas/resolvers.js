@@ -24,7 +24,6 @@ const resolvers = {
       return User.find({});
     },
     getComments: async (parent, { _id }) => {
-      console.log(_id);
       const post = await Post.findById(_id).populate({
         path: "comments",
         populate: {
@@ -39,7 +38,6 @@ const resolvers = {
       return User.findOne({ _id }).populate("posts");
     },
     me: async (parent, args, context) => {
-      console.log(context, "IS THIS BEING USED");
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("posts");
       }
@@ -61,7 +59,6 @@ const resolvers = {
       }
     },
     loginUser: async (parent, { username, password }) => {
-      console.log(username, password);
       const user = await User.findOne({ username });
       if (!user) {
         throw new AuthenticationError("Incorrect Credentials");
@@ -99,19 +96,16 @@ const resolvers = {
         const newUpload = upload(parent, args);
         return newUpload;
       } catch (error) {
-        console.log(error);
         throw error;
       }
     },
     multiUpload: async (parent, args) => {
-      console.log(args);
       const upload = s3Uploader.multiUploadResolver.bind(s3Uploader);
 
       try {
         const newUploads = await upload(parent, args);
         return newUploads;
       } catch (error) {
-        console.log(error);
         throw error;
       }
     },

@@ -1,5 +1,4 @@
 import decode from "jwt-decode";
-import { redirect } from "react-router-dom";
 
 class AuthService {
   getProfile() {
@@ -35,8 +34,10 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("id_token");
-    window.location.reload();
+    window.location.assign("/");
   }
 }
 
-export default new AuthService();
+const Auth = new AuthService();
+
+export default Auth;

@@ -1,25 +1,25 @@
-.myheader {
+nav {
   min-height: 35px;
   background: black;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
   padding: 10px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: larger;
   font-weight: bolder;
 }
 
-ul {
-  margin: 0;
+.nav-list {
+  width: 70%;
   padding: 0;
   list-style: none;
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
   gap: 20px;
   margin-right: 20vw;
   color: white;
 }
 ul li a {
+  font-size: 115%;
   color: white;
 }
 
@@ -27,6 +27,16 @@ ul li a {
   transition: transform 0.2s ease-in-out;
 }
 
+.logout-btn {
+  background-color: rgba(240, 248, 255, 0);
+  color: white;
+  padding-block: 0;
+  padding-inline: 0;
+  border-width: 0;
+}
+.logout-btn:hover {
+  cursor: pointer;
+}
 @keyframes blink-with-shadow {
   0% {
     opacity: 1;
@@ -34,11 +44,11 @@ ul li a {
   }
   50% {
     opacity: 1;
-    box-shadow: 0 0 20px rgba(128, 128, 128, 0.7);
+    text-shadow: 2px 0px 8px rgba(128, 128, 128, 0.7);
   }
   100% {
     opacity: 1;
-    box-shadow: none;
+    text-shadow: none;
   }
 }
 
@@ -46,4 +56,11 @@ ul li a {
   transform: scale(1.05);
   color: gray;
   animation: blink-with-shadow 1s infinite;
+}
+
+@media only screen and (max-width: 600px) {
+  .nav-list {
+    width: 100%;
+    justify-content: center;
+  }
 }

@@ -34,17 +34,21 @@ const MainFeed = ({ imgSrc, postId, title, likes, description }) => {
         <h2>{title}</h2>
         <div className="cardContainer">
           <div className="cardImageContainer">
-            <img className="mainImage" src={imgSrc} alt=""></img>
+            <img className="mainImage" src={imgSrc} alt={title}></img>
           </div>
           <div className="cardInfo">
             <ul>
               <li>
-                <img className="extraImage" src={heart} alt=""></img>
+                <img className="extraImage" src={heart} alt="Like button"></img>
                 <p>{likes}</p>
               </li>
               <li>
                 <button alt="CommentPopup" onClick={openCommentPopup}>
-                  <img className="extraImage" src={commentImg} />
+                  <img
+                    className="extraImage"
+                    src={commentImg}
+                    alt="Comment button"
+                  />
                 </button>
               </li>
             </ul>

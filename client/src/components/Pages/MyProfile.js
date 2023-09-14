@@ -1,11 +1,12 @@
 import React from "react";
 import "./MyProfile.css";
-import NavTabs from "../NavTabs";
-import MainFeed from "../MainFeed/MainFeed";
 import { QUERY_ME } from "../../utils/query";
 import { QUERY_USER } from "../../utils/query";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
+import ProfileFeed from "../ProfileFeed";
+import userImage from "../../images/userImage.jpg";
+import { Link } from "react-router-dom";
 
 export default function MyProfile() {
   const { userId } = useParams();
@@ -13,21 +14,33 @@ export default function MyProfile() {
   const { loading, data, error } = useQuery(userId ? QUERY_USER : QUERY_ME, {
     variables: { id: userId },
   });
-  console.log(error);
+  //Shouldnt show the follow button if its your profile
 
   const userData = data?.me || data?.userProfile;
-  console.log(data);
-  console.log(userData);
 
+  const isUser = () => {
+    if (!userId) {
+      return (
+        <>
+          <Link to={"/new"}>
+            <button className="primary">New Script</button>
+          </Link>
+          <Link to={"/settings"}>
+            <button className="primary">Settings</button>
+          </Link>
+        </>
+      );
+    }
+
+    return <button className="primary ghost">Follow</button>;
+  };
+
+  if (error) return <h2>{error.message}</h2>;
   if (loading) return <h2>Loading...</h2>;
   return (
     <article className="profile">
       <div className="card-container">
-        <img
-          className="round"
-          src="https://www.bing.com/ck/a?!&&p=aa1f6fe22360ae83JmltdHM9MTY5NDQ3NjgwMCZpZ3VpZD0yNGIwZDgwNy1kNGQ0LTYwZDEtM2Y0MC1jYjcxZDVhMzYxNDgmaW5zaWQ9NTY1MA&ptn=3&hsh=3&fclid=24b0d807-d4d4-60d1-3f40-cb71d5a36148&u=a1L2ltYWdlcy9zZWFyY2g_cT1pY29uIHBlcnNvbiZGT1JNPUlRRlJCQSZpZD1EQUY0RDdDQTI0ODU1NDJCNzkzOUI3RjFCREY2RUEwQUJCODEwMEQ2&ntb=1"
-          alt="user"
-        />
+        <img className="picture-profile" src={userImage} alt="user" />
         <h3 className="user-profile">
           {userData?.username ? userData.username : ""} {/**Username */}
         </h3>
@@ -39,8 +52,7 @@ export default function MyProfile() {
           <br />
         </p>
         <div className="buttons">
-          <button className="primary">SCRIPTS</button>
-          <button className="primary ghost">Follow</button>{" "}
+          {isUser()}
           {/**Will say followed, if you follow them */}
         </div>
         {/**Will be able to edit your profile and add these */}
@@ -57,6 +69,18 @@ export default function MyProfile() {
             <li>Node</li>
           </ul>
         </div>
+      </div>
+      <div className="profile-feed">
+        {userData.posts.map(function ({ _id, image, title, description }) {
+          return (
+            <ProfileFeed
+              key={_id}
+              title={title}
+              image={image}
+              description={description}
+            />
+          );
+        })}
       </div>
     </article>
   );
