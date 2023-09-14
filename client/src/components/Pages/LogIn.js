@@ -6,28 +6,36 @@ import { LOGIN_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 const Login = () => {
   const [formState, setFormState] = useState({ username: "", password: "" });
-
+  const [errorMessage, setErrorMessage] = useState({
+    message: "",
+    class: "error-login",
+  });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
   const onChange = (e) => {
     const { value, name } = e.target;
 
     setFormState({ ...formState, [name]: value });
+  };
 
-    console.log(formState);
+  const displayErrorMessage = (message) => {
+    setErrorMessage({ message: message, class: "error-active" });
+
+    setTimeout(function () {
+      setErrorMessage({ message: "", class: "error-login" });
+    }, 1000);
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formState);
 
     try {
-      const { data } = await login({
+      const { data, error } = await login({
         variables: { ...formState },
       });
       Auth.login(data.loginUser.token);
     } catch (error) {
-      console.log(error);
+      displayErrorMessage(error.message);
     }
   };
   return (
@@ -50,6 +58,7 @@ const Login = () => {
           <button type="submit" className="btn">
             Login
           </button>
+          <p className={errorMessage.class}>Incorrect Credientals</p>
           <Link className="signup" to={"/signup"}>
             Or Signup
           </Link>
