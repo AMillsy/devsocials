@@ -13,12 +13,25 @@ const Settings = () => {
   const [skills, setSkills] = useState([]);
   const { data, loading } = useQuery(QUERY_ME_SKILLS);
 
-  useEffect(function () {
-    setSkills(data?.me?.skills);
-  }, []);
+  useEffect(
+    function () {
+      setSkills(data?.me?.skills);
+    },
+    [data]
+  );
+  const removeSkill = (skill) => {
+    const removedSkill = skills.filter((value) => value !== skill);
 
+    setSkills(removedSkill);
+  };
+  const addSkill = (skill) => {
+    setSkills([...skills, skill]);
+  };
   const showSkills = () => {
-    return <SkillList skills={formState.skills} />;
+    console.log(skills);
+    if (loading) return;
+    if (!skills) return;
+    return <SkillList skills={skills} />;
   };
   const onFormChange = (e) => {
     const { value, name } = e.target;
@@ -64,7 +77,7 @@ const Settings = () => {
             <input type="text" placeholder="skill"></input>
             <button className="settings-submit skills-btn">+</button>
           </div>
-          <SkillList />
+          {showSkills()}
           <button className="settings-submit">Submit</button>
         </form>
       </div>

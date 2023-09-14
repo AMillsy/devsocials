@@ -1,13 +1,16 @@
 import "./SkillList.css";
 
-const SkillList = ({ skills, setTotalSkill }) => {
-  const removeSkill = () => {};
+const SkillList = ({ skills, removeSkill, addSkill }) => {
   return (
     <ul>
-      <li className="skill-item">
-        <p className="skill-text">UX/UI</p>
-        <button className="skill-btn">-</button>
-      </li>
+      {skills.map(function (skill) {
+        return (
+          <li className="skill-item">
+            <p className="skill-text">UX/UI</p>
+            <button className="skill-btn">-</button>
+          </li>
+        );
+      })}
     </ul>
   );
 };
