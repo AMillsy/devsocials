@@ -3,7 +3,7 @@ import "./MyProfile.css";
 import { QUERY_ME } from "../../utils/query";
 import { QUERY_USER } from "../../utils/query";
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { Route, useParams } from "react-router-dom";
 import ProfileFeed from "../ProfileFeed";
 import userImage from "../../images/userImage.jpg";
 import { Link } from "react-router-dom";
@@ -37,7 +37,9 @@ export default function MyProfile() {
 
   if (error) return <h2>{error.message}</h2>;
   if (loading) return <h2>Loading...</h2>;
+
   return (
+    
     <article className="profile">
       <div className="card-container">
         <img className="picture-profile" src={userImage} alt="user" />
@@ -83,5 +85,6 @@ export default function MyProfile() {
         })}
       </div>
     </article>
+  
   );
 }
