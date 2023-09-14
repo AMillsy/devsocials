@@ -1,5 +1,13 @@
-const Developers = ({ title }) => {
-  return <h2>{title}</h2>;
-};
+import "./Aside.css"
 
-export default Developers;
+const Developers = ({ name,picture,id }) => {
+    console.log(picture)
+    return (<div className="devCon">
+    <img src={picture} className="photo" />
+    <h2>{name}</h2>
+    </div>
+
+  )};
+  
+  
+  export default Developers;
