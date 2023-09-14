@@ -56,7 +56,16 @@ export default function MyProfile() {
         </div>
       </div>
       <div className="profile-feed">
-        <ProfileFeed />
+        {userData.posts.map(function ({ _id, image, title, description }) {
+          return (
+            <ProfileFeed
+              key={_id}
+              title={title}
+              image={image}
+              description={description}
+            />
+          );
+        })}
       </div>
     </article>
   );
