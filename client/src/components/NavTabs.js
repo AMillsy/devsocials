@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Navtabs.css";
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
@@ -15,6 +15,12 @@ function NavTabs() {
 
   function isLoggedIn() {
     if (loading) return;
+    if (error)
+      return (
+        <Link className="nav-item" to={"/me"}>
+          Profile
+        </Link>
+      );
     if (username) {
       return (
         <Link className="nav-item" to={"/me"}>

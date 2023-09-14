@@ -1,7 +1,5 @@
 import React from "react";
 import "./MyProfile.css";
-import NavTabs from "../NavTabs";
-import MainFeed from "../MainFeed/MainFeed";
 import { QUERY_ME } from "../../utils/query";
 import { QUERY_USER } from "../../utils/query";
 import { useQuery } from "@apollo/client";
@@ -16,6 +14,7 @@ export default function MyProfile() {
 
   const userData = data?.me || data?.userProfile;
 
+  if (error) return <h2>Error has occured. Please reload the page</h2>;
   if (loading) return <h2>Loading...</h2>;
   return (
     <article className="profile">
