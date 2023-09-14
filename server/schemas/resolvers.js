@@ -74,6 +74,35 @@ const resolvers = {
 
       return { token, user };
     },
+    updateUser: async (parent, { username, file, location }, context) => {
+      console.log(context);
+      if (!context.user)
+        throw new AuthenticationError("Must be logged in to update settings");
+
+      const updates = {};
+
+      if (file) {
+        const upload = s3Uploader.singleFileUploadResovler.bind(s3Uploader);
+
+        try {
+          const newPicture = upload(parents, { file });
+
+          updates.image = newPicture.link;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      if (username) updates.username = username;
+      if (location) updates.location = location;
+
+      console.log(updates);
+      const updateUser = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        updates,
+        { new: true }
+      );
+      return updateUser;
+    },
     createPost: async (parent, { title, description, image }, context) => {
       if (!context.user)
         throw new AuthenticationError("Must be logged in to create a post ");

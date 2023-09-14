@@ -5,28 +5,23 @@ import { GET_COMMENTS_QUERY } from "../utils/query";
 import { CREATE_COMMENT } from "../utils/mutations";
 import './CommentPopUp.css';
 import {Link} from 'react-router-dom';
-
 const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
   const { data, loading, error } = useQuery(GET_COMMENTS_QUERY, {
     variables: { id: postId },
   });
-
   const [commentText, setCommentText] = useState("");
   const [createComment] = useMutation(CREATE_COMMENT);
-
+  console.log(data);
   // useEffect(() => {
   //   if (isOpen) {
   //     refetch();
   //   }
   // }, [isOpen, refetch]);
-
   console.log(data);
   console.log(error);
   if (loading) return "Loading...";
   if (error) return "Error with loading";
-
   const comments = data.getComments;
-
   const handleCommentSubmit = async () => {
     try {
       await createComment({
@@ -41,7 +36,6 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
       console.error("Error adding comment", err);
     }
   };
-
   return (
     <Modal
       isOpen={isOpen}
