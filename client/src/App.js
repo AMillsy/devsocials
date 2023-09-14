@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Pages/Layout";
 import Login from "./components/Pages/Login";
 import MyProfile from "./components/Pages/MyProfile";
+import { UsernameProvider } from "./utils/userContext";
 const uploadLink = createUploadLink({ uri: "/graphql" });
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("id_token");
@@ -30,7 +31,14 @@ function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <UsernameProvider>
+                <Layout />
+              </UsernameProvider>
+            }
+          >
             <Route index element={<Homepage />} />
             <Route path="profile/:userId" element={<MyProfile />} />
             <Route path="login" element={<Login />} />

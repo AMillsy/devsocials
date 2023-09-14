@@ -2,7 +2,8 @@ import React from "react";
 import "./Navtabs.css";
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
-
+import { QUERY_ME } from "../utils/query";
+import { useQuery } from "@apollo/client";
 function NavTabs() {
   function isLoggedIn() {
     const loggedIn = Auth.loggedIn();

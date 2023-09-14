@@ -49,6 +49,14 @@ export const QUERY_ME = gql`
   }
 `;
 
+export const QUERY_ME_USERNAME = gql`
+  query Me {
+    me {
+      username
+    }
+  }
+`;
+
 /**Need to send through a ID, just send a string of the profile you have clicked on */
 /**
   const { loading, error, data } = useQuery(QUERY_USER, {

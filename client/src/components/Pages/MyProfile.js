@@ -13,11 +13,8 @@ export default function MyProfile() {
   const { loading, data, error } = useQuery(userId ? QUERY_USER : QUERY_ME, {
     variables: { id: userId },
   });
-  console.log(error);
 
   const userData = data?.me || data?.userProfile;
-  console.log(data);
-  console.log(userData);
 
   if (loading) return <h2>Loading...</h2>;
   return (
