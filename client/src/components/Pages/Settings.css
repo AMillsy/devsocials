@@ -44,3 +44,17 @@
   color: #fff;
   cursor: pointer;
 }
+.skills-submit {
+  width: 20%;
+}
+
+.skills-btn {
+  width: 40px;
+  height: 20px;
+  padding: 0;
+  margin: 10px;
+}
+
+.skills-warning {
+  color: white;
+}

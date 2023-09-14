@@ -33,14 +33,25 @@ const Settings = () => {
             onChange={onFormChange}
           ></input>
           <label>Profile Image:</label>
-          <input type="file" name="file" />
+          <input type="file" name="file" onChange={onFormChange} />
           <label>Location:</label>
           <input
             type="text"
             id="location"
-            placeholder="Location"
+            placeholder="London"
             name="location"
+            onChange={onFormChange}
           ></input>
+          <label>Job or Hobby:</label>
+          <input name="job" placeholder="Web developer"></input>
+          <label>Skills</label>
+          <div className="skills-submit">
+            <p className="skills-warning">
+              Click the <b>+</b> to add new skills
+            </p>
+            <input type="text" placeholder="skill"></input>
+            <button className="settings-submit skills-btn">+</button>
+          </div>
           <button className="settings-submit">Submit</button>
         </form>
       </div>
