@@ -25,6 +25,7 @@ export const GET_COMMENTS_QUERY = gql`
       likes
       message
       user {
+        _id
         username
       }
     }
