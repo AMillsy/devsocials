@@ -42,7 +42,11 @@ export default function MyProfile() {
   return (
     <article className="profile">
       <div className="card-container">
-        <img className="picture-profile" src={userImage} alt="user" />
+        <img
+          className="picture-profile"
+          src={userData?.image ? userData.image : userImage}
+          alt="user"
+        />
         <h3 className="user-profile">
           {userData?.username ? userData.username : ""} {/**Username */}
         </h3>

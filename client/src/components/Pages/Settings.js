@@ -14,7 +14,7 @@ const Settings = () => {
   });
   const [skills, setSkills] = useState([]);
   const { data, loading } = useQuery(QUERY_ME_SKILLS);
-  const [updateUser, { error }] = useMutation(UPDATE_USER);
+  const [updateUserMutation, { error }] = useMutation(UPDATE_USER);
   useEffect(
     function () {
       setSkills(data?.me?.skills);
@@ -48,20 +48,27 @@ const Settings = () => {
   };
 
   const onFileChange = (e) => {
-    setFormState({ ...formState, file: e.target.files[0] });
+    const {
+      validity,
+      files: [file],
+    } = e.target;
+    if (!validity.valid) return;
+    setFormState({ ...formState, file: file });
   };
   //Adds data to my formState
   const onFormChange = (e) => {
     const { value, name } = e.target;
 
     setFormState({ ...formState, [name]: value });
-    console.log(formState);
   };
   //Submits the data to the server
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    updateUser({ variables: { ...formState, skills: skills } });
+    try {
+      await updateUserMutation({
+        variables: { ...formState, skills: skills },
+      });
+    } catch (error) {}
 
     window.location.assign("/me");
   };

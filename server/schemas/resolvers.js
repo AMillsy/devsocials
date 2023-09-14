@@ -88,13 +88,9 @@ const resolvers = {
       if (file) {
         const upload = s3Uploader.singleFileUploadResovler.bind(s3Uploader);
 
-        try {
-          const newPicture = upload(parent, { file });
+        const newPicture = await upload(parent, { file });
 
-          updates.image = newPicture.link;
-        } catch (error) {
-          console.log(error);
-        }
+        updates.image = newPicture.url;
       }
       if (username) updates.username = username;
       if (location) updates.location = location;
