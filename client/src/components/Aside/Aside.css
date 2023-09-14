@@ -1,0 +1,9 @@
+.photo {
+border-radius: 50%;
+width:50px;
+}
+
+.devCon {
+    display: flex;
+    margin: 10px;
+}

@@ -2,6 +2,9 @@ import MainFeed from "../MainFeed";
 import "./Homepage.css";
 import { useQuery } from "@apollo/client";
 import { QUERY_POST } from "../../utils/query";
+import Developers from "../Aside";
+const mock = require("../Aside/mock.json")
+
 const Homepage = () => {
   const { loading, data, error } = useQuery(QUERY_POST);
 
@@ -10,26 +13,34 @@ const Homepage = () => {
   return (
     <>
       <article className="main">
-        {data.posts.map(function ({
-          _id,
-          image,
-          title,
-          likes,
-          description,
-          commentCount,
-        }) {
-          return (
-            <MainFeed
-              key={_id}
-              imgSrc={image}
-              postId={_id}
-              title={title}
-              likes={likes}
-              description={description}
-              commentCount={commentCount}
-            />
-          );
-        })}
+        <aside className="devs">DEVELOPERS</aside>
+        <div className="devs">
+          {mock.map(function ({ name,picture,id }) {
+            return <Developers name={name} picture={picture} key={id} />;
+          })}
+        </div>
+        <div className="feed">
+          {data.posts.map(function ({
+            _id,
+            image,
+            title,
+            likes,
+            description,
+            commentCount,
+          }) {
+            return (
+              <MainFeed
+                key={_id}
+                imgSrc={image}
+                postId={_id}
+                title={title}
+                likes={likes}
+                description={description}
+                commentCount={commentCount}
+              />
+            );
+          })}
+        </div>
       </article>
     </>
   );
