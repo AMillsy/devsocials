@@ -13,11 +13,13 @@ export default function MyProfile() {
   const { loading, data, error } = useQuery(userId ? QUERY_USER : QUERY_ME, {
     variables: { id: userId },
   });
+  console.log(error);
 
   const userData = data?.me || data?.userProfile;
-
+  console.log(data);
   console.log(userData);
 
+  if (loading) return <h2>Loading...</h2>;
   return (
     <article className="profile">
       <div className="card-container">
@@ -26,12 +28,14 @@ export default function MyProfile() {
           src="https://www.bing.com/ck/a?!&&p=aa1f6fe22360ae83JmltdHM9MTY5NDQ3NjgwMCZpZ3VpZD0yNGIwZDgwNy1kNGQ0LTYwZDEtM2Y0MC1jYjcxZDVhMzYxNDgmaW5zaWQ9NTY1MA&ptn=3&hsh=3&fclid=24b0d807-d4d4-60d1-3f40-cb71d5a36148&u=a1L2ltYWdlcy9zZWFyY2g_cT1pY29uIHBlcnNvbiZGT1JNPUlRRlJCQSZpZD1EQUY0RDdDQTI0ODU1NDJCNzkzOUI3RjFCREY2RUEwQUJCODEwMEQ2&ntb=1"
           alt="user"
         />
-        <h3 className="user-profile">Dev Socials {/**Username */}</h3>
+        <h3 className="user-profile">
+          {userData?.username ? userData.username : ""} {/**Username */}
+        </h3>
         <h6 className="location-profile">
-          Birmingham {/** Location Dynamically inputted */}
+          {userData?.location ? userData.location : ""}
         </h6>
         <p className="skill-profile">
-          Full-stack developer {/**Special area Dynamically inputed */}
+          {userData?.job ? userData.job : ""}
           <br />
         </p>
         <div className="buttons">
@@ -41,6 +45,7 @@ export default function MyProfile() {
         </div>
         {/**Will be able to edit your profile and add these */}
         <div className="skills">
+          {/**Map through all the skills and put them on here */}
           <h6>Dev Skills</h6>
           <ul>
             <li>UI / UX</li>

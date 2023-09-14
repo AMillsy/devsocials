@@ -23,6 +23,13 @@ const userSchema = new Schema(
       required: true,
       minlength: 8,
     },
+    location: {
+      type: String,
+    },
+    job: {
+      type: String,
+    },
+    skills: [{ type: String }],
     posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
     followed: [{ type: Schema.Types.ObjectId, ref: "User" }],
     following: [{ type: Schema.Types.ObjectId, ref: "User" }],

@@ -39,6 +39,7 @@ const resolvers = {
       return User.findOne({ _id }).populate("posts");
     },
     me: async (parent, args, context) => {
+      console.log(context, "IS THIS BEING USED");
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("posts");
       }
