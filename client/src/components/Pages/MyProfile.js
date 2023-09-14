@@ -4,6 +4,7 @@ import { QUERY_ME } from "../../utils/query";
 import { QUERY_USER } from "../../utils/query";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
+import ProfileFeed from "../ProfileFeed";
 
 export default function MyProfile() {
   const { userId } = useParams();
@@ -20,7 +21,7 @@ export default function MyProfile() {
     <article className="profile">
       <div className="card-container">
         <img
-          className="round"
+          className="picture-profile"
           src="https://www.bing.com/ck/a?!&&p=aa1f6fe22360ae83JmltdHM9MTY5NDQ3NjgwMCZpZ3VpZD0yNGIwZDgwNy1kNGQ0LTYwZDEtM2Y0MC1jYjcxZDVhMzYxNDgmaW5zaWQ9NTY1MA&ptn=3&hsh=3&fclid=24b0d807-d4d4-60d1-3f40-cb71d5a36148&u=a1L2ltYWdlcy9zZWFyY2g_cT1pY29uIHBlcnNvbiZGT1JNPUlRRlJCQSZpZD1EQUY0RDdDQTI0ODU1NDJCNzkzOUI3RjFCREY2RUEwQUJCODEwMEQ2&ntb=1"
           alt="user"
         />
@@ -53,6 +54,9 @@ export default function MyProfile() {
             <li>Node</li>
           </ul>
         </div>
+      </div>
+      <div className="profile-feed">
+        <ProfileFeed />
       </div>
     </article>
   );

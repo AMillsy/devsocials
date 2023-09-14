@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+.profile {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+.profile-feed {
+  grid-column-start: 2;
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
 body {
   background-color: #1e1e1e;
   font-family: Montserrat, sans-serif;
@@ -35,12 +47,17 @@ body {
   width: 350px;
   max-width: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  align-items: center;
 }
 
-.card-container .round {
-  border: 1px solid #d4d4d4;
+.card-container .picture-profile {
+  border: 2px solid #d4d4d4;
   border-radius: 50%;
-  padding: 7px;
+  width: 100px;
+  height: 100px;
 }
 
 button.primary {
