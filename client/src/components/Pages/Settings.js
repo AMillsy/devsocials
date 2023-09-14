@@ -24,14 +24,17 @@ const Settings = () => {
 
     setSkills(removedSkill);
   };
-  const addSkill = (skill) => {
+  const addSkill = (e) => {
+    const input = e.target.previousElementSibling;
+    const skill = input.value;
+    if (!skill) return;
     setSkills([...skills, skill]);
   };
   const showSkills = () => {
     console.log(skills);
     if (loading) return;
     if (!skills) return;
-    return <SkillList skills={skills} />;
+    return <SkillList skills={skills} removeSkill={removeSkill} />;
   };
   const onFormChange = (e) => {
     const { value, name } = e.target;
@@ -74,8 +77,10 @@ const Settings = () => {
             <p className="skills-warning">
               Click the <b>+</b> to add new skills
             </p>
-            <input type="text" placeholder="skill"></input>
-            <button className="settings-submit skills-btn">+</button>
+            <input type="text" placeholder="skill" id="skillInput"></input>
+            <button className="settings-submit skills-btn" onClick={addSkill}>
+              +
+            </button>
           </div>
           {showSkills()}
           <button className="settings-submit">Submit</button>
