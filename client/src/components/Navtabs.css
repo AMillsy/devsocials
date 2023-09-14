@@ -27,6 +27,16 @@ ul li a {
   transition: transform 0.2s ease-in-out;
 }
 
+.logout-btn {
+  background-color: rgba(240, 248, 255, 0);
+  color: white;
+  padding-block: 0;
+  padding-inline: 0;
+  border-width: 0;
+}
+.logout-btn:hover {
+  cursor: pointer;
+}
 @keyframes blink-with-shadow {
   0% {
     opacity: 1;
@@ -34,11 +44,11 @@ ul li a {
   }
   50% {
     opacity: 1;
-    box-shadow: 0 0 20px rgba(128, 128, 128, 0.7);
+    text-shadow: 2px 0px 8px rgba(128, 128, 128, 0.7);
   }
   100% {
     opacity: 1;
-    box-shadow: none;
+    text-shadow: none;
   }
 }
 
