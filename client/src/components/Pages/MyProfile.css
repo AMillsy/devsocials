@@ -7,24 +7,20 @@
 body {
   background-color: #1e1e1e;
   font-family: Montserrat, sans-serif;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
   min-height: 100vh;
   margin: 0;
 }
 
-h3 {
+.user-profile {
   margin: 10px 0;
 }
 
-h6 {
+.location-profile {
   margin: 5px 0;
   text-transform: uppercase;
 }
 
-p {
+.skill-profile {
   font-size: 14px;
   line-height: 21px;
 }
@@ -67,9 +63,14 @@ button.primary.ghost {
   text-align: left;
   padding: 15px;
   margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  text-wrap: wrap;
 }
 
 .skills ul {
+  display: flex;
+  flex-wrap: wrap;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -77,6 +78,7 @@ button.primary.ghost {
 
 .skills ul li {
   border: 1px solid #000000;
+  height: 50px;
   border-radius: 2px;
   display: inline-block;
   font-size: 12px;
