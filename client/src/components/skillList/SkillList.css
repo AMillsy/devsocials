@@ -11,8 +11,7 @@
 
 .skill-item {
   display: flex;
-  margin: 10px;
-
+  margin: 5px;
   align-items: center;
 }
 
@@ -21,4 +20,9 @@
   background-color: #161616;
   color: #fff;
   cursor: pointer;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
 }

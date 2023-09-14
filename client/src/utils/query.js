@@ -37,6 +37,10 @@ export const QUERY_ME = gql`
     me {
       _id
       username
+      job
+      location
+      skills
+      image
       posts {
         _id
         title

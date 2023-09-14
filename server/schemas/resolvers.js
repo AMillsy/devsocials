@@ -74,8 +74,12 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async (parent, { username, file, location }, context) => {
-      console.log(context);
+    updateUser: async (
+      parent,
+      { username, file, location, job, skills },
+      context
+    ) => {
+      console.log(file);
       if (!context.user)
         throw new AuthenticationError("Must be logged in to update settings");
 
@@ -85,7 +89,7 @@ const resolvers = {
         const upload = s3Uploader.singleFileUploadResovler.bind(s3Uploader);
 
         try {
-          const newPicture = upload(parents, { file });
+          const newPicture = upload(parent, { file });
 
           updates.image = newPicture.link;
         } catch (error) {
@@ -94,7 +98,8 @@ const resolvers = {
       }
       if (username) updates.username = username;
       if (location) updates.location = location;
-
+      if (skills) updates.skills = skills;
+      if (job) updates.job = job;
       console.log(updates);
       const updateUser = await User.findOneAndUpdate(
         { _id: context.user._id },
