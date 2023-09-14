@@ -31,7 +31,7 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
         },
       });
       setCommentText("");
-      // refetch();
+    
     } catch (err) {
       console.error("Error adding comment", err);
     }
@@ -71,5 +71,4 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
     </Modal>
   );
 };
-
 export default CommentPopup;
