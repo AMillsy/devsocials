@@ -15,6 +15,9 @@ export default function MyProfile() {
     variables: { id: userId },
   });
   //Shouldnt show the follow button if its your profile
+
+  const userData = data?.me || data?.userProfile;
+
   const isUser = () => {
     if (!userId) {
       return (
@@ -31,8 +34,6 @@ export default function MyProfile() {
 
     return <button className="primary ghost">Follow</button>;
   };
-
-  const userData = data?.me || data?.userProfile;
 
   if (error) return <h2>{error.message}</h2>;
   if (loading) return <h2>Loading...</h2>;

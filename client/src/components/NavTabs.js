@@ -43,6 +43,7 @@ function NavTabs() {
   }
   function logout() {
     //Log the user out and return them to the homepage
+    Auth.logout();
   }
   function addLogout() {
     if (loggedIn)
