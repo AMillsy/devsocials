@@ -24,6 +24,10 @@ export default function MyProfile() {
 
   useEffect(
     function () {
+      if (isFollowingData?.follows) {
+        if (userId === isFollowingData.follows._id)
+          window.location.assign("/me");
+      }
       if (Auth.loggedIn() && isFollowingData?.follows?.following) {
         setFollowed(isFollowingData.follows.following.includes(userId));
       }
