@@ -18,6 +18,8 @@ export default function MyProfile() {
 
   const userData = data?.me || data?.userProfile;
 
+  const followUser = (userId) => {};
+
   const isUser = () => {
     if (!userId) {
       return (
@@ -32,10 +34,13 @@ export default function MyProfile() {
       );
     }
 
-    return <button className="primary ghost">Follow</button>;
+    return (
+      <button onClick={() => followUser(userId)} className="primary ghost">
+        Follow
+      </button>
+    );
   };
 
-  console.log(userData);
   if (error) return <h2>{error.message}</h2>;
   if (loading) return <h2>Loading...</h2>;
 
@@ -66,9 +71,10 @@ export default function MyProfile() {
           {/**Map through all the skills and put them on here */}
           <h6>Dev Skills</h6>
           <ul className="profile-skill-list">
-            {userData?.skills.map(function (skill) {
-              return <li key={skill}>{skill}</li>;
-            })}
+            {userData?.skills &&
+              userData?.skills.map(function (skill) {
+                return <li key={skill}>{skill}</li>;
+              })}
           </ul>
         </div>
       </div>

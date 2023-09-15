@@ -77,6 +77,8 @@ const typeDefs = gql`
     createComment(postID: ID!, message: String, userID: ID): Comment
     singleUpload(file: Upload!): UploadFileResponse
     multiUpload(files: [Upload!]): [UploadFileResponse]
+    followUser(userId: ID!): User
+    unFollowUser(userId: String): User
   }
 `;
 

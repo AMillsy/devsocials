@@ -3,6 +3,7 @@ const { User, Post, Comment } = require("../models");
 const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const AWSS3Uploader = require("../config/awsS3config");
 const { signToken } = require("../utils/auth");
+const { findOneAndUpdate } = require("../models/user");
 require("dotenv").config();
 const s3Uploader = new AWSS3Uploader({
   destinationBucketName: "devsocials",
@@ -140,10 +141,13 @@ const resolvers = {
         throw error;
       }
     },
-    createComment: async (parent, { postID, message, userID }, context) => {
-      // if (!context.user)
-      //   throw new AuthenticationError("Must be logged in to make a comment");
-      const newComment = await Comment.create({ message, user: userID });
+    createComment: async (parent, { postID, message }, context) => {
+      if (!context.user)
+        throw new AuthenticationError("Must be logged in to make a comment");
+      const newComment = await Comment.create({
+        message,
+        user: context.user._id,
+      });
       const updatePost = await Post.findOneAndUpdate(
         { _id: postID },
         { $push: { comments: newComment } },
@@ -152,6 +156,28 @@ const resolvers = {
 
       return newComment;
     },
+    followUser: async (parent, { userId }, context) => {
+      if (!context.user)
+        throw new AuthenticationError("Must be logged in to follow");
+      console.log(userId);
+      try {
+        const userFollowing = await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { followed: context.user._id } }
+        );
+        const meUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { following: userId } },
+          { new: true }
+        )
+          .populate("following")
+          .select("-password");
+        return meUser;
+      } catch (error) {
+        throw new AuthenticationError(error);
+      }
+    },
+    unFollowUser: async (parent, { userId }, context) => {},
   },
 };
 

@@ -27,8 +27,8 @@ function NavTabs() {
           {username}
         </Link>
       );
-    } else if (data) {
-      setUsername(data?.me.username);
+    } else if (data?.me?.username) {
+      setUsername(data?.me?.username);
       return (
         <Link className="nav-item" to={"/me"}>
           {username}
@@ -37,7 +37,7 @@ function NavTabs() {
     }
     return (
       <Link className="nav-item" to={"/login"}>
-        Login
+        Login / Sign Up
       </Link>
     );
   }
@@ -46,7 +46,7 @@ function NavTabs() {
     Auth.logout();
   }
   function addLogout() {
-    if (loggedIn)
+    if (loggedIn && (data?.me?.username || username))
       return (
         <li>
           <Link onClick={() => logout()} className="logout-btn nav-item">
