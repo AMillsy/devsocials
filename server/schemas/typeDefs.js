@@ -43,8 +43,8 @@ const typeDefs = gql`
     job: String
     skills: [String]
     posts: [Post]
-    followed: [ID]
-    following: [ID]
+    followed: [User]
+    following: [User]
   }
 
   type PostData {
@@ -77,8 +77,8 @@ const typeDefs = gql`
     createComment(postID: ID!, message: String, userID: ID): Comment
     singleUpload(file: Upload!): UploadFileResponse
     multiUpload(files: [Upload!]): [UploadFileResponse]
-    followUser(userId: ID!): User
-    unFollowUser(userId: String): User
+    followUser(userID: ID): User
+    unFollowUser(userID: ID!): User
   }
 `;
 

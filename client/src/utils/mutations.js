@@ -79,3 +79,15 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+export const FOLLOW_USER = gql`
+  mutation Mutation($userId: ID) {
+    followUser(userID: $userId) {
+      username
+      following {
+        _id
+        username
+      }
+    }
+  }
+`;

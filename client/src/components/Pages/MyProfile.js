@@ -1,24 +1,41 @@
 import React from "react";
 import "./MyProfile.css";
-import { QUERY_ME } from "../../utils/query";
+import { QUERY_ME, QUERY_ME_FOLLOWING } from "../../utils/query";
 import { QUERY_USER } from "../../utils/query";
-import { useQuery } from "@apollo/client";
-import { Route, useParams } from "react-router-dom";
+import { useQuery, useMutation } from "@apollo/client";
+import { useParams } from "react-router-dom";
 import ProfileFeed from "../ProfileFeed";
 import userImage from "../../images/userImage.jpg";
 import { Link } from "react-router-dom";
+import { FOLLOW_USER } from "../../utils/mutations";
+import Auth from "../../utils/auth";
 
 export default function MyProfile() {
   const { userId } = useParams();
-
   const { loading, data, error } = useQuery(userId ? QUERY_USER : QUERY_ME, {
     variables: { id: userId },
   });
+  const { data: isFollowingData } = useQuery(QUERY_ME_FOLLOWING, {
+    skip: !Auth.loggedIn() && userId,
+  });
+
+  let followed = false;
+  if (Auth.loggedIn() && isFollowingData?.me?.following) {
+    console.log(isFollowingData.me.following.includes(userId));
+  }
+  const [
+    followUserMutation,
+    { loading: followLoad, error: followError, data: followData },
+  ] = useMutation(FOLLOW_USER);
   //Shouldnt show the follow button if its your profile
 
   const userData = data?.me || data?.userProfile;
 
-  const followUser = (userId) => {};
+  const followUser = async (userId) => {
+    const follow = await followUserMutation({ variables: { userId } });
+    console.log(followError);
+    // window.location.reload();
+  };
 
   const isUser = () => {
     if (!userId) {

@@ -1,5 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Post, Comment } = require("../models");
+const { ObjectId } = require("mongoose").Types;
 const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const AWSS3Uploader = require("../config/awsS3config");
 const { signToken } = require("../utils/auth");
@@ -10,7 +11,6 @@ const s3Uploader = new AWSS3Uploader({
 });
 const resolvers = {
   Upload: GraphQLUpload,
-
   Query: {
     posts: async () => {
       return Post.find({}).populate({
@@ -156,25 +156,27 @@ const resolvers = {
 
       return newComment;
     },
-    followUser: async (parent, { userId }, context) => {
+    followUser: async (parent, { userID }, context) => {
       if (!context.user)
         throw new AuthenticationError("Must be logged in to follow");
-      console.log(userId);
+
       try {
-        const userFollowing = await User.findOneAndUpdate(
-          { _id: userId },
+        const userFollowing = await User.findByIdAndUpdate(
+          { _id: userID },
           { $addToSet: { followed: context.user._id } }
         );
-        const meUser = await User.findOneAndUpdate(
+
+        console.log(userFollowing._id);
+
+        const meUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { following: userId } },
-          { new: true }
-        )
-          .populate("following")
-          .select("-password");
+          { $addToSet: { following: userFollowing._id } }
+        ).populate("following");
+
+        console.log(meUser);
         return meUser;
       } catch (error) {
-        throw new AuthenticationError(error);
+        console.log(error);
       }
     },
     unFollowUser: async (parent, { userId }, context) => {},

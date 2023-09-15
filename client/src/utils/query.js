@@ -69,6 +69,13 @@ export const QUERY_ME_SKILLS = gql`
   }
 `;
 
+export const QUERY_ME_FOLLOWING = gql`
+  query Me {
+    me {
+      following
+    }
+  }
+`;
 /**Need to send through a ID, just send a string of the profile you have clicked on */
 /**
   const { loading, error, data } = useQuery(QUERY_USER, {
