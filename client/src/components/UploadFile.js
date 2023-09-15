@@ -37,7 +37,7 @@ const UploadFile = () => {
     }
   };
   const onChange = async ({ target }) => {
-    await multiUpload({ target });
+    await sinlgeUpload({ target });
   };
 
   if (multiLoad) return <div>Loading....</div>;

@@ -31,7 +31,7 @@
 }
 
 .settings-submit {
-  background-color: #717171;
+  background-color: #ff5722;
   padding: 3px;
   border-radius: 10px;
   width: 100px;
@@ -39,8 +39,21 @@
 }
 
 .settings-submit:hover {
-  box-shadow: 2px 2px 2px #161616;
-  background-color: #161616;
+  background-color: #c24119;
   color: #fff;
   cursor: pointer;
+}
+.skills-submit {
+  width: 30%;
+}
+
+.skills-btn {
+  width: 40px;
+  height: 20px;
+  padding: 0;
+  margin: 10px;
+}
+
+.skills-warning {
+  color: white;
 }

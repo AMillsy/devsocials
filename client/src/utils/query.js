@@ -37,6 +37,10 @@ export const QUERY_ME = gql`
     me {
       _id
       username
+      job
+      location
+      skills
+      image
       posts {
         _id
         title
@@ -54,6 +58,13 @@ export const QUERY_ME_USERNAME = gql`
   query Me {
     me {
       username
+    }
+  }
+`;
+export const QUERY_ME_SKILLS = gql`
+  query Me {
+    me {
+      skills
     }
   }
 `;

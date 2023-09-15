@@ -35,14 +35,18 @@ export default function MyProfile() {
     return <button className="primary ghost">Follow</button>;
   };
 
+  console.log(userData);
   if (error) return <h2>{error.message}</h2>;
   if (loading) return <h2>Loading...</h2>;
 
   return (
-    
     <article className="profile">
       <div className="card-container">
-        <img className="picture-profile" src={userImage} alt="user" />
+        <img
+          className="picture-profile"
+          src={userData?.image ? userData.image : userImage}
+          alt="user"
+        />
         <h3 className="user-profile">
           {userData?.username ? userData.username : ""} {/**Username */}
         </h3>
@@ -61,14 +65,10 @@ export default function MyProfile() {
         <div className="skills">
           {/**Map through all the skills and put them on here */}
           <h6>Dev Skills</h6>
-          <ul>
-            <li>UI / UX</li>
-            <li>Front End Development</li>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React</li>
-            <li>Node</li>
+          <ul className="profile-skill-list">
+            {userData?.skills.map(function (skill) {
+              return <li key={skill}>{skill}</li>;
+            })}
           </ul>
         </div>
       </div>
@@ -85,6 +85,5 @@ export default function MyProfile() {
         })}
       </div>
     </article>
-  
   );
 }

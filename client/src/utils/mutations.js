@@ -45,12 +45,36 @@ export const CREATE_USER = gql`
 `;
 
 export const CREATE_COMMENT = gql`
-mutation CreateComment($postId: ID!, $message: String!) {
-  createComment(postId: $postId, message: $message) {
-    _id
-    message
-    likes
-    date
+  mutation CreateComment($postId: ID!, $message: String!) {
+    createComment(postId: $postId, message: $message) {
+      _id
+      message
+      likes
+      date
+    }
   }
-}
-`
+`;
+
+export const UPDATE_USER = gql`
+  mutation Mutation(
+    $username: String
+    $file: Upload
+    $location: String
+    $job: String
+    $skills: [String]
+  ) {
+    updateUser(
+      username: $username
+      file: $file
+      location: $location
+      job: $job
+      skills: $skills
+    ) {
+      _id
+      username
+      skills
+      location
+      job
+    }
+  }
+`;
