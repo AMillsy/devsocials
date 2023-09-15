@@ -40,6 +40,7 @@ export default function MyProfile() {
   const followUser = async (userId) => {
     await followUserMutation({ variables: { userId } });
     console.log(followError);
+    setFollowed(true);
     // window.location.reload();
   };
 
