@@ -48,14 +48,15 @@ const resolvers = {
   Mutation: {
     createUser: async (parent, args) => {
       try {
+        console.log(args);
         const user = await User.create(args);
 
         if (user) {
-          return user;
+          const token = signToken(user);
+          return { token, user };
         }
-        throw new AuthenticationError("Error creating user");
       } catch (error) {
-        throw new AuthenticationError("Error creating user");
+        throw new AuthenticationError(error);
       }
     },
     loginUser: async (parent, { username, password }) => {
