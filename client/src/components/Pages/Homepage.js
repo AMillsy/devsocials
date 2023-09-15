@@ -3,8 +3,8 @@ import "./Homepage.css";
 import { useQuery } from "@apollo/client";
 import { QUERY_POST } from "../../utils/query";
 import Developers from "../Aside";
-import peopleicon from "../../images/peopleicon.jpg"
-const mock = require("../Aside/mock.json")
+import peopleicon from "../../images/peopleicon.jpg";
+const mock = require("../Aside/mock.json");
 
 const Homepage = () => {
   const { loading, data, error } = useQuery(QUERY_POST);
@@ -14,10 +14,12 @@ const Homepage = () => {
   return (
     <>
       <article className="main">
-        <aside className="devs">DEVELOPERS</aside>
-        <img src={peopleicon} className="devs-image" />
         <div className="devs">
-          {mock.map(function ({ name,picture,id }) {
+          <div className="devs-title">
+            <img src={peopleicon} className="devs-image" />
+            <h3 className="devs">DEVELOPERS</h3>
+          </div>
+          {mock.map(function ({ name, picture, id }) {
             return <Developers name={name} picture={picture} key={id} />;
           })}
         </div>
