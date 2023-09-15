@@ -44,6 +44,13 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in");
     },
+    follows: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).select(
+          "following followed"
+        );
+      }
+    },
   },
 
   Mutation: {

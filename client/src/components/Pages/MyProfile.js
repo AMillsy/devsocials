@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./MyProfile.css";
 import { QUERY_ME, QUERY_ME_FOLLOWING } from "../../utils/query";
 import { QUERY_USER } from "../../utils/query";
@@ -12,30 +12,38 @@ import Auth from "../../utils/auth";
 
 export default function MyProfile() {
   const { userId } = useParams();
+  const [followed, setFollowed] = useState(false);
   const { loading, data, error } = useQuery(userId ? QUERY_USER : QUERY_ME, {
     variables: { id: userId },
   });
-  const { data: isFollowingData } = useQuery(QUERY_ME_FOLLOWING, {
-    skip: !Auth.loggedIn() && userId,
-  });
+  const { data: isFollowingData, loading: meLoad } = useQuery(
+    QUERY_ME_FOLLOWING,
+    {
+      skip: !Auth.loggedIn() && userId,
+    }
+  );
 
-  let followed = false;
-  if (Auth.loggedIn() && isFollowingData?.me?.following) {
-    console.log(isFollowingData.me.following.includes(userId));
-  }
-  const [
-    followUserMutation,
-    { loading: followLoad, error: followError, data: followData },
-  ] = useMutation(FOLLOW_USER);
+  useEffect(
+    function () {
+      if (Auth.loggedIn() && isFollowingData?.follows?.following) {
+        setFollowed(isFollowingData.follows.following.includes(userId));
+      }
+    },
+    [meLoad]
+  );
+
+  const [followUserMutation, { error: followError }] = useMutation(FOLLOW_USER);
   //Shouldnt show the follow button if its your profile
 
   const userData = data?.me || data?.userProfile;
 
   const followUser = async (userId) => {
-    const follow = await followUserMutation({ variables: { userId } });
+    await followUserMutation({ variables: { userId } });
     console.log(followError);
     // window.location.reload();
   };
+
+  const unFollowUser = async (userId) => {};
 
   const isUser = () => {
     if (!userId) {
@@ -51,6 +59,13 @@ export default function MyProfile() {
       );
     }
 
+    if (followed) {
+      return (
+        <button onClick={() => followUser(userId)} className="primary">
+          Followed
+        </button>
+      );
+    }
     return (
       <button onClick={() => followUser(userId)} className="primary ghost">
         Follow

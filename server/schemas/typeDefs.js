@@ -47,6 +47,11 @@ const typeDefs = gql`
     following: [User]
   }
 
+  type meFollow {
+    _id: ID
+    followed: [ID]
+    following: [ID]
+  }
   type PostData {
     user: User
     Post: Post
@@ -57,6 +62,7 @@ const typeDefs = gql`
     getComments(_id: ID!): [Comment]
     userProfile(_id: ID!): User
     me: User
+    follows: meFollow
   }
   type Mutation {
     createUser(username: String!, email: String!, password: String!): Auth

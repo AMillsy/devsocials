@@ -70,8 +70,10 @@ export const QUERY_ME_SKILLS = gql`
 `;
 
 export const QUERY_ME_FOLLOWING = gql`
-  query Me {
-    me {
+  query Follows {
+    follows {
+      _id
+      followed
       following
     }
   }
