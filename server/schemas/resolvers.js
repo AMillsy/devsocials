@@ -163,13 +163,13 @@ const resolvers = {
 
       return newComment;
     },
-    followUser: async (parent, { userID }, context) => {
+    followUser: async (parent, { userId }, context) => {
       if (!context.user)
         throw new AuthenticationError("Must be logged in to follow");
 
       try {
         const userFollowing = await User.findByIdAndUpdate(
-          { _id: userID },
+          { _id: userId },
           { $addToSet: { followed: context.user._id } }
         );
 
@@ -186,7 +186,26 @@ const resolvers = {
         console.log(error);
       }
     },
-    unFollowUser: async (parent, { userId }, context) => {},
+    unFollowUser: async (parent, { userId }, context) => {
+      console.log(userId);
+      if (!context.user) throw new AuthenticationError("Must be logged in");
+
+      try {
+        const unfollow = await User.findByIdAndUpdate(
+          { _id: userId },
+          { $pull: { followed: new ObjectId(context.user._id) } }
+        );
+
+        const meUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { following: unfollow._id } }
+        );
+
+        return meUser;
+      } catch (err) {
+        throw new AuthenticationError(err);
+      }
+    },
   },
 };
 

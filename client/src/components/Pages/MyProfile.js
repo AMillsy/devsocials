@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./MyProfile.css";
-import { QUERY_ME, QUERY_ME_FOLLOWING } from "../../utils/query";
-import { QUERY_USER } from "../../utils/query";
+import { QUERY_ME, QUERY_ME_FOLLOWING, QUERY_USER } from "../../utils/query";
 import { useQuery, useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import ProfileFeed from "../ProfileFeed";
 import userImage from "../../images/userImage.jpg";
 import { Link } from "react-router-dom";
-import { FOLLOW_USER } from "../../utils/mutations";
+import { FOLLOW_USER, UNFOLLOW_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
 export default function MyProfile() {
@@ -33,6 +32,8 @@ export default function MyProfile() {
   );
 
   const [followUserMutation, { error: followError }] = useMutation(FOLLOW_USER);
+  const [unFollowUserMutation, { error: unFollowError }] =
+    useMutation(UNFOLLOW_USER);
   //Shouldnt show the follow button if its your profile
 
   const userData = data?.me || data?.userProfile;
@@ -44,7 +45,10 @@ export default function MyProfile() {
     // window.location.reload();
   };
 
-  const unFollowUser = async (userId) => {};
+  const unFollowUser = async (userId) => {
+    await unFollowUserMutation({ variables: { userId } });
+    setFollowed(false);
+  };
 
   const isUser = () => {
     if (!userId) {
@@ -62,7 +66,7 @@ export default function MyProfile() {
 
     if (followed) {
       return (
-        <button onClick={() => followUser(userId)} className="primary">
+        <button onClick={() => unFollowUser(userId)} className="primary">
           Followed
         </button>
       );
@@ -112,7 +116,7 @@ export default function MyProfile() {
         </div>
       </div>
       <div className="profile-feed">
-        {userData.posts.map(function ({ _id, image, title, description }) {
+        {userData?.posts.map(function ({ _id, image, title, description }) {
           return (
             <ProfileFeed
               key={_id}
