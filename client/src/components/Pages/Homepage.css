@@ -27,3 +27,8 @@
   align-items: center;
   border-bottom: 2px solid white;
 }
+
+.follow-suggestion {
+  text-align: center;
+  margin-top: 30px;
+}

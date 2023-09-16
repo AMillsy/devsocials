@@ -8,7 +8,7 @@ import { useEffect } from "react";
 const mock = require("../Aside/mock.json");
 
 const Homepage = () => {
-  const { loading, data, error } = useQuery(QUERY_POST);
+  const { loading, data, error, refetch: postRefetch } = useQuery(QUERY_POST);
   const {
     loading: followLoad,
     data: followData,
@@ -17,9 +17,11 @@ const Homepage = () => {
 
   useEffect(function () {
     refetch();
+    postRefetch();
   }, []);
   if (error) return <h2>Error loading data</h2>;
   if (loading) return <p>Loading data</p>;
+  console.log(followData?.me?.following.length);
   return (
     <>
       <article className="main">
@@ -28,7 +30,7 @@ const Homepage = () => {
             <img src={peopleicon} className="devs-image" />
             <h3 className="devs">DEVELOPERS</h3>
           </div>
-          {followData?.me &&
+          {followData?.me?.following.length !== 0 ? (
             followData.me.following.map(function ({ username, image, _id }) {
               return (
                 <Developers
@@ -38,7 +40,12 @@ const Homepage = () => {
                   id={_id}
                 />
               );
-            })}
+            })
+          ) : (
+            <h3 className="follow-suggestion">
+              Follow Developers to get easy access here!
+            </h3>
+          )}
         </div>
         <div className="feed">
           {data.posts.map(function ({
