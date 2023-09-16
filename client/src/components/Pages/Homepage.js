@@ -29,8 +29,9 @@ const Homepage = () => {
             <img src={peopleicon} className="devs-image" />
             <h3 className="devs">DEVELOPERS</h3>
           </div>
-          {followData && followData?.me?.following?.length !== 0 ? (
-            followData.me.following.map(function ({ username, image, _id }) {
+          {followData?.me?.following &&
+          followData?.me?.following?.length !== 0 ? (
+            followData.me?.following?.map(function ({ username, image, _id }) {
               return (
                 <Developers
                   name={username}

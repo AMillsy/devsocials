@@ -5,6 +5,7 @@ import { QUERY_ME_SKILLS } from "../../utils/query";
 import { useQuery } from "@apollo/client";
 import { UPDATE_USER } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 const Settings = () => {
   const [formState, setFormState] = useState({
     username: "",
@@ -12,6 +13,7 @@ const Settings = () => {
     job: "",
     file: null,
   });
+  const navigate = useNavigate();
   const [skills, setSkills] = useState([]);
   const { data, loading } = useQuery(QUERY_ME_SKILLS);
   const [updateUserMutation, { error }] = useMutation(UPDATE_USER);
@@ -68,9 +70,9 @@ const Settings = () => {
       await updateUserMutation({
         variables: { ...formState, skills: skills },
       });
+      navigate("/me");
+      window.location.reload();
     } catch (error) {}
-
-    window.location.assign("/me");
   };
   return (
     <>
