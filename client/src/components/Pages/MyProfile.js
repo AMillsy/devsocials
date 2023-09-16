@@ -24,6 +24,7 @@ export default function MyProfile() {
 
   useEffect(
     function () {
+      //Shouldnt show the follow button if its your profile
       if (isFollowingData?.follows) {
         if (userId === isFollowingData.follows._id)
           window.location.assign("/me");
@@ -38,7 +39,6 @@ export default function MyProfile() {
   const [followUserMutation, { error: followError }] = useMutation(FOLLOW_USER);
   const [unFollowUserMutation, { error: unFollowError }] =
     useMutation(UNFOLLOW_USER);
-  //Shouldnt show the follow button if its your profile
 
   const userData = data?.me || data?.userProfile;
 
@@ -46,7 +46,6 @@ export default function MyProfile() {
     await followUserMutation({ variables: { userId } });
     console.log(followError);
     setFollowed(true);
-    // window.location.reload();
   };
 
   const unFollowUser = async (userId) => {

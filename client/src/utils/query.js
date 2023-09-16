@@ -61,6 +61,18 @@ export const QUERY_ME_USERNAME = gql`
     }
   }
 `;
+
+export const QUERY_ME_HOMEPAGE_FOLLOW = gql`
+  query Me {
+    me {
+      following {
+        username
+        image
+        _id
+      }
+    }
+  }
+`;
 export const QUERY_ME_SKILLS = gql`
   query Me {
     me {

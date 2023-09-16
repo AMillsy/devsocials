@@ -1,13 +1,18 @@
 import MainFeed from "../MainFeed";
 import "./Homepage.css";
 import { useQuery } from "@apollo/client";
-import { QUERY_POST } from "../../utils/query";
+import { QUERY_POST, QUERY_ME_HOMEPAGE_FOLLOW } from "../../utils/query";
 import Developers from "../Aside";
 import peopleicon from "../../images/peopleicon.jpg";
 const mock = require("../Aside/mock.json");
 
 const Homepage = () => {
   const { loading, data, error } = useQuery(QUERY_POST);
+  const { loading: followLoad, data: followData } = useQuery(
+    QUERY_ME_HOMEPAGE_FOLLOW
+  );
+
+  console.log(followData);
 
   if (error) return <h2>Error loading data</h2>;
   if (loading) return <p>Loading data</p>;
@@ -19,9 +24,17 @@ const Homepage = () => {
             <img src={peopleicon} className="devs-image" />
             <h3 className="devs">DEVELOPERS</h3>
           </div>
-          {mock.map(function ({ name, picture, id }) {
-            return <Developers name={name} picture={picture} key={id} />;
-          })}
+          {followData?.me &&
+            followData.me.following.map(function ({ username, image, _id }) {
+              return (
+                <Developers
+                  name={username}
+                  picture={image}
+                  key={_id}
+                  id={_id}
+                />
+              );
+            })}
         </div>
         <div className="feed">
           {data.posts.map(function ({

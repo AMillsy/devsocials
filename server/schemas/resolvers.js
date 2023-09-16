@@ -40,7 +40,10 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("posts");
+        return User.findOne({ _id: context.user._id })
+          .populate("posts")
+          .populate("following")
+          .populate("followed");
       }
       throw new AuthenticationError("You need to be logged in");
     },
