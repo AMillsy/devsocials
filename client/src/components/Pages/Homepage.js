@@ -4,16 +4,20 @@ import { useQuery } from "@apollo/client";
 import { QUERY_POST, QUERY_ME_HOMEPAGE_FOLLOW } from "../../utils/query";
 import Developers from "../Aside";
 import peopleicon from "../../images/peopleicon.jpg";
+import { useEffect } from "react";
 const mock = require("../Aside/mock.json");
 
 const Homepage = () => {
   const { loading, data, error } = useQuery(QUERY_POST);
-  const { loading: followLoad, data: followData } = useQuery(
-    QUERY_ME_HOMEPAGE_FOLLOW
-  );
+  const {
+    loading: followLoad,
+    data: followData,
+    refetch,
+  } = useQuery(QUERY_ME_HOMEPAGE_FOLLOW);
 
-  console.log(followData);
-
+  useEffect(function () {
+    refetch();
+  }, []);
   if (error) return <h2>Error loading data</h2>;
   if (loading) return <p>Loading data</p>;
   return (
