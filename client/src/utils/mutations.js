@@ -34,23 +34,28 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_USER = gql`
-  mutation CreateUser($username: String!, $email: String!, $password: String!) {
+  mutation Mutation($username: String!, $email: String!, $password: String!) {
     createUser(username: $username, email: $email, password: $password) {
-      _id
-      email
-      password
-      username
+      token
+      user {
+        _id
+        username
+      }
     }
   }
 `;
 
 export const CREATE_COMMENT = gql`
-  mutation CreateComment($postId: ID!, $message: String!) {
+  mutation Mutation($postId: ID!, $message: String) {
     createComment(postId: $postId, message: $message) {
       _id
-      message
-      likes
       date
+      likes
+      message
+      user {
+        _id
+        username
+      }
     }
   }
 `;
@@ -75,6 +80,27 @@ export const UPDATE_USER = gql`
       skills
       location
       job
+    }
+  }
+`;
+
+export const FOLLOW_USER = gql`
+  mutation Mutation($userId: ID) {
+    followUser(userId: $userId) {
+      username
+      following {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const UNFOLLOW_USER = gql`
+  mutation UnFollowUser($userId: ID!) {
+    unFollowUser(userId: $userId) {
+      _id
+      username
     }
   }
 `;

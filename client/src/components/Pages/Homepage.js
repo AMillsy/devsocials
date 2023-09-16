@@ -1,16 +1,27 @@
 import MainFeed from "../MainFeed";
 import "./Homepage.css";
 import { useQuery } from "@apollo/client";
-import { QUERY_POST } from "../../utils/query";
+import { QUERY_POST, QUERY_ME_HOMEPAGE_FOLLOW } from "../../utils/query";
 import Developers from "../Aside";
 import peopleicon from "../../images/peopleicon.jpg";
+import { useEffect } from "react";
 const mock = require("../Aside/mock.json");
 
 const Homepage = () => {
-  const { loading, data, error } = useQuery(QUERY_POST);
+  const { loading, data, error, refetch: postRefetch } = useQuery(QUERY_POST);
+  const {
+    loading: followLoad,
+    data: followData,
+    refetch,
+  } = useQuery(QUERY_ME_HOMEPAGE_FOLLOW);
 
+  useEffect(function () {
+    refetch();
+    postRefetch();
+  }, []);
   if (error) return <h2>Error loading data</h2>;
   if (loading) return <p>Loading data</p>;
+  console.log(followData?.me?.following.length);
   return (
     <>
       <article className="main">
@@ -19,9 +30,22 @@ const Homepage = () => {
             <img src={peopleicon} className="devs-image" />
             <h3 className="devs">DEVELOPERS</h3>
           </div>
-          {mock.map(function ({ name, picture, id }) {
-            return <Developers name={name} picture={picture} key={id} />;
-          })}
+          {followData?.me?.following.length !== 0 ? (
+            followData.me.following.map(function ({ username, image, _id }) {
+              return (
+                <Developers
+                  name={username}
+                  picture={image}
+                  key={_id}
+                  id={_id}
+                />
+              );
+            })
+          ) : (
+            <h3 className="follow-suggestion">
+              Follow Developers to get easy access here!
+            </h3>
+          )}
         </div>
         <div className="feed">
           {data.posts.map(function ({

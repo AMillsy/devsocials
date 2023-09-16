@@ -1,15 +1,16 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Post, Comment } = require("../models");
+const { ObjectId } = require("mongoose").Types;
 const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const AWSS3Uploader = require("../config/awsS3config");
 const { signToken } = require("../utils/auth");
+const { findOneAndUpdate } = require("../models/user");
 require("dotenv").config();
 const s3Uploader = new AWSS3Uploader({
   destinationBucketName: "devsocials",
 });
 const resolvers = {
   Upload: GraphQLUpload,
-
   Query: {
     posts: async () => {
       return Post.find({}).populate({
@@ -39,23 +40,34 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("posts");
+        return User.findOne({ _id: context.user._id })
+          .populate("posts")
+          .populate("following")
+          .populate("followed");
       }
       throw new AuthenticationError("You need to be logged in");
+    },
+    follows: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).select(
+          "following followed"
+        );
+      }
     },
   },
 
   Mutation: {
     createUser: async (parent, args) => {
       try {
+        console.log(args);
         const user = await User.create(args);
 
         if (user) {
-          return user;
+          const token = signToken(user);
+          return { token, user };
         }
-        throw new AuthenticationError("Error creating user");
       } catch (error) {
-        throw new AuthenticationError("Error creating user");
+        throw new AuthenticationError(error);
       }
     },
     loginUser: async (parent, { username, password }) => {
@@ -139,17 +151,71 @@ const resolvers = {
         throw error;
       }
     },
-    createComment: async (parent, { postID, message, userID }, context) => {
-      // if (!context.user)
-      //   throw new AuthenticationError("Must be logged in to make a comment");
-      const newComment = await Comment.create({ message, user: userID });
+    createComment: async (parent, { postId, message }, context) => {
+      if (!message) throw new AuthenticationError("Must add a message");
+      if (!context.user)
+        throw new AuthenticationError("Must be logged in to make a comment");
+
+      const meUser = await User.findById(context.user._id);
+      if (!meUser)
+        throw new AuthenticationError("Must be logged in to make a comment");
+      const newComment = await Comment.create({
+        message,
+        user: context.user._id,
+      });
+      const popComment = await newComment.populate("user");
       const updatePost = await Post.findOneAndUpdate(
-        { _id: postID },
+        { _id: postId },
         { $push: { comments: newComment } },
         { new: true }
       );
 
-      return newComment;
+      console.log(updatePost);
+
+      return popComment;
+    },
+    followUser: async (parent, { userId }, context) => {
+      if (!context.user)
+        throw new AuthenticationError("Must be logged in to follow");
+
+      try {
+        const userFollowing = await User.findByIdAndUpdate(
+          { _id: userId },
+          { $addToSet: { followed: context.user._id } }
+        );
+
+        console.log(userFollowing._id);
+
+        const meUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { following: userFollowing._id } }
+        ).populate("following");
+
+        console.log(meUser);
+        return meUser;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    unFollowUser: async (parent, { userId }, context) => {
+      console.log(userId);
+      if (!context.user) throw new AuthenticationError("Must be logged in");
+
+      try {
+        const unfollow = await User.findByIdAndUpdate(
+          { _id: userId },
+          { $pull: { followed: new ObjectId(context.user._id) } }
+        );
+
+        const meUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { following: unfollow._id } }
+        );
+
+        return meUser;
+      } catch (err) {
+        throw new AuthenticationError(err);
+      }
     },
   },
 };

@@ -21,6 +21,7 @@ export const QUERY_POST = gql`
 export const GET_COMMENTS_QUERY = gql`
   query GetComments($id: ID!) {
     getComments(_id: $id) {
+      _id
       date
       likes
       message
@@ -61,6 +62,18 @@ export const QUERY_ME_USERNAME = gql`
     }
   }
 `;
+
+export const QUERY_ME_HOMEPAGE_FOLLOW = gql`
+  query Me {
+    me {
+      following {
+        username
+        image
+        _id
+      }
+    }
+  }
+`;
 export const QUERY_ME_SKILLS = gql`
   query Me {
     me {
@@ -69,6 +82,15 @@ export const QUERY_ME_SKILLS = gql`
   }
 `;
 
+export const QUERY_ME_FOLLOWING = gql`
+  query Follows {
+    follows {
+      _id
+      followed
+      following
+    }
+  }
+`;
 /**Need to send through a ID, just send a string of the profile you have clicked on */
 /**
   const { loading, error, data } = useQuery(QUERY_USER, {
