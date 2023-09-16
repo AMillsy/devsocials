@@ -21,7 +21,6 @@ const Homepage = () => {
   }, []);
   if (error) return <h2>Error loading data</h2>;
   if (loading) return <p>Loading data</p>;
-  console.log(followData?.me?.following.length);
   return (
     <>
       <article className="main">
@@ -30,7 +29,7 @@ const Homepage = () => {
             <img src={peopleicon} className="devs-image" />
             <h3 className="devs">DEVELOPERS</h3>
           </div>
-          {followData?.me?.following.length !== 0 ? (
+          {followData?.me?.following?.length !== 0 ? (
             followData.me.following.map(function ({ username, image, _id }) {
               return (
                 <Developers
