@@ -44,7 +44,6 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
 
       setComments([...comments, { ...data.createComment }]);
       setCommentText("");
-      console.log(data);
     } catch (err) {
       setCommentError(err.message);
       setTimeout(function () {
@@ -52,7 +51,7 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
       }, 2000);
     }
   };
-  console.log(comments);
+
   return (
     <Modal
       isOpen={isOpen}
