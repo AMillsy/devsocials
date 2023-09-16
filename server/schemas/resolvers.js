@@ -151,18 +151,25 @@ const resolvers = {
         throw error;
       }
     },
-    createComment: async (parent, { postID, message }, context) => {
+    createComment: async (parent, { postId, message }, context) => {
+      if (!message) throw new AuthenticationError("Must add a message");
       if (!context.user)
+        throw new AuthenticationError("Must be logged in to make a comment");
+
+      const meUser = await User.findById(context.user._id);
+      if (!meUser)
         throw new AuthenticationError("Must be logged in to make a comment");
       const newComment = await Comment.create({
         message,
         user: context.user._id,
       });
       const updatePost = await Post.findOneAndUpdate(
-        { _id: postID },
+        { _id: postId },
         { $push: { comments: newComment } },
         { new: true }
       );
+
+      console.log(updatePost);
 
       return newComment;
     },

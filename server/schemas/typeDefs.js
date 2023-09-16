@@ -81,7 +81,7 @@ const typeDefs = gql`
       image: [Upload]!
       userId: ID!
     ): PostData
-    createComment(postID: ID!, message: String, userID: ID): Comment
+    createComment(postId: ID!, message: String): Comment
     singleUpload(file: Upload!): UploadFileResponse
     multiUpload(files: [Upload!]): [UploadFileResponse]
     followUser(userId: ID): User

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_COMMENTS_QUERY } from "../utils/query";
@@ -10,29 +10,40 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
     variables: { id: postId },
   });
   const [commentText, setCommentText] = useState("");
+  const [commentError, setCommentError] = useState("");
+  const [comments, setComments] = useState([]);
   const [createComment] = useMutation(CREATE_COMMENT);
-  console.log(data);
+
   // useEffect(() => {
   //   if (isOpen) {
   //     refetch();
   //   }
   // }, [isOpen, refetch]);
-  console.log(data);
-  console.log(error);
+
+  useEffect(
+    function () {
+      setComments(data.getComments);
+    },
+    [loading]
+  );
+
   if (loading) return "Loading...";
   if (error) return "Error with loading";
-  const comments = data.getComments;
+
   const handleCommentSubmit = async () => {
     try {
       await createComment({
         variables: {
-          postId: postId,
+          postId,
           message: commentText,
         },
       });
       setCommentText("");
     } catch (err) {
-      console.error("Error adding comment", err);
+      setCommentError(err.message);
+      setTimeout(function () {
+        setCommentError("");
+      }, 2000);
     }
   };
   return (
@@ -73,6 +84,7 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
         <button onClick={handleCommentSubmit} className="add-comment-button">
           Add Comment
         </button>
+        <p className="error-comment">{commentError}</p>
       </div>
       <button onClick={onRequestClose} className="close-button">
         Close
