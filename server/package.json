@@ -22,10 +22,10 @@
   },
   "homepage": "https://github.com/AMillsy/devsocials#readme",
   "devDependencies": {
-    "dotenv": "^16.3.1",
     "nodemon": "^3.0.1"
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "apollo-server-express": "^3.12.1",
     "aws-sdk": "^2.1451.0",
     "bcrypt": "^5.1.1",
