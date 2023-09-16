@@ -28,7 +28,8 @@ export default function MyProfile() {
     function () {
       //Shouldnt show the follow button if its your profile
       if (isFollowingData?.follows) {
-        if (userId === isFollowingData.follows._id) navigate("/me");
+        if (userId === isFollowingData.follows._id)
+          window.location.assign("/me");
       }
       if (Auth.loggedIn() && isFollowingData?.follows?.following) {
         setFollowed(isFollowingData.follows.following.includes(userId));
