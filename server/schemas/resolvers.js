@@ -163,6 +163,7 @@ const resolvers = {
         message,
         user: context.user._id,
       });
+      const popComment = await newComment.populate("user");
       const updatePost = await Post.findOneAndUpdate(
         { _id: postId },
         { $push: { comments: newComment } },
@@ -171,7 +172,7 @@ const resolvers = {
 
       console.log(updatePost);
 
-      return newComment;
+      return popComment;
     },
     followUser: async (parent, { userId }, context) => {
       if (!context.user)

@@ -21,6 +21,7 @@ export const QUERY_POST = gql`
 export const GET_COMMENTS_QUERY = gql`
   query GetComments($id: ID!) {
     getComments(_id: $id) {
+      _id
       date
       likes
       message

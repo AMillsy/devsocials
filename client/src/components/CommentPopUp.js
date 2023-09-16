@@ -6,7 +6,7 @@ import { CREATE_COMMENT } from "../utils/mutations";
 import "./CommentPopUp.css";
 import { Link } from "react-router-dom";
 const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
-  const { data, loading, error } = useQuery(GET_COMMENTS_QUERY, {
+  const { data, loading, error, refetch } = useQuery(GET_COMMENTS_QUERY, {
     variables: { id: postId },
   });
   const [commentText, setCommentText] = useState("");
@@ -22,9 +22,12 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
 
   useEffect(
     function () {
-      setComments(data.getComments);
+      if (isOpen) {
+        refetch();
+        setComments(data?.getComments);
+      }
     },
-    [loading]
+    [loading, isOpen]
   );
 
   if (loading) return "Loading...";
@@ -32,13 +35,16 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
 
   const handleCommentSubmit = async () => {
     try {
-      await createComment({
+      const { data } = await createComment({
         variables: {
           postId,
           message: commentText,
         },
       });
+
+      setComments([...comments, { ...data.createComment }]);
       setCommentText("");
+      console.log(data);
     } catch (err) {
       setCommentError(err.message);
       setTimeout(function () {
@@ -46,6 +52,7 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
       }, 2000);
     }
   };
+  console.log(comments);
   return (
     <Modal
       isOpen={isOpen}
@@ -56,23 +63,24 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
     >
       <h2 className="comment-popup-title">Comments</h2>
       <ul className="comment-list">
-        {comments.map((comment) => (
-          <li
-            className="comment-item"
-            style={{ color: "black" }}
-            key={comment._id}
-          >
-            <span className="comment-text">
-              <Link
-                className="comment-username-link"
-                to={`/profile/${comment.user._id}`}
-              >
-                {comment.user.username}
-              </Link>{" "}
-              {comment.message}
-            </span>
-          </li>
-        ))}
+        {comments &&
+          comments.map((comment) => (
+            <li
+              className="comment-item"
+              style={{ color: "black" }}
+              key={comment._id}
+            >
+              <span className="comment-text">
+                <Link
+                  className="comment-username-link"
+                  to={`/profile/${comment.user._id}`}
+                >
+                  {comment.user.username}
+                </Link>{" "}
+                {comment.message}
+              </span>
+            </li>
+          ))}
       </ul>
       <div>
         <textarea

@@ -52,6 +52,10 @@ export const CREATE_COMMENT = gql`
       date
       likes
       message
+      user {
+        _id
+        username
+      }
     }
   }
 `;
