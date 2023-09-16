@@ -5,7 +5,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import ProfileFeed from "../ProfileFeed";
 import userImage from "../../images/userImage.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FOLLOW_USER, UNFOLLOW_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
@@ -22,12 +22,13 @@ export default function MyProfile() {
     }
   );
 
+  const navigate = useNavigate();
+
   useEffect(
     function () {
       //Shouldnt show the follow button if its your profile
       if (isFollowingData?.follows) {
-        if (userId === isFollowingData.follows._id)
-          window.location.assign("/me");
+        if (userId === isFollowingData.follows._id) navigate("/me");
       }
       if (Auth.loggedIn() && isFollowingData?.follows?.following) {
         setFollowed(isFollowingData.follows.following.includes(userId));
