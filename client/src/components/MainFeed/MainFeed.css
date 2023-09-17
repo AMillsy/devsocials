@@ -82,6 +82,19 @@
   margin: 0;
   padding: 0;
   margin: 5px;
+  position: relative;
+}
+
+.buttonNum {
+  position: absolute;
+  color: black;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 25%;
+  text-align: center;
+  font-weight: bolder;
 }
 @media only screen and (max-width: 900px) {
   .card {
@@ -125,5 +138,8 @@
   .cardTop {
     flex-direction: column;
     justify-content: space-between;
+  }
+  .buttonNum {
+    top: 15%;
   }
 }

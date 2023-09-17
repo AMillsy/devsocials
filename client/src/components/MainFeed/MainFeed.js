@@ -15,9 +15,10 @@ const MainFeed = ({
   username,
   userId,
   userImage,
+  commentCount,
 }) => {
   const [isCommentPopupOpen, setIsCommentPopupOpen] = useState(false);
-
+  const [commentAmount, setCommentAmount] = useState(commentCount);
   const openCommentPopup = () => {
     setIsCommentPopupOpen(true);
   };
@@ -26,6 +27,10 @@ const MainFeed = ({
     setIsCommentPopupOpen(false);
   };
 
+  const addCommentCount = () => {
+    const newTotal = commentAmount + 1;
+    setCommentAmount(newTotal);
+  };
   const isCommentOpen = () => {
     if (isCommentPopupOpen) {
       return (
@@ -33,6 +38,7 @@ const MainFeed = ({
           isOpen={isCommentPopupOpen}
           onRequestClose={closeCommentPopup}
           postId={postId}
+          addCommentCount={addCommentCount}
         />
       );
     }
@@ -64,13 +70,11 @@ const MainFeed = ({
                 src={commentImg}
                 alt="comment Button"
               />
+              <p className="buttonNum">{commentAmount ? commentAmount : ""}</p>
             </button>
             <button>
-              <img
-                className="cardBottomImage"
-                src={heart}
-                alt="comment Button"
-              />
+              <img className="cardBottomImage" src={heart} alt="Like Btn" />
+              <p className="buttonNum"></p>
             </button>
           </div>
         </div>
