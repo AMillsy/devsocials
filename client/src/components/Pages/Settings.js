@@ -100,7 +100,11 @@ const Settings = () => {
             onChange={onFormChange}
           ></input>
           <label>Job or Hobby:</label>
-          <input name="job" placeholder="Web developer"></input>
+          <input
+            name="job"
+            placeholder="Web developer"
+            onChange={onFormChange}
+          ></input>
           <label>Skills</label>
           <div className="skills-submit">
             <p className="skills-warning">

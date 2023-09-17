@@ -105,7 +105,12 @@ export const QUERY_ME_FOLLOWING = gql`
 export const QUERY_USER = gql`
   query UserProfile($id: ID!) {
     userProfile(_id: $id) {
+      _id
       username
+      job
+      location
+      skills
+      image
       posts {
         _id
         title

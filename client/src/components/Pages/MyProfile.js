@@ -24,6 +24,8 @@ export default function MyProfile() {
     skip: !Auth.loggedIn(),
   });
 
+  console.log(data);
+
   useEffect(
     function () {
       //Shouldnt show the follow button if its your profile
