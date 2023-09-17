@@ -55,8 +55,27 @@ const MainFeed = ({
         <div className="imgCon-card">
           <img src={imgSrc} className="imgCard" />
         </div>
-        <div className="cardSections cardBottom"></div>
+        <div className="cardSections cardBottom">
+          <p className="cardDesc">{description}</p>
+          <div className="cardLinks">
+            <button onClick={openCommentPopup}>
+              <img
+                className="cardBottomImage"
+                src={commentImg}
+                alt="comment Button"
+              />
+            </button>
+            <button>
+              <img
+                className="cardBottomImage"
+                src={heart}
+                alt="comment Button"
+              />
+            </button>
+          </div>
+        </div>
       </div>
+      <div>{isCommentOpen()}</div>
       <div className="cardSpacer"></div>
     </>
   );

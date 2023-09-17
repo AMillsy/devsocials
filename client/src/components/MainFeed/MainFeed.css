@@ -57,6 +57,32 @@
   cursor: pointer;
 }
 
+.cardDesc {
+  padding: 10px;
+  color: white;
+}
+.cardBottom {
+  position: relative;
+}
+.cardBottomImage {
+  width: 40px;
+  height: 40px;
+}
+
+.cardLinks {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.cardLinks button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  margin: 5px;
+}
 @media only screen and (max-width: 900px) {
   .card {
     width: 100%;
@@ -77,5 +103,27 @@
   }
   .imgCon-card {
     height: 90%;
+  }
+
+  .cardDesc {
+    font-size: 80%;
+  }
+
+  .cardBottomImage {
+    width: 30px;
+    height: 30px;
+  }
+  .cardTitle {
+    position: relative;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+  }
+  .userLink-card {
+    position: relative;
+  }
+  .cardTop {
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
