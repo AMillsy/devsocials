@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./NewScript.css";
 import ShowcaseFeed from "../ShowcaseFeed";
-
+import { useMutation } from "@apollo/client";
+import { CREATE_POST } from "../../utils/mutations";
 const NewScript = () => {
   const [formState, setFormState] = useState({
     title: "",
@@ -9,33 +10,39 @@ const NewScript = () => {
     file: null,
   });
 
+  const [mutation, { error }] = useMutation(CREATE_POST);
   const [image, setImage] = useState();
 
   const onFormChange = (e) => {
     const { value, name } = e.target;
     setFormState({ ...formState, [name]: value });
 
-    console.log(name);
     if (name === "file") {
-      const file = e.target.files[0];
-      console.log(file);
-      const url = URL.createObjectURL(file);
-      setImage(url);
     }
   };
 
-  const handleFileUpload = (e) => {
-    const selectedFile = e.target.files[0];
-    setFormState({ ...formState, file: selectedFile });
+  const onFileChange = ({ target }) => {
+    const {
+      validity,
+      files: [file],
+    } = target;
+    if (!validity.valid) return;
+    setFormState({ ...formState, file: file });
+    const url = URL.createObjectURL(file);
+    setImage(url);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission here (e.g., send data to server)
     console.log("Title:", formState.title);
     console.log("Description:", formState.description);
     console.log("File:", formState.file);
+
     // Reset form fields or perform other actions as needed
+    await mutation({ variables: { ...formState } });
+
+    window.location.assign("/me");
   };
 
   return (
@@ -63,7 +70,7 @@ const NewScript = () => {
             type="file"
             name="file"
             accept="image/*"
-            onChange={onFormChange}
+            onChange={onFileChange}
             required
           />
           <button className="new-script-submit" type="submit">

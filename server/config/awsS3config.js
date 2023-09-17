@@ -46,9 +46,9 @@ class AWSS3Uploader {
 
   checkFileType(filename) {
     const regex = /(jpg|JPG|gif|jpeg|JPEG|PNG|png|jfif)$/;
+
     const fileType = filename.split(".").pop();
-    console.log(fileType);
-    console.log(regex.test(fileType));
+
     if (!regex.test(fileType)) return false;
 
     return true;
@@ -91,7 +91,6 @@ class AWSS3Uploader {
       try {
         uploads.push(this.singleFileUploadResovler(parent, { file }));
       } catch (error) {
-        console.log(error);
         continue;
       }
     }

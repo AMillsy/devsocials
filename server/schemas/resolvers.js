@@ -118,7 +118,7 @@ const resolvers = {
       );
       return updateUser;
     },
-    createPost: async (parent, { title, description, image }, context) => {
+    createPost: async (parent, { title, description, file }, context) => {
       if (!context.user)
         throw new AuthenticationError("Must be logged in to create a post ");
 
@@ -127,11 +127,27 @@ const resolvers = {
       if (!findUser)
         throw new AuthenticationError("No user found to create post");
 
+      let image = "";
+      try {
+        const upload = s3Uploader.singleFileUploadResovler.bind(s3Uploader);
+        const imageUploaded = await upload(parent, { file: file[0] });
+
+        image = imageUploaded.url;
+      } catch (error) {
+        throw new AuthenticationError(error);
+      }
       const post = await Post.create({
         title: title,
         description: description,
         image: image,
+        user: context.user._id,
       });
+
+      const userUpdate = await User.findByIdAndUpdate(context.user._id, {
+        $push: { posts: post._id },
+      });
+
+      return post;
     },
     singleUpload: async (parent, args) => {
       const upload = s3Uploader.singleFileUploadResovler.bind(s3Uploader);
