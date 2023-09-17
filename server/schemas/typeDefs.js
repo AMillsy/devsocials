@@ -32,6 +32,7 @@ const typeDefs = gql`
     date: Date
     comments: [Comment]
     commentCount: Int
+    user: User
   }
 
   type User {

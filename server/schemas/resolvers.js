@@ -13,13 +13,15 @@ const resolvers = {
   Upload: GraphQLUpload,
   Query: {
     posts: async () => {
-      return Post.find({}).populate({
-        path: "comments",
-        populate: {
-          path: "user",
-          model: "User",
-        },
-      });
+      return Post.find({})
+        .populate({
+          path: "comments",
+          populate: {
+            path: "user",
+            model: "User",
+          },
+        })
+        .populate("user");
     },
     users: async () => {
       return User.find({});

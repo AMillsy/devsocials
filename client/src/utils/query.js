@@ -14,6 +14,10 @@ export const QUERY_POST = gql`
       description
       date
       commentCount
+      user {
+        _id
+        username
+      }
     }
   }
 `;

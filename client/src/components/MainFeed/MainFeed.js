@@ -5,7 +5,15 @@ import commentImg from "../../images/comment.png";
 import CommentPopup from "../CommentPopUp";
 import { Link } from "react-router-dom";
 
-const MainFeed = ({ imgSrc, postId, title, likes, description }) => {
+const MainFeed = ({
+  imgSrc,
+  postId,
+  title,
+  likes,
+  description,
+  username,
+  userId,
+}) => {
   const [isCommentPopupOpen, setIsCommentPopupOpen] = useState(false);
 
   const openCommentPopup = () => {

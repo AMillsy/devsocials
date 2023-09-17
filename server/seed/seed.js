@@ -40,6 +40,7 @@ const seed = async () => {
         image: image,
         likes: likes,
         comments: [newComment._id],
+        user: userPost._id,
       });
 
       const updateUser = await User.updateOne(

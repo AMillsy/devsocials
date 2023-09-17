@@ -19,6 +19,7 @@ const Homepage = () => {
     refetch();
     postRefetch();
   }, []);
+  console.log(data);
   if (error) return <h2>Error loading data</h2>;
   if (loading) return <p>Loading data</p>;
   return (
@@ -55,6 +56,7 @@ const Homepage = () => {
             likes,
             description,
             commentCount,
+            user,
           }) {
             return (
               <MainFeed
@@ -65,6 +67,8 @@ const Homepage = () => {
                 likes={likes}
                 description={description}
                 commentCount={commentCount}
+                username={user.username}
+                userId={user._id}
               />
             );
           })}
