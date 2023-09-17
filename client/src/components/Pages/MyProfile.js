@@ -99,6 +99,14 @@ export default function MyProfile() {
   if (error) return <h2>{error.message}</h2>;
   if (loading) return <h2>Loading...</h2>;
 
+  const hasUserPosted = () => {
+    if (userId) return;
+
+    if (userData.posts.length !== 0) return;
+
+    return <h2>Its looking blank here... Maybe posts some Scripts</h2>;
+  };
+
   return (
     <article className="profile">
       <div className="card-container">
@@ -144,6 +152,7 @@ export default function MyProfile() {
             />
           );
         })}
+        {hasUserPosted()}
       </div>
     </article>
   );
