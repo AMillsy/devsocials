@@ -67,7 +67,7 @@ const resolvers = {
           return { token, user };
         }
       } catch (error) {
-        throw new AuthenticationError(error);
+        throw new AuthenticationError(error.message);
       }
     },
     loginUser: async (parent, { username, password }) => {
