@@ -1,69 +1,44 @@
-.middle {
-  grid-column-start: 2;
-}
 .card {
-  display: flex;
-  background-color: #121212;
-  height: 800px;
-  width: 100%;
-  flex-direction: column;
-  grid-row-start: 2;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  margin-bottom: 20px;
-  position: relative;
-  padding: 10px;
+  width: 800px;
+  height: 700px;
+  margin: 20px;
 }
 
-.card h2 {
-  color: white;
-  border-bottom: 2px white solid;
+.cardSections {
+  background-color: black;
   width: 100%;
-  text-align: center;
-  font-size: 250%;
+  height: 100px;
 }
 
-.cardContainer {
-  height: 80%;
+.imgCon-card {
   width: 100%;
-  display: grid;
-  grid-template-columns: 20% 60% 20%;
-  justify-content: center;
+  height: 500px;
+  background-color: rgb(56, 56, 56);
 }
-.cardImageContainer {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  grid-column-start: 2;
+
+.imgCard {
   height: inherit;
-  width: 100%;
-
-  object-fit: contain;
-}
-.mainImage {
-  height: 100%;
   width: inherit;
   object-fit: contain;
 }
 
-.cardInfo {
+.cardTop {
   display: flex;
-  grid-column-start: 3;
-  color: white;
   justify-content: center;
-  align-items: center;
-  width: inherit;
-  height: inherit;
 }
 
-.cardDesc {
+.cardTitle {
   color: white;
-  text-align: center;
+  padding: 20px;
+  font-size: 130%;
 }
 
-.extraImage {
-  width: 75px;
-  margin-bottom: 40px;
+@media only screen and (max-width: 900px) {
+  .card {
+    width: 100%;
+    height: 400px;
+  }
+  .imgCon-card {
+    height: 90%;
+  }
 }

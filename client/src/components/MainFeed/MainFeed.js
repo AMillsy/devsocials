@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import heart from "../../images/heart.png";
 import commentImg from "../../images/comment.png";
 import CommentPopup from "../CommentPopUp";
+import { Link } from "react-router-dom";
 
 const MainFeed = ({ imgSrc, postId, title, likes, description }) => {
   const [isCommentPopupOpen, setIsCommentPopupOpen] = useState(false);
@@ -29,37 +30,18 @@ const MainFeed = ({ imgSrc, postId, title, likes, description }) => {
   };
 
   return (
-    <div className="middle">
+    <>
       <div className="card">
-        <h2>{title}</h2>
-        <div className="cardContainer">
-          <div className="cardImageContainer">
-            <img className="mainImage" src={imgSrc} alt={title}></img>
-          </div>
-          <div className="cardInfo">
-            <ul>
-              <li>
-                <img className="extraImage" src={heart} alt="Like button"></img>
-                <p>{likes}</p>
-              </li>
-              <li>
-                <button alt="CommentPopup" onClick={openCommentPopup}>
-                  <img
-                    className="extraImage"
-                    src={commentImg}
-                    alt="Comment button"
-                  />
-                </button>
-              </li>
-            </ul>
-          </div>
+        <div className="cardSections cardTop">
+          <Link>{}</Link>
+          <h3 className="cardTitle">{title}</h3>
         </div>
-        <div className="cardDesc">
-          <p>{description}</p>
+        <div className="imgCon-card">
+          <img src={imgSrc} className="imgCard" />
         </div>
+        <div className="cardSections cardBottom"></div>
       </div>
-      {isCommentOpen()}
-    </div>
+    </>
   );
 };
 
