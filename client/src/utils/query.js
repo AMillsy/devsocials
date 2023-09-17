@@ -9,8 +9,8 @@ export const QUERY_POST = gql`
     posts {
       _id
       image
-      likes
       title
+      likeCount
       description
       date
       commentCount

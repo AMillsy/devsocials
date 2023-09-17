@@ -28,7 +28,7 @@ const typeDefs = gql`
     title: String!
     description: String
     image: String!
-    likes: Int
+    likeCount: Int
     date: Date
     comments: [Comment]
     commentCount: Int
