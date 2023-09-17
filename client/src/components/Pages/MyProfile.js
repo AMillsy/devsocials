@@ -12,21 +12,24 @@ import Auth from "../../utils/auth";
 export default function MyProfile() {
   const { userId } = useParams();
   const [followed, setFollowed] = useState(false);
+  const [followErrorMessage, setFollowError] = useState("");
   const { loading, data, error } = useQuery(userId ? QUERY_USER : QUERY_ME, {
     variables: { id: userId },
   });
-  const { data: isFollowingData, loading: meLoad } = useQuery(
-    QUERY_ME_FOLLOWING,
-    {
-      skip: !Auth.loggedIn() && userId,
-    }
-  );
+  const {
+    data: isFollowingData,
+    loading: meLoad,
+    refetch,
+  } = useQuery(QUERY_ME_FOLLOWING, {
+    skip: !Auth.loggedIn(),
+  });
 
   const navigate = useNavigate();
 
   useEffect(
     function () {
       //Shouldnt show the follow button if its your profile
+      refetch();
       if (isFollowingData?.follows) {
         if (userId === isFollowingData.follows._id)
           window.location.assign("/me");
@@ -35,7 +38,7 @@ export default function MyProfile() {
         setFollowed(isFollowingData.follows.following.includes(userId));
       }
     },
-    [meLoad]
+    [meLoad, userId]
   );
 
   const [followUserMutation, { error: followError }] = useMutation(FOLLOW_USER);
@@ -45,9 +48,16 @@ export default function MyProfile() {
   const userData = data?.me || data?.userProfile;
 
   const followUser = async (userId) => {
-    await followUserMutation({ variables: { userId } });
-    console.log(followError);
-    setFollowed(true);
+    try {
+      await followUserMutation({ variables: { userId } });
+      console.log(followError);
+      setFollowed(true);
+    } catch (error) {
+      setFollowError(error.message);
+      setTimeout(function () {
+        setFollowError("");
+      }, 2000);
+    }
   };
 
   const unFollowUser = async (userId) => {
@@ -77,9 +87,12 @@ export default function MyProfile() {
       );
     }
     return (
-      <button onClick={() => followUser(userId)} className="primary ghost">
-        Follow
-      </button>
+      <>
+        <button onClick={() => followUser(userId)} className="primary ghost">
+          Follow
+        </button>
+        <p className="error">{followErrorMessage}</p>
+      </>
     );
   };
 
