@@ -21,7 +21,8 @@ const resolvers = {
             model: "User",
           },
         })
-        .populate("user");
+        .populate("user")
+        .sort({ date: -1 });
     },
     users: async () => {
       return User.find({});
