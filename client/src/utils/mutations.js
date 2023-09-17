@@ -112,3 +112,11 @@ export const UNFOLLOW_USER = gql`
     }
   }
 `;
+
+export const ADD_LIKE = gql`
+  mutation Mutation($postId: ID!) {
+    addLike(postId: $postId) {
+      _id
+    }
+  }
+`;

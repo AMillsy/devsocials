@@ -236,6 +236,18 @@ const resolvers = {
         throw new AuthenticationError(err);
       }
     },
+    addLike: async (parent, { postId }, context) => {
+      if (!context.user) return new AuthenticationError("Must be logged in");
+
+      const user = User.findById(context.user._id);
+      if (!user) return new AuthenticationError("Musted be logged in");
+
+      const updatePost = Post.findByIdAndUpdate(postId, {
+        $addToSet: { likes: context.user._id },
+      });
+
+      return updatePost;
+    },
   },
 };
 

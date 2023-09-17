@@ -2,10 +2,12 @@
   width: 800px;
   height: 800px;
   margin: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .cardSections {
-  background-color: black;
+  background-color: rgb(12, 12, 12);
   width: 100%;
   height: 100px;
 }
@@ -95,6 +97,9 @@
   top: 25%;
   text-align: center;
   font-weight: bolder;
+}
+.likes {
+  color: red;
 }
 @media only screen and (max-width: 900px) {
   .card {

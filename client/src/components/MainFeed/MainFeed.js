@@ -5,6 +5,10 @@ import commentImg from "../../images/comment.png";
 import CommentPopup from "../CommentPopUp";
 import { Link } from "react-router-dom";
 import basicUserImage from "../../images/userImage.jpg";
+import { useMutation } from "@apollo/client";
+import { ADD_LIKE } from "../../utils/mutations";
+import Snackbar from "@mui/material/Snackbar";
+import { Alert } from "@mui/material";
 
 const MainFeed = ({
   imgSrc,
@@ -19,6 +23,10 @@ const MainFeed = ({
 }) => {
   const [isCommentPopupOpen, setIsCommentPopupOpen] = useState(false);
   const [commentAmount, setCommentAmount] = useState(commentCount);
+  const [likesAmount, setLikesAmount] = useState(likes);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [mutation, { error }] = useMutation(ADD_LIKE);
   const openCommentPopup = () => {
     setIsCommentPopupOpen(true);
   };
@@ -30,6 +38,23 @@ const MainFeed = ({
   const addCommentCount = () => {
     const newTotal = commentAmount + 1;
     setCommentAmount(newTotal);
+  };
+
+  const addLike = async () => {
+    try {
+      await mutation({ variables: { postId } });
+      if (likes === likesAmount) {
+        const likeTotal = likesAmount + 1;
+        setLikesAmount(likeTotal);
+      }
+    } catch (error) {
+      setErrorMessage(error.message);
+      setSnackbarOpen(true);
+    }
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
   };
 
   const isCommentOpen = () => {
@@ -73,13 +98,31 @@ const MainFeed = ({
               />
               <p className="buttonNum">{commentAmount ? commentAmount : ""}</p>
             </button>
-            <button>
+            <button onClick={addLike}>
               <img className="cardBottomImage" src={heart} alt="Like Btn" />
-              <p className="buttonNum">{likes ? likes : ""}</p>
+              <p className="buttonNum likes">
+                {likesAmount ? likesAmount : ""}
+              </p>
             </button>
           </div>
         </div>
       </div>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="error"
+          color="error"
+          style={{ backgroundColor: "black" }}
+        >
+          {errorMessage}
+        </Alert>
+      </Snackbar>
+
       <div>{isCommentOpen()}</div>
       <div className="cardSpacer"></div>
     </>

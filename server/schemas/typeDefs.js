@@ -76,6 +76,7 @@ const typeDefs = gql`
       job: String
       skills: [String]
     ): User
+    addLike(postId: ID!): Post
     createPost(title: String!, description: String, file: [Upload]!): Post
     createComment(postId: ID!, message: String): Comment
     singleUpload(file: Upload!): UploadFileResponse
