@@ -56,7 +56,21 @@
 .userLink-card:hover {
   cursor: pointer;
 }
+
 @media only screen and (max-width: 900px) {
+  .card {
+    width: 100%;
+    height: 600px;
+  }
+  .imgCon-card {
+    height: 100%;
+  }
+
+  .cardSpacer {
+    margin: 100px;
+  }
+}
+@media only screen and (max-width: 500px) {
   .card {
     width: 100%;
     height: 400px;

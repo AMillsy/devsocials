@@ -57,6 +57,7 @@ const MainFeed = ({
         </div>
         <div className="cardSections cardBottom"></div>
       </div>
+      <div className="cardSpacer"></div>
     </>
   );
 };
