@@ -9,9 +9,19 @@ const NewScript = () => {
     file: null,
   });
 
+  const [image, setImage] = useState();
+
   const onFormChange = (e) => {
     const { value, name } = e.target;
     setFormState({ ...formState, [name]: value });
+
+    console.log(name);
+    if (name === "file") {
+      const file = e.target.files[0];
+      console.log(file);
+      const url = URL.createObjectURL(file);
+      setImage(url);
+    }
   };
 
   const handleFileUpload = (e) => {
@@ -53,7 +63,7 @@ const NewScript = () => {
             type="file"
             name="file"
             accept="image/*"
-            onChange={handleFileUpload}
+            onChange={onFormChange}
             required
           />
           <button className="new-script-submit" type="submit">
@@ -61,7 +71,11 @@ const NewScript = () => {
           </button>
         </form>
       </div>
-      <ShowcaseFeed />
+      <ShowcaseFeed
+        title={formState.title}
+        description={formState.description}
+        image={image}
+      />
     </div>
   );
 };
