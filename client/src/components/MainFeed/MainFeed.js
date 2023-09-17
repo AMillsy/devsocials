@@ -31,6 +31,7 @@ const MainFeed = ({
     const newTotal = commentAmount + 1;
     setCommentAmount(newTotal);
   };
+
   const isCommentOpen = () => {
     if (isCommentPopupOpen) {
       return (
@@ -74,7 +75,7 @@ const MainFeed = ({
             </button>
             <button>
               <img className="cardBottomImage" src={heart} alt="Like Btn" />
-              <p className="buttonNum"></p>
+              <p className="buttonNum">{likes ? likes : ""}</p>
             </button>
           </div>
         </div>

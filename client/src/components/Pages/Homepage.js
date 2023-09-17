@@ -21,6 +21,8 @@ const Homepage = () => {
   }, []);
   if (error) return <h2>Error loading data</h2>;
   if (loading) return <p>Loading data</p>;
+
+  console.log(data);
   return (
     <>
       <article className="main">
@@ -52,7 +54,7 @@ const Homepage = () => {
             _id,
             image,
             title,
-            likes,
+            likeCount,
             description,
             commentCount,
             user,
@@ -63,7 +65,7 @@ const Homepage = () => {
                 imgSrc={image}
                 postId={_id}
                 title={title}
-                likes={likes}
+                likes={likeCount}
                 description={description}
                 commentCount={commentCount}
                 username={user.username}
