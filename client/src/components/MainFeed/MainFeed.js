@@ -4,6 +4,7 @@ import heart from "../../images/heart.png";
 import commentImg from "../../images/comment.png";
 import CommentPopup from "../CommentPopUp";
 import { Link } from "react-router-dom";
+import basicUserImage from "../../images/userImage.jpg";
 
 const MainFeed = ({
   imgSrc,
@@ -13,6 +14,7 @@ const MainFeed = ({
   description,
   username,
   userId,
+  userImage,
 }) => {
   const [isCommentPopupOpen, setIsCommentPopupOpen] = useState(false);
 
@@ -41,7 +43,13 @@ const MainFeed = ({
     <>
       <div className="card">
         <div className="cardSections cardTop">
-          <Link>{}</Link>
+          <Link className="userLink-card" to={`/profile/${userId}`}>
+            <img
+              src={userImage ? userImage : basicUserImage}
+              className="cardUserImage"
+            />
+            <p>{username}</p>
+          </Link>
           <h3 className="cardTitle">{title}</h3>
         </div>
         <div className="imgCon-card">

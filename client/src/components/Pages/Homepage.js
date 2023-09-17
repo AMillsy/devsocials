@@ -69,6 +69,7 @@ const Homepage = () => {
                 commentCount={commentCount}
                 username={user.username}
                 userId={user._id}
+                userImage={user.image}
               />
             );
           })}

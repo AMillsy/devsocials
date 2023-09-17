@@ -17,6 +17,7 @@ export const QUERY_POST = gql`
       user {
         _id
         username
+        image
       }
     }
   }
@@ -52,7 +53,7 @@ export const QUERY_ME = gql`
         image
         description
         date
-        likes
+        likeCount
         commentCount
       }
     }
@@ -111,7 +112,7 @@ export const QUERY_USER = gql`
         image
         description
         date
-        likes
+        likeCount
         commentCount
       }
     }

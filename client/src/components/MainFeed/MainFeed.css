@@ -25,14 +25,37 @@
 .cardTop {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .cardTitle {
   color: white;
   padding: 20px;
   font-size: 130%;
+  position: absolute;
+  bottom: 0;
 }
 
+.cardUserImage {
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.userLink-card {
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  font-size: 130%;
+  color: white;
+  font-weight: bolder;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+.userLink-card:hover {
+  cursor: pointer;
+}
 @media only screen and (max-width: 900px) {
   .card {
     width: 100%;
