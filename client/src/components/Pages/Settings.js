@@ -31,6 +31,8 @@ const Settings = () => {
   };
   //Adds a skill locally onto the list
   const addSkill = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const input = e.target.previousElementSibling;
     const skill = input.value;
     if (!skill) return;
@@ -110,7 +112,12 @@ const Settings = () => {
             <p className="skills-warning">
               Click the <b>+</b> to add new skills
             </p>
-            <input type="text" placeholder="skill" id="skillInput"></input>
+            <input
+              type="text"
+              placeholder="skill"
+              id="skillInput"
+              onSubmit={addSkill}
+            ></input>
             <button className="settings-submit skills-btn" onClick={addSkill}>
               +
             </button>
