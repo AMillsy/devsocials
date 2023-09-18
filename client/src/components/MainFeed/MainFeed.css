@@ -122,7 +122,11 @@
   }
 
   .cardSpacer {
-    margin: 150px;
+    margin: 180px;
+  }
+
+  .cardSpacer:last-child {
+    margin: 200px;
   }
 }
 @media only screen and (max-width: 500px) {
