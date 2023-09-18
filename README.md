@@ -1,6 +1,7 @@
 # //RunDev
 
 ## Table of Contents
+
 - [Description](#description)
 - [Usage](#usage)
 - [Features](#features)
@@ -9,6 +10,7 @@
 - [Installation](#installation)
 
 ## Description
+
 //RunDev is the ultimate social media platform for developers to share images, network with peers, and personalize their profiles. Whether you're a seasoned developer or just starting your journey, //RunDev has something for everyone.
 
 ## Usage
@@ -61,3 +63,11 @@
 
 To get //RunDev up and running on your local machine, follow these steps:
 "cd server && npm i && cd ../client && npm i",
+
+## Screenshots
+
+![Login Page](./client/src/images/screenshot1.png)
+
+![Post page](./client/src/images/screenshot2.png)
+
+![User page](./client/src/images/screenshot3.png)
