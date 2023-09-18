@@ -35,6 +35,7 @@ const Settings = () => {
     e.stopPropagation();
     const input = e.target.previousElementSibling;
     const skill = input.value;
+    input.value = "";
     if (!skill) return;
     if (!skills) {
       setSkills([skill]);
