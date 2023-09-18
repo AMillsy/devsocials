@@ -10,6 +10,7 @@
 - [Compatibility](#compatibility)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
+- [Screenshots](#screenshots)
 
 ## Description
 
