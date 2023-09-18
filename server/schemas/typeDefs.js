@@ -28,10 +28,11 @@ const typeDefs = gql`
     title: String!
     description: String
     image: String!
-    likes: Int
+    likeCount: Int
     date: Date
     comments: [Comment]
     commentCount: Int
+    user: User
   }
 
   type User {
@@ -75,12 +76,8 @@ const typeDefs = gql`
       job: String
       skills: [String]
     ): User
-    createPost(
-      title: String!
-      description: String
-      image: [Upload]!
-      userId: ID!
-    ): PostData
+    addLike(postId: ID!): Post
+    createPost(title: String!, description: String, file: [Upload]!): Post
     createComment(postId: ID!, message: String): Comment
     singleUpload(file: Upload!): UploadFileResponse
     multiUpload(files: [Upload!]): [UploadFileResponse]

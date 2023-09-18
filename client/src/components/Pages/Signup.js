@@ -12,7 +12,7 @@ const Signup = () => {
   });
 
   const [signup, { error, data }] = useMutation(CREATE_USER);
-
+  const [singupError, setSignupError] = useState("");
   const onChange = (e) => {
     const { value, name } = e.target;
 
@@ -29,6 +29,10 @@ const Signup = () => {
       Auth.login(data.createUser.token);
     } catch (error) {
       console.log(error);
+      setSignupError(error.message);
+      setTimeout(function () {
+        setSignupError("");
+      }, 2000);
     }
   };
   return (
@@ -57,6 +61,7 @@ const Signup = () => {
           <button type="submit" className="btn">
             Sign Up
           </button>
+          <p className="danger-signup">{singupError}</p>
           <Link className="login" to={"/login"}>
             Login Now
           </Link>

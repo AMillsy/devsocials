@@ -5,6 +5,10 @@
 
 .feed {
   grid-column-start: 2;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .devs {
@@ -31,4 +35,11 @@
 .follow-suggestion {
   text-align: center;
   margin-top: 30px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
 }

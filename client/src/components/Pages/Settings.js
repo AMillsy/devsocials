@@ -31,8 +31,11 @@ const Settings = () => {
   };
   //Adds a skill locally onto the list
   const addSkill = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const input = e.target.previousElementSibling;
     const skill = input.value;
+    input.value = "";
     if (!skill) return;
     if (!skills) {
       setSkills([skill]);
@@ -100,13 +103,22 @@ const Settings = () => {
             onChange={onFormChange}
           ></input>
           <label>Job or Hobby:</label>
-          <input name="job" placeholder="Web developer"></input>
+          <input
+            name="job"
+            placeholder="Web developer"
+            onChange={onFormChange}
+          ></input>
           <label>Skills</label>
           <div className="skills-submit">
             <p className="skills-warning">
               Click the <b>+</b> to add new skills
             </p>
-            <input type="text" placeholder="skill" id="skillInput"></input>
+            <input
+              type="text"
+              placeholder="skill"
+              id="skillInput"
+              onSubmit={addSkill}
+            ></input>
             <button className="settings-submit skills-btn" onClick={addSkill}>
               +
             </button>

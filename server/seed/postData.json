@@ -3,7 +3,6 @@
     "title": "Code: The Breakfast of Champions 🥞",
     "description": "Start your day with a hearty helping of code! Let's explore the delicious world of programming together. #CodeBreakfast #DevHumor",
     "image": "https://devsocials.s3.eu-west-2.amazonaws.com/testimage1.jpg_1694115914823",
-    "likes": 0,
     "comments": [
       {
         "message": "I prefer my code with a side of bacon, but code pancakes are a close second! 🥓🥞 #CodeBreakfast",
@@ -15,7 +14,6 @@
     "title": "Debugging: Where Bugs Go to Hide 🕵️‍♂️",
     "description": "Join the bug-hunting adventure! We're like detectives chasing bugs through the code jungle. #DebuggingAdventures #DevLife",
     "image": "https://devsocials.s3.eu-west-2.amazonaws.com/testimage2.png_1694115963401",
-    "likes": 0,
     "comments": [
       {
         "message": "I prefer my code with a side of bacon, but code pancakes are a close second! 🥓🥞 #CodeBreakfast",
@@ -27,7 +25,6 @@
     "title": "Git: The Wizardry of Version Control 🧙‍♂️",
     "description": "Git is like a magical spellbook for developers. Let's learn the enchanting ways of version control together! #GitWizardry #CodeMagic",
     "image": "https://devsocials.s3.eu-west-2.amazonaws.com/testimage3.jpg_1694115968472",
-    "likes": 0,
     "comments": [
       {
         "message": "Git gud, my fellow wizards! Git is the magical wand we all need in our developer spellbook. ✨🧙‍♂️ #GitMagic",
@@ -39,7 +36,6 @@
     "title": "Coding Zen: Achieving Nirvana One Line at a Time 🧘‍♂️",
     "description": "Finding inner peace in code is like chasing enlightenment. Let's explore the path to coding nirvana together! #CodingNirvana #DevHumor",
     "image": "https://devsocials.s3.eu-west-2.amazonaws.com/testimage4.png_1694115972608",
-    "likes": 0,
     "comments": [
       {
         "message": "I prefer my code with a side of bacon, but code pancakes are a close second! 🥓🥞 #CodeBreakfast",
@@ -51,7 +47,6 @@
     "title": "Microservices: The Mini Revolution 🌟",
     "description": "Microservices are like the tiny superheroes of the tech world. Join us in unleashing their pint-sized power! #MicroservicesHeroes #TechHumor",
     "image": "https://devsocials.s3.eu-west-2.amazonaws.com/testimage5.jfif_1694116000604",
-    "likes": 0,
     "comments": [
       {
         "message": "Microservices are like the Avengers of the tech world, only smaller and without capes! 💥🦸‍♂️ #MicroservicesHeroes",
@@ -63,7 +58,6 @@
     "title": "DevOps: Where Devs and Ops Try Not to Break Things Together 🤣",
     "description": "DevOps is like a tightrope act – balancing between development and operations without falling flat on our faces! #DevOpsFun #TechComedy",
     "image": "https://devsocials.s3.eu-west-2.amazonaws.com/imagetest6.jpg_1694116005525",
-    "likes": 0,
     "comments": [
       {
         "message": "DevOps: where developers and operations folks join forces to fix the mess we create. It's a beautiful partnership! 🤣🤝 #DevOpsLove",
@@ -75,7 +69,6 @@
     "title": "Container Conundrum: Where Docker Dreams Come True... or Not! 🐳",
     "description": "Containers are like magical boxes, but sometimes they play hide and seek. Let's navigate this container wonderland together! #DockerDreams #TechComedy",
     "image": "https://devsocials.s3.eu-west-2.amazonaws.com/testimage7.jpg_1694116021173",
-    "likes": 0,
     "comments": [
       {
         "message": "Containers are like Russian nesting dolls for code - you never know what's inside until you open them! 🤪🧩 #ContainerConundrum",
@@ -87,7 +80,6 @@
     "title": "AI Alchemy: Turning Data into Gold and Cat Memes 🤖💰",
     "description": "Data science is like alchemy, except we turn data into gold and funny cat memes! Join the data magic show! #AIAlchemy #DataComedy",
     "image": "https://devsocials.s3.eu-west-2.amazonaws.com/testimage8.jpg_1694116024837",
-    "likes": 0,
     "comments": [
       {
         "message": "AI alchemy: where we turn data into gold and cat memes. It's like having a magic wand for the internet! 🌟🐱 #AIWizards",

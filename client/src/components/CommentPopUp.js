@@ -5,7 +5,7 @@ import { GET_COMMENTS_QUERY } from "../utils/query";
 import { CREATE_COMMENT } from "../utils/mutations";
 import "./CommentPopUp.css";
 import { Link } from "react-router-dom";
-const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
+const CommentPopup = ({ isOpen, onRequestClose, postId, addCommentCount }) => {
   const { data, loading, error, refetch } = useQuery(GET_COMMENTS_QUERY, {
     variables: { id: postId },
   });
@@ -44,6 +44,7 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
 
       setComments([...comments, { ...data.createComment }]);
       setCommentText("");
+      addCommentCount();
     } catch (err) {
       setCommentError(err.message);
       setTimeout(function () {

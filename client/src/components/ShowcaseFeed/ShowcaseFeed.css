@@ -1,0 +1,29 @@
+.showCard {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 300px;
+  height: 500px;
+}
+
+.showImg {
+  width: 300px;
+  height: 400px;
+  object-fit: contain;
+  background-color: rgb(44, 44, 44);
+}
+
+.showSection {
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 120%;
+  overflow: hidden;
+}
+
+.showBottom {
+  font-size: 80%;
+}
