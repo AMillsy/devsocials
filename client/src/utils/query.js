@@ -9,11 +9,16 @@ export const QUERY_POST = gql`
     posts {
       _id
       image
-      likes
       title
+      likeCount
       description
       date
       commentCount
+      user {
+        _id
+        username
+        image
+      }
     }
   }
 `;
@@ -48,7 +53,7 @@ export const QUERY_ME = gql`
         image
         description
         date
-        likes
+        likeCount
         commentCount
       }
     }
@@ -100,14 +105,19 @@ export const QUERY_ME_FOLLOWING = gql`
 export const QUERY_USER = gql`
   query UserProfile($id: ID!) {
     userProfile(_id: $id) {
+      _id
       username
+      job
+      location
+      skills
+      image
       posts {
         _id
         title
         image
         description
         date
-        likes
+        likeCount
         commentCount
       }
     }

@@ -33,6 +33,14 @@ export const LOGIN_USER = gql`
   }
 `;
 
+export const CREATE_POST = gql`
+  mutation Mutation($title: String!, $file: [Upload]!, $description: String) {
+    createPost(title: $title, file: $file, description: $description) {
+      _id
+    }
+  }
+`;
+
 export const CREATE_USER = gql`
   mutation Mutation($username: String!, $email: String!, $password: String!) {
     createUser(username: $username, email: $email, password: $password) {
@@ -101,6 +109,14 @@ export const UNFOLLOW_USER = gql`
     unFollowUser(userId: $userId) {
       _id
       username
+    }
+  }
+`;
+
+export const ADD_LIKE = gql`
+  mutation Mutation($postId: ID!) {
+    addLike(postId: $postId) {
+      _id
     }
   }
 `;

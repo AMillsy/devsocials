@@ -13,13 +13,16 @@ const resolvers = {
   Upload: GraphQLUpload,
   Query: {
     posts: async () => {
-      return Post.find({}).populate({
-        path: "comments",
-        populate: {
-          path: "user",
-          model: "User",
-        },
-      });
+      return Post.find({})
+        .populate({
+          path: "comments",
+          populate: {
+            path: "user",
+            model: "User",
+          },
+        })
+        .populate("user")
+        .sort({ date: -1 });
     },
     users: async () => {
       return User.find({});
@@ -67,7 +70,7 @@ const resolvers = {
           return { token, user };
         }
       } catch (error) {
-        throw new AuthenticationError(error);
+        throw new AuthenticationError(error.message);
       }
     },
     loginUser: async (parent, { username, password }) => {
@@ -116,7 +119,7 @@ const resolvers = {
       );
       return updateUser;
     },
-    createPost: async (parent, { title, description, image }, context) => {
+    createPost: async (parent, { title, description, file }, context) => {
       if (!context.user)
         throw new AuthenticationError("Must be logged in to create a post ");
 
@@ -125,11 +128,27 @@ const resolvers = {
       if (!findUser)
         throw new AuthenticationError("No user found to create post");
 
+      let image = "";
+      try {
+        const upload = s3Uploader.singleFileUploadResovler.bind(s3Uploader);
+        const imageUploaded = await upload(parent, { file: file[0] });
+
+        image = imageUploaded.url;
+      } catch (error) {
+        throw new AuthenticationError(error);
+      }
       const post = await Post.create({
         title: title,
         description: description,
         image: image,
+        user: context.user._id,
       });
+
+      const userUpdate = await User.findByIdAndUpdate(context.user._id, {
+        $push: { posts: post._id },
+      });
+
+      return post;
     },
     singleUpload: async (parent, args) => {
       const upload = s3Uploader.singleFileUploadResovler.bind(s3Uploader);
@@ -216,6 +235,18 @@ const resolvers = {
       } catch (err) {
         throw new AuthenticationError(err);
       }
+    },
+    addLike: async (parent, { postId }, context) => {
+      if (!context.user) return new AuthenticationError("Must be logged in");
+
+      const user = User.findById(context.user._id);
+      if (!user) return new AuthenticationError("Musted be logged in");
+
+      const updatePost = Post.findByIdAndUpdate(postId, {
+        $addToSet: { likes: context.user._id },
+      });
+
+      return updatePost;
     },
   },
 };
