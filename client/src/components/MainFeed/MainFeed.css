@@ -108,6 +108,10 @@
 .cardSpacer {
   margin: 20px;
 }
+
+.cardSpacer:last-child {
+  margin: 50px;
+}
 @media only screen and (max-width: 900px) {
   .card {
     width: 100%;
