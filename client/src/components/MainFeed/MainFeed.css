@@ -141,6 +141,7 @@
   .cardBottomImage {
     width: 30px;
     height: 30px;
+    background-color: transparent;
   }
   .cardTitle {
     position: relative;
