@@ -19,7 +19,8 @@ const Homepage = () => {
     refetch();
     postRefetch();
   }, []);
-  if (error) return <h2>Error loading data</h2>;
+  console.log(error);
+  if (error) return <h2>{error}</h2>;
   if (loading) return <p>Loading data</p>;
   return (
     <>
