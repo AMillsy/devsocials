@@ -85,4 +85,5 @@ Mongoose is a MongoDB object modeling tool used to interact with the MongoDB dat
 These technologies have been carefully selected to provide a powerful, secure, and user-friendly experience for developers using //RunDev. The combination of AWS for infrastructure, Material UI for design, React for the frontend, and a robust backend stack ensures that //RunDev is a top-notch platform for developer networking and content sharing.
 
 ## INSTALLATION
+"cd server && npm i && cd ../client && npm i".
 
