@@ -5,6 +5,7 @@ const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const AWSS3Uploader = require("../config/awsS3config");
 const { signToken } = require("../utils/auth");
 const { findOneAndUpdate } = require("../models/user");
+
 require("dotenv").config();
 const s3Uploader = new AWSS3Uploader({
   destinationBucketName: "devsocials",
@@ -56,6 +57,12 @@ const resolvers = {
           "following followed"
         );
       }
+    },
+    findPost: async (parent, { postId }, context) => {
+      if (!context.user)
+        throw new AuthenticationError("Must be logged in to edit post");
+
+      return await Post.findById(postId);
     },
   },
 
@@ -147,6 +154,40 @@ const resolvers = {
       const userUpdate = await User.findByIdAndUpdate(context.user._id, {
         $push: { posts: post._id },
       });
+
+      return post;
+    },
+    updatePost: async (
+      parent,
+      { title, description, file, postId },
+      context
+    ) => {
+      if (!context.user)
+        throw new AuthenticationError("Must be logged in to create a post ");
+
+      const findUser = await User.findOne({ _id: context.user._id });
+
+      if (!findUser)
+        throw new AuthenticationError("No user found to create post");
+
+      let updates = { title, description };
+
+      if (file) {
+        try {
+          const upload = s3Uploader.singleFileUploadResovler.bind(s3Uploader);
+          const imageUploaded = await upload(parent, { file: file[0] });
+
+          updates.image = imageUploaded.url;
+        } catch (error) {
+          throw new AuthenticationError(error);
+        }
+      }
+
+      const post = await Post.findByIdAndUpdate(postId, {
+        ...updates,
+        user: context.user._id,
+      });
+      console.log(post);
 
       return post;
     },
@@ -247,6 +288,16 @@ const resolvers = {
       });
 
       return updatePost;
+    },
+    deletePost: async (parent, { postId }, context) => {
+      if (!context.user)
+        return new AuthenticationError(
+          "Cannot delete a post when not logged in"
+        );
+
+      const deletedPost = Post.findByIdAndDelete(postId);
+
+      return deletedPost;
     },
   },
 };

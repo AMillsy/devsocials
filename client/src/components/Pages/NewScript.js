@@ -1,16 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./NewScript.css";
 import ShowcaseFeed from "../ShowcaseFeed";
 import { useMutation } from "@apollo/client";
-import { CREATE_POST } from "../../utils/mutations";
+import { CREATE_POST, UPDATE_POST } from "../../utils/mutations";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { QUERY_SINGLE_POST } from "../../utils/query";
 const NewScript = () => {
+  const { postId } = useParams();
+
+  const {
+    loading,
+    data,
+    error: postError,
+  } = useQuery(QUERY_SINGLE_POST, { variables: { postId } });
+
+  useEffect(
+    function () {
+      if (data?.findPost) {
+        setFormState({
+          title: data.findPost?.title,
+          description: data.findPost?.description,
+        });
+
+        setImage(data.findPost?.image);
+      }
+    },
+    [loading]
+  );
+
   const [formState, setFormState] = useState({
     title: "",
     description: "",
     file: null,
   });
 
-  const [mutation, { error }] = useMutation(CREATE_POST);
+  const [mutation, { error }] = useMutation(postId ? UPDATE_POST : CREATE_POST);
   const [image, setImage] = useState();
 
   const onFormChange = (e) => {
@@ -40,15 +65,25 @@ const NewScript = () => {
     console.log("File:", formState.file);
 
     // Reset form fields or perform other actions as needed
-    await mutation({ variables: { ...formState } });
+    if (postId) {
+      console.log(postId);
+      await mutation({ variables: { ...formState, postId: postId } });
+    } else {
+      await mutation({ variables: { ...formState } });
+    }
 
     window.location.assign("/me");
   };
 
+  if (loading) return <h3>Loading data</h3>;
+  if (error) return <h3>{error.message}</h3>;
+
   return (
     <div className="new-script-container">
       <div className="newFormCon">
-        <h2 className="new-script-title">Create a New Script</h2>
+        <h2 className="new-script-title">
+          {postId ? "Edit Post" : "Create a New Script"}
+        </h2>
         <form className="new-script-form" onSubmit={handleFormSubmit}>
           <label>Title:</label>
           <input
@@ -56,6 +91,7 @@ const NewScript = () => {
             name="title"
             placeholder="Title"
             onChange={onFormChange}
+            value={formState.title}
             required
           />
           <label>Description:</label>
@@ -63,16 +99,27 @@ const NewScript = () => {
             name="description"
             placeholder="Description"
             onChange={onFormChange}
+            value={formState.description}
             required
           />
           <label>Upload File:</label>
-          <input
-            type="file"
-            name="file"
-            accept="image/*"
-            onChange={onFileChange}
-            required
-          />
+          {postId ? (
+            <input
+              type="file"
+              name="file"
+              accept="image/*"
+              onChange={onFileChange}
+            />
+          ) : (
+            <input
+              type="file"
+              name="file"
+              accept="image/*"
+              onChange={onFileChange}
+              required
+            />
+          )}
+
           <button className="new-script-submit" type="submit">
             Submit
           </button>

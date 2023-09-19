@@ -60,6 +60,7 @@ const typeDefs = gql`
   }
   type Query {
     posts: [Post]
+    findPost(postId: ID!): Post
     users: [User]
     getComments(_id: ID!): [Comment]
     userProfile(_id: ID!): User
@@ -76,8 +77,15 @@ const typeDefs = gql`
       job: String
       skills: [String]
     ): User
+    deletePost(postId: ID!): Post
     addLike(postId: ID!): Post
     createPost(title: String!, description: String, file: [Upload]!): Post
+    updatePost(
+      title: String
+      description: String
+      file: [Upload]
+      postId: ID!
+    ): Post
     createComment(postId: ID!, message: String): Comment
     singleUpload(file: Upload!): UploadFileResponse
     multiUpload(files: [Upload!]): [UploadFileResponse]

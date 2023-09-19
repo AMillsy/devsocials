@@ -120,3 +120,29 @@ export const ADD_LIKE = gql`
     }
   }
 `;
+
+export const DELETE_POST = gql`
+  mutation Mutation($postId: ID!) {
+    deletePost(postId: $postId) {
+      _id
+    }
+  }
+`;
+
+export const UPDATE_POST = gql`
+  mutation UpdatePost(
+    $postId: ID!
+    $title: String
+    $description: String
+    $file: [Upload]
+  ) {
+    updatePost(
+      postId: $postId
+      title: $title
+      description: $description
+      file: $file
+    ) {
+      _id
+    }
+  }
+`;

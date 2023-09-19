@@ -41,6 +41,7 @@ function App() {
             <Route path="me" element={<MyProfile />} />
             <Route path="settings" element={<Settings />} />
             <Route path="new" element={<NewScript />}></Route>
+            <Route path="edit/:postId" element={<NewScript />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

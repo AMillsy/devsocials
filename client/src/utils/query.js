@@ -123,3 +123,13 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const QUERY_SINGLE_POST = gql`
+  query FindPost($postId: ID!) {
+    findPost(postId: $postId) {
+      title
+      image
+      description
+    }
+  }
+`;

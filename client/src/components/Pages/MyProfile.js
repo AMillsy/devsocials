@@ -146,6 +146,7 @@ export default function MyProfile() {
           return (
             <ProfileFeed
               key={_id}
+              postId={_id}
               title={title}
               image={image}
               description={description}
