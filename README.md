@@ -65,7 +65,9 @@
 ## Installation
 
 To get //RunDev up and running on your local machine, follow these steps:
-"cd server && npm i && cd ../client && npm i",
+```bash
+npm install
+```
 
 ## Screenshots
 
