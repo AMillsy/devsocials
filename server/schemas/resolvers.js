@@ -69,7 +69,6 @@ const resolvers = {
   Mutation: {
     createUser: async (parent, args) => {
       try {
-        console.log(args);
         const user = await User.create(args);
 
         if (user) {
@@ -101,7 +100,6 @@ const resolvers = {
       { username, file, location, job, skills },
       context
     ) => {
-      console.log(file);
       if (!context.user)
         throw new AuthenticationError("Must be logged in to update settings");
 
@@ -118,7 +116,7 @@ const resolvers = {
       if (location) updates.location = location;
       if (skills) updates.skills = skills;
       if (job) updates.job = job;
-      console.log(updates);
+
       const updateUser = await User.findOneAndUpdate(
         { _id: context.user._id },
         updates,
@@ -187,7 +185,6 @@ const resolvers = {
         ...updates,
         user: context.user._id,
       });
-      console.log(post);
 
       return post;
     },
@@ -230,8 +227,6 @@ const resolvers = {
         { new: true }
       );
 
-      console.log(updatePost);
-
       return popComment;
     },
     followUser: async (parent, { userId }, context) => {
@@ -244,21 +239,15 @@ const resolvers = {
           { $addToSet: { followed: context.user._id } }
         );
 
-        console.log(userFollowing._id);
-
         const meUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $addToSet: { following: userFollowing._id } }
         ).populate("following");
 
-        console.log(meUser);
         return meUser;
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     },
     unFollowUser: async (parent, { userId }, context) => {
-      console.log(userId);
       if (!context.user) throw new AuthenticationError("Must be logged in");
 
       try {

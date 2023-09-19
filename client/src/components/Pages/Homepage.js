@@ -19,11 +19,10 @@ const Homepage = () => {
     refetch();
     postRefetch();
   }, []);
-  console.log(error);
+
   if (error) return <h2>{error}</h2>;
   if (loading) return <p>Loading data</p>;
 
-  console.log(data);
   return (
     <>
       <article className="main">

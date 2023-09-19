@@ -6,7 +6,6 @@ const UploadFile = () => {
   const [multiUploadMutate, { loading: multiLoad, error: multiError }] =
     useMutation(MULTI_UPLOAD);
   const sinlgeUpload = async ({ target }) => {
-    console.log(target.files);
     const {
       validity,
       files: [file],
@@ -15,15 +14,11 @@ const UploadFile = () => {
     if (validity.valid) {
       try {
         const { data } = await mutate({ variables: { file } });
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
   };
 
   const multiUpload = async ({ target }) => {
-    console.log(target);
     const { validity, files } = target;
 
     if (validity.valid) {
@@ -31,9 +26,7 @@ const UploadFile = () => {
         const { data } = await multiUploadMutate({
           variables: { files },
         });
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
   };
   const onChange = async ({ target }) => {

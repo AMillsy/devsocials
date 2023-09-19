@@ -24,8 +24,6 @@ export default function MyProfile() {
     skip: !Auth.loggedIn(),
   });
 
-  console.log(data);
-
   useEffect(
     function () {
       //Shouldnt show the follow button if its your profile
@@ -50,7 +48,7 @@ export default function MyProfile() {
   const followUser = async (userId) => {
     try {
       await followUserMutation({ variables: { userId } });
-      console.log(followError);
+
       setFollowed(true);
     } catch (error) {
       setFollowError(error.message);

@@ -60,13 +60,9 @@ const NewScript = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission here (e.g., send data to server)
-    console.log("Title:", formState.title);
-    console.log("Description:", formState.description);
-    console.log("File:", formState.file);
 
     // Reset form fields or perform other actions as needed
     if (postId) {
-      console.log(postId);
       await mutation({ variables: { ...formState, postId: postId } });
     } else {
       await mutation({ variables: { ...formState } });

@@ -46,7 +46,6 @@ const Settings = () => {
   };
   //Shows the skills on screen
   const showSkills = () => {
-    console.log(skills);
     if (loading) return;
     if (!skills) return;
     return <SkillList skills={skills} removeSkill={removeSkill} />;

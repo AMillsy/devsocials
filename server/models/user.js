@@ -49,7 +49,6 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.post("save", function (error, doc, next) {
-  console.log(error.keyValue, error.name);
   if (error.name === "MongoServerError" && error.code === 11000) {
     next(new Error(`${Object.keys(error.keyValue)[0]} already exists`));
   } else {

@@ -28,7 +28,6 @@ const Signup = () => {
       });
       Auth.login(data.createUser.token);
     } catch (error) {
-      console.log(error);
       setSignupError(error.message);
       setTimeout(function () {
         setSignupError("");
