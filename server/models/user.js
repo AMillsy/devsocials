@@ -53,6 +53,12 @@ userSchema.post("save", function (error, doc, next) {
     next(new Error(`${Object.keys(error.keyValue)[0]} already exists`));
   } else {
     next(error);
+
+
+
+
+
+    
   }
 });
 
