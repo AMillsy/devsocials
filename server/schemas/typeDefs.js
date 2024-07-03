@@ -16,6 +16,7 @@ const typeDefs = gql`
   }
 
   type Comment {
+    _id: ID
     user: User
     message: String
     likes: Int
@@ -27,10 +28,11 @@ const typeDefs = gql`
     title: String!
     description: String
     image: String!
-    likes: Int
+    likeCount: Int
     date: Date
     comments: [Comment]
     commentCount: Int
+    user: User
   }
 
   type User {
@@ -43,20 +45,27 @@ const typeDefs = gql`
     job: String
     skills: [String]
     posts: [Post]
+    followed: [User]
+    following: [User]
+  }
+
+  type meFollow {
+    _id: ID
     followed: [ID]
     following: [ID]
   }
-
   type PostData {
     user: User
     Post: Post
   }
   type Query {
     posts: [Post]
+    findPost(postId: ID!): Post
     users: [User]
     getComments(_id: ID!): [Comment]
     userProfile(_id: ID!): User
     me: User
+    follows: meFollow
   }
   type Mutation {
     createUser(username: String!, email: String!, password: String!): Auth
@@ -68,15 +77,20 @@ const typeDefs = gql`
       job: String
       skills: [String]
     ): User
-    createPost(
-      title: String!
+    deletePost(postId: ID!): Post
+    addLike(postId: ID!): Post
+    createPost(title: String!, description: String, file: [Upload]!): Post
+    updatePost(
+      title: String
       description: String
-      image: [Upload]!
-      userId: ID!
-    ): PostData
-    createComment(postID: ID!, message: String, userID: ID): Comment
+      file: [Upload]
+      postId: ID!
+    ): Post
+    createComment(postId: ID!, message: String): Comment
     singleUpload(file: Upload!): UploadFileResponse
     multiUpload(files: [Upload!]): [UploadFileResponse]
+    followUser(userId: ID): User
+    unFollowUser(userId: ID): User
   }
 `;
 

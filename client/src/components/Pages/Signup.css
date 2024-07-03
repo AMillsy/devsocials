@@ -1,21 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap");
 
-body{
-  background-image: linear-gradient(60deg, rgba(0, 0, 0, 0.215), rgb(40, 40, 40), rgba(69, 69, 69, 0.174));
-
-}
 .log-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #ffffff;
   padding: 20px;
-  background-image: linear-gradient(120deg, rgba(0, 0, 0, 0.215), rgb(38, 38, 38), rgba(0, 0, 0, 0.174));
+  background-image: linear-gradient(
+    120deg,
+    rgba(0, 0, 0, 0.215),
+    rgb(38, 38, 38),
+    rgba(0, 0, 0, 0.174)
+  );
   width: 650px;
   height: 300px;
   border-radius: 30px;
-  margin: auto;
-  font-family: 'Courier New', Courier, monospace;  
+  margin: 10px auto;
+  font-family: "Courier New", Courier, monospace;
 }
 
 form {
@@ -36,14 +37,12 @@ form input {
   color: #ffffff;
   text-align: center;
   text-decoration: underline;
-  
 }
 
-h2 { 
+h2 {
   padding: 20px;
   color: #fff;
-  font-size: 20px ;
-
+  font-size: 20px;
 }
 
 .btn {
@@ -60,9 +59,22 @@ h2 {
   color: #fff;
 }
 
-a.login{
-    margin: auto;
-    padding: 15px;
-    text-decoration: underline;
-    color: #fff;
+a.login {
+  margin: auto;
+  padding: 15px;
+  text-decoration: underline;
+  color: #fff;
+}
+
+.danger-signup {
+  color: red;
+}
+
+@media only screen and (max-width: 700px) {
+  .log-form {
+    width: 95%;
+  }
+  .log-form form {
+    width: 90%;
+  }
 }

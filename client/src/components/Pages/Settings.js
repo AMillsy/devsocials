@@ -5,6 +5,7 @@ import { QUERY_ME_SKILLS } from "../../utils/query";
 import { useQuery } from "@apollo/client";
 import { UPDATE_USER } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 const Settings = () => {
   const [formState, setFormState] = useState({
     username: "",
@@ -12,6 +13,7 @@ const Settings = () => {
     job: "",
     file: null,
   });
+  const navigate = useNavigate();
   const [skills, setSkills] = useState([]);
   const { data, loading } = useQuery(QUERY_ME_SKILLS);
   const [updateUserMutation, { error }] = useMutation(UPDATE_USER);
@@ -29,8 +31,11 @@ const Settings = () => {
   };
   //Adds a skill locally onto the list
   const addSkill = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const input = e.target.previousElementSibling;
     const skill = input.value;
+    input.value = "";
     if (!skill) return;
     if (!skills) {
       setSkills([skill]);
@@ -41,7 +46,6 @@ const Settings = () => {
   };
   //Shows the skills on screen
   const showSkills = () => {
-    console.log(skills);
     if (loading) return;
     if (!skills) return;
     return <SkillList skills={skills} removeSkill={removeSkill} />;
@@ -68,9 +72,9 @@ const Settings = () => {
       await updateUserMutation({
         variables: { ...formState, skills: skills },
       });
+      navigate("/me");
+      window.location.reload();
     } catch (error) {}
-
-    window.location.assign("/me");
   };
   return (
     <>
@@ -98,13 +102,22 @@ const Settings = () => {
             onChange={onFormChange}
           ></input>
           <label>Job or Hobby:</label>
-          <input name="job" placeholder="Web developer"></input>
+          <input
+            name="job"
+            placeholder="Web developer"
+            onChange={onFormChange}
+          ></input>
           <label>Skills</label>
           <div className="skills-submit">
             <p className="skills-warning">
               Click the <b>+</b> to add new skills
             </p>
-            <input type="text" placeholder="skill" id="skillInput"></input>
+            <input
+              type="text"
+              placeholder="skill"
+              id="skillInput"
+              onSubmit={addSkill}
+            ></input>
             <button className="settings-submit skills-btn" onClick={addSkill}>
               +
             </button>

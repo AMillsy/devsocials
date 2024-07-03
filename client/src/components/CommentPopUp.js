@@ -1,62 +1,86 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_COMMENTS_QUERY } from "../utils/query";
 import { CREATE_COMMENT } from "../utils/mutations";
-import './CommentPopUp.css';
-import {Link} from 'react-router-dom';
-const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
-  const { data, loading, error } = useQuery(GET_COMMENTS_QUERY, {
+import "./CommentPopUp.css";
+import { Link } from "react-router-dom";
+const CommentPopup = ({ isOpen, onRequestClose, postId, addCommentCount }) => {
+  const { data, loading, error, refetch } = useQuery(GET_COMMENTS_QUERY, {
     variables: { id: postId },
   });
   const [commentText, setCommentText] = useState("");
+  const [commentError, setCommentError] = useState("");
+  const [comments, setComments] = useState([]);
   const [createComment] = useMutation(CREATE_COMMENT);
-  console.log(data);
+
   // useEffect(() => {
   //   if (isOpen) {
   //     refetch();
   //   }
   // }, [isOpen, refetch]);
-  console.log(data);
-  console.log(error);
+
+  useEffect(
+    function () {
+      if (isOpen) {
+        refetch();
+        setComments(data?.getComments);
+      }
+    },
+    [loading, isOpen]
+  );
+
   if (loading) return "Loading...";
   if (error) return "Error with loading";
-  const comments = data.getComments;
+
   const handleCommentSubmit = async () => {
     try {
-      await createComment({
+      const { data } = await createComment({
         variables: {
-          postId: postId,
+          postId,
           message: commentText,
         },
       });
+
+      setComments([...comments, { ...data.createComment }]);
       setCommentText("");
-    
+      addCommentCount();
     } catch (err) {
-      console.error("Error adding comment", err);
+      setCommentError(err.message);
+      setTimeout(function () {
+        setCommentError("");
+      }, 2000);
     }
   };
+
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel="Comment Popup"
       className="comment-popup"
+      ariaHideApp={false}
     >
       <h2 className="comment-popup-title">Comments</h2>
       <ul className="comment-list">
-        {comments.map((comment) => (
-          <li className="comment-item" style={{ color: "black" }} key={comment._id}>
-           <span className="comment-text" >
-           <Link
-          className="comment-username-link"
-          to={`/profile/${comment.user._id}`}
-        >
-          {comment.user.username}
-        </Link>{" "}
-            {comment.message}</span>
-          </li>
-        ))}
+        {comments &&
+          comments.map((comment) => (
+            <li
+              className="comment-item"
+              style={{ color: "black" }}
+              key={comment._id}
+            >
+              <span className="comment-text">
+                <Link
+                  className="comment-username-link"
+                  to={`/profile/${comment.user._id}`}
+                >
+                  {comment.user.username}
+                </Link>{" "}
+                {comment.message}
+              </span>
+            </li>
+          ))}
       </ul>
       <div>
         <textarea
@@ -65,9 +89,14 @@ const CommentPopup = ({ isOpen, onRequestClose, postId }) => {
           placeholder="Write a comment..."
           className="comment-input"
         />
-        <button onClick={handleCommentSubmit} className="add-comment-button">Add Comment</button>
+        <button onClick={handleCommentSubmit} className="add-comment-button">
+          Add Comment
+        </button>
+        <p className="error-comment">{commentError}</p>
       </div>
-      <button onClick={onRequestClose} className="close-button">Close</button>
+      <button onClick={onRequestClose} className="close-button">
+        Close
+      </button>
     </Modal>
   );
 };

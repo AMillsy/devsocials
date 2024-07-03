@@ -5,13 +5,13 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: true,
+      required: [true, "Username is required"],
       unique: true,
       trim: true,
     },
     email: {
       type: String,
-      required: true,
+      required: [true, "Email is required"],
       unique: true,
       match: [
         /.[\w_\.-]+@[\w\.-]+\.(\w{2,3})+/,
@@ -20,7 +20,7 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: [true, "Password is required"],
       minlength: 8,
     },
     image: {
@@ -46,6 +46,20 @@ userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
   next();
+});
+
+userSchema.post("save", function (error, doc, next) {
+  if (error.name === "MongoServerError" && error.code === 11000) {
+    next(new Error(`${Object.keys(error.keyValue)[0]} already exists`));
+  } else {
+    next(error);
+
+
+
+
+
+    
+  }
 });
 
 userSchema.methods.isCorrectPassword = async function (password) {

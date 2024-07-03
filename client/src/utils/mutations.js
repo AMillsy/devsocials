@@ -33,24 +33,37 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const CREATE_USER = gql`
-  mutation CreateUser($username: String!, $email: String!, $password: String!) {
-    createUser(username: $username, email: $email, password: $password) {
+export const CREATE_POST = gql`
+  mutation Mutation($title: String!, $file: [Upload]!, $description: String) {
+    createPost(title: $title, file: $file, description: $description) {
       _id
-      email
-      password
-      username
+    }
+  }
+`;
+
+export const CREATE_USER = gql`
+  mutation Mutation($username: String!, $email: String!, $password: String!) {
+    createUser(username: $username, email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
     }
   }
 `;
 
 export const CREATE_COMMENT = gql`
-  mutation CreateComment($postId: ID!, $message: String!) {
+  mutation Mutation($postId: ID!, $message: String) {
     createComment(postId: $postId, message: $message) {
       _id
-      message
-      likes
       date
+      likes
+      message
+      user {
+        _id
+        username
+      }
     }
   }
 `;
@@ -75,6 +88,61 @@ export const UPDATE_USER = gql`
       skills
       location
       job
+    }
+  }
+`;
+
+export const FOLLOW_USER = gql`
+  mutation Mutation($userId: ID) {
+    followUser(userId: $userId) {
+      username
+      following {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const UNFOLLOW_USER = gql`
+  mutation UnFollowUser($userId: ID!) {
+    unFollowUser(userId: $userId) {
+      _id
+      username
+    }
+  }
+`;
+
+export const ADD_LIKE = gql`
+  mutation Mutation($postId: ID!) {
+    addLike(postId: $postId) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_POST = gql`
+  mutation Mutation($postId: ID!) {
+    deletePost(postId: $postId) {
+      _id
+    }
+  }
+`;
+
+export const UPDATE_POST = gql`
+  mutation UpdatePost(
+    $postId: ID!
+    $title: String
+    $description: String
+    $file: [Upload]
+  ) {
+    updatePost(
+      postId: $postId
+      title: $title
+      description: $description
+      file: $file
+    ) {
+      _id
     }
   }
 `;

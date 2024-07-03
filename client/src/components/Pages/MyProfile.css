@@ -50,15 +50,17 @@ body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  height: 500px;
   align-items: center;
+  height: auto;
+  position: relative;
 }
 
-.card-container .picture-profile {
+.picture-profile {
   border: 2px solid #d4d4d4;
   border-radius: 50%;
   width: 100px;
   height: 100px;
+  object-fit: fill;
 }
 
 button.primary {
@@ -91,7 +93,7 @@ button.primary:hover {
   flex-wrap: wrap;
   text-wrap: wrap;
   overflow: auto;
-  height: 400px;
+  min-height: 250px;
 }
 
 .skills ul {
@@ -114,7 +116,9 @@ button.primary:hover {
   margin: 0 7px 7px 0;
   padding: 7px;
 }
-
+.error {
+  color: red;
+}
 @media only screen and (max-width: 1000px) {
   .profile {
     display: flex;

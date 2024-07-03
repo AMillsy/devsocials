@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# //RunDev
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[RunDev Website](https://rundev-625acb8fef45.herokuapp.com/)
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Description](#description)
+- [Usage](#usage)
+- [Features](#features)
+- [Compatibility](#compatibility)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Screenshots](#screenshots)
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+//RunDev is the ultimate social media platform for developers to share images, network with peers, and personalize their profiles. Whether you're a seasoned developer or just starting your journey, //RunDev has something for everyone.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Usage
 
-### `npm test`
+- **Account Registration:** Upon launching the app, you can sign up for an account using your email and password. Fill in your registration details, including your email and a secure password. After successful registration, you can proceed to login.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Login:** Enter your registered email and password. Click the "Login" button to access your //RunDev account.
 
-### `npm run build`
+## Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Interacting with Posts:** You can like and comment on posts created by other developers. By clicking the heart icon, you can "Like" a post. To leave a comment, click on the comment icon and type your thoughts.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Profile Management:** Explore other developers' profiles by clicking on their usernames. On your own profile, you can view your posts and followers. You can also follow other developers to keep up with their updates.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Settings:** Access the "Settings" page from the app's navigation menu. Here, you can update your:
+  - Username
+  - Profile Picture
+  - Location
+  - Jobs
+  - Hobbies
+  - Developer Skills
 
-### `npm run eject`
+## Compatibility
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+//RunDev is designed to be responsive and accessible on any device, be it a desktop computer, tablet, or smartphone. You can enjoy a seamless experience regardless of your preferred device.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Technologies Used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **AWS (Amazon Web Services):** AWS provides a robust and scalable infrastructure for hosting the //RunDev app and managing data storage, ensuring high availability and reliability.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Material UI:** Material UI is used for designing the app's user interface, offering a clean and visually appealing design with a focus on user experience.
 
-## Learn More
+- **React:** //RunDev's frontend is built using React, a popular JavaScript library for building interactive and dynamic user interfaces.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Node.js:** The backend of //RunDev is powered by Node.js, which allows for efficient server-side scripting and handling of HTTP requests.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Express:** Express.js is used as the web application framework for Node.js, simplifying routing, middleware management, and API development.
 
-### Code Splitting
+- **GraphQL:** GraphQL is employed to efficiently query and manipulate data, providing a flexible and optimized way to interact with the server.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Apollo Server Express:** Apollo Server Express is used to set up the GraphQL server, facilitating data retrieval and mutation operations efficiently.
 
-### Analyzing the Bundle Size
+- **Bcrypt:** Bcrypt is utilized for securely hashing and storing user passwords, ensuring that user data remains protected.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **JSON Web Tokens (JWT):** JWTs are employed for user authentication and authorization, enhancing the security of //RunDev.
 
-### Making a Progressive Web App
+- **Mongoose:** Mongoose is a MongoDB object modeling tool used to interact with the MongoDB database, making it easier to work with data models and queries. These technologies have been carefully selected to provide a powerful, secure, and user-friendly experience for developers using //RunDev. The combination of AWS for infrastructure, Material UI for design, React for the frontend, and a robust backend stack ensures that //RunDev is a top-notch platform for developer networking and content sharing.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Installation
 
-### Advanced Configuration
+To get //RunDev up and running on your local machine, follow these steps:
+```bash
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Screenshots
 
-### Deployment
+![Login Page](./client/src/images/screenshot1.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![Post page](./client/src/images/screenshot2.png)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![User page](./client/src/images/screenshot3.png)

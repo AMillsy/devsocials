@@ -1,69 +1,167 @@
-.middle {
-  grid-column-start: 2;
-}
 .card {
-  display: flex;
-  background-color: #121212;
+  width: 700px;
   height: 800px;
+  margin: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.cardSections {
+  background-color: #121212;
   width: 100%;
-  flex-direction: column;
-  grid-row-start: 2;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  margin-bottom: 20px;
+  height: 100px;
+}
+
+.imgCon-card {
+  width: 100%;
+  height: 500px;
+  background-color: #212121;
+}
+
+.imgCard {
+  height: inherit;
+  width: inherit;
+  object-fit: contain;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: center;
   position: relative;
+  height: 150px;
+}
+
+.cardTitle {
+  color: white;
   padding: 10px;
-}
-
-.card h2 {
-  color: white;
-  border-bottom: 2px white solid;
-  width: 100%;
+  font-size: 130%;
+  position: absolute;
+  bottom: 0;
+  text-overflow: ellipsis;
   text-align: center;
-  font-size: 250%;
 }
 
-.cardContainer {
-  height: 80%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 20% 60% 20%;
-  justify-content: center;
+.cardUserImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
-.cardImageContainer {
-  margin-top: 20px;
+.userLink-card {
   display: flex;
+  height: 40px;
   justify-content: center;
   align-items: center;
-  grid-column-start: 2;
-  height: inherit;
-  width: 100%;
-
-  object-fit: contain;
-}
-.mainImage {
-  height: 100%;
-  width: inherit;
-  object-fit: contain;
-}
-
-.cardInfo {
-  display: flex;
-  grid-column-start: 3;
+  font-size: 130%;
   color: white;
-  justify-content: center;
-  align-items: center;
-  width: inherit;
-  height: inherit;
+  font-weight: bolder;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+.userLink-card:hover {
+  cursor: pointer;
 }
 
 .cardDesc {
+  padding: 10px;
   color: white;
-  text-align: center;
+}
+.cardBottom {
+  position: relative;
+  height: 200px;
+}
+.cardBottomImage {
+  width: 40px;
+  height: 40px;
 }
 
-.extraImage {
-  width: 75px;
-  margin-bottom: 40px;
+.cardLinks {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.cardLinks button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  margin: 5px;
+  position: relative;
+}
+
+.buttonNum {
+  position: absolute;
+  color: black;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 25%;
+  text-align: center;
+  font-weight: bolder;
+}
+.likes {
+  color: red;
+}
+.cardSpacer {
+  margin: 20px;
+}
+
+.cardSpacer:last-child {
+  margin: 50px;
+}
+@media only screen and (max-width: 900px) {
+  .card {
+    width: 100%;
+    height: 600px;
+  }
+  .imgCon-card {
+    height: 100%;
+  }
+
+  .cardSpacer {
+    margin: 180px;
+  }
+
+  .cardSpacer:last-child {
+    margin: 200px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .card {
+    width: 100%;
+    height: 400px;
+  }
+  .imgCon-card {
+    height: 90%;
+  }
+
+  .cardDesc {
+    font-size: 80%;
+  }
+
+  .cardBottomImage {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+  }
+  .cardTitle {
+    position: relative;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+  }
+  .userLink-card {
+    position: relative;
+  }
+  .cardTop {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .buttonNum {
+    top: 15%;
+  }
 }

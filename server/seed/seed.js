@@ -15,7 +15,7 @@ const seed = async () => {
 
       createUsers.push(newUser);
     }
-    console.log(createUsers);
+
     for (const [
       i,
       { title, description, image, likes, comments },
@@ -32,14 +32,13 @@ const seed = async () => {
         user: userMessage._id,
       });
 
-      console.log(newComment);
-
       const createPost = await Post.create({
         title: title,
         description: description,
         image: image,
         likes: likes,
         comments: [newComment._id],
+        user: userPost._id,
       });
 
       const updateUser = await User.updateOne(

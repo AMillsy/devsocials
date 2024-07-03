@@ -4,6 +4,7 @@
   width: 100%;
   height: 100%;
   box-shadow: rgba(0, 0, 0, 0.671) 0px 2px 8px 0px;
+  position: relative;
 }
 
 .profile-post-con {
@@ -39,6 +40,32 @@
 .profile-post-desc {
   color: white;
   padding: 10px;
+}
+
+.postBtns {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.postBtn {
+  font-weight: bolder;
+
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  margin: 10px;
+}
+
+.postDelete {
+  background-color: red;
+}
+
+.postEdit {
+  background-color: green;
 }
 
 @media only screen and (max-width: 1000px) {

@@ -5,7 +5,7 @@ const path = require("path");
 const graphqlUploadExpress = require("graphql-upload/graphqlUploadExpress.js");
 const db = require("./config/connection.js");
 const { authMiddleware } = require("./utils/auth");
-
+require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 }
 
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 

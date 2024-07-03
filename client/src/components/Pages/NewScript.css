@@ -1,25 +1,33 @@
+.new-script-container {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+}
 
+.newFormCon {
+  width: 50%;
+}
+.new-script-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-  .new-script-container {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 40%;
-    margin: 0 auto;
-  }
-  .new-script-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .new-script-form label {
-    display: block;
-    margin-bottom: 10px;
-  }
+.new-script-form {
+  width: 100%;
+}
+.new-script-form label {
+  display: block;
+  margin-bottom: 10px;
+}
 
-  .new-script-form input[type="text"],
+.new-script-form input[type="text"],
 .new-script-form textarea {
   width: 100%;
   padding: 10px;
@@ -31,26 +39,34 @@
 }
 
 .new-script-form input[type="file"] {
-    width: 100%;
-    padding: 1px;
-    margin-bottom: 20px;
-    border: none;
-    background-color: #333;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+  width: 100%;
+  padding: 1px;
+  margin-bottom: 20px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
-  .new-script-submit {
-    background-color: #ff5722;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.new-script-submit {
+  background-color: #ff5722;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.new-script-submit:hover {
+  background-color: #ff7043;
+}
+
+@media only screen and (max-width: 1000px) {
+  .new-script-container {
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
   }
-  
-  .new-script-submit:hover {
-    background-color: #ff7043;
-  }
+}
